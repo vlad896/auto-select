@@ -1,0 +1,13 @@
+export { HeroSection } from "./HeroSection";
+export { Quiz } from "./Quiz";
+export { ToolsProof } from "./ToolsProof";
+export { ServicesGrid } from "./ServicesGrid";
+export { Methodology } from "./Methodology";
+export { PricingTable } from "./PricingTable";
+export { Calculator } from "./Calculator";
+export { ProcessSteps } from "./ProcessSteps";
+export { LegalCheck } from "./LegalCheck";
+export { VideoShowcase } from "./VideoShowcase";
+export { CaseStudies } from "./CaseStudies";
+export { FAQSection } from "./FAQSection";
+export { OfficeMap } from "./OfficeMap";
