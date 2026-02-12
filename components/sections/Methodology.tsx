@@ -7,8 +7,10 @@ import {
   Timer,
   CircuitBoard,
   ScanLine,
+  ArrowRight,
 } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 
@@ -252,6 +254,17 @@ export function Methodology() {
               },
             ]}
           />
+
+          {/* Semantic cocoon: link to L2 diagnostics page */}
+          <div className="mt-8 text-center">
+            <Link
+              href="/diagnostika/"
+              className="inline-flex items-center gap-2 rounded-xl bg-primary-600 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-primary-700"
+            >
+              Подробнее о выездной диагностике
+              <ArrowRight className="h-4 w-4" aria-hidden="true" />
+            </Link>
+          </div>
         </div>
       </Container>
     </section>

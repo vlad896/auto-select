@@ -140,7 +140,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className="min-h-screen bg-surface-950 font-sans text-neutral-300 antialiased">
+      <body className="min-h-screen bg-surface-950 font-sans text-neutral-300 antialiased" suppressHydrationWarning>
         {/* Skip to content — WCAG 2.2 keyboard nav */}
         <a
           href="#main-content"

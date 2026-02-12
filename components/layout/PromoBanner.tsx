@@ -28,8 +28,15 @@ function getTimeLeft() {
 
 export function PromoBanner() {
   const [isVisible, setIsVisible] = useState(true);
-  const [timeLeft, setTimeLeft] = useState(getTimeLeft);
+  const [mounted, setMounted] = useState(false);
+  const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0, expired: false });
   const bannerRef = useRef<HTMLDivElement>(null);
+
+  // Only start the timer after client mount to avoid hydration mismatch
+  useEffect(() => {
+    setMounted(true);
+    setTimeLeft(getTimeLeft());
+  }, []);
 
   // Sync CSS variable with banner height
   const syncHeight = useCallback(() => {
@@ -47,12 +54,12 @@ export function PromoBanner() {
     };
   }, [syncHeight]);
 
-  // Countdown timer — tick every second
+  // Countdown timer — tick every second (only after mount)
   useEffect(() => {
-    if (!isVisible) return;
+    if (!isVisible || !mounted) return;
     const id = setInterval(() => setTimeLeft(getTimeLeft()), 1000);
     return () => clearInterval(id);
-  }, [isVisible]);
+  }, [isVisible, mounted]);
 
   const handleClose = () => {
     setIsVisible(false);
@@ -128,7 +135,9 @@ export function PromoBanner() {
 function CountdownUnit({ value, label }: { value: number; label: string }) {
   return (
     <span className="inline-flex items-baseline gap-px">
-      <span className="text-white">{String(value).padStart(2, "0")}</span>
+      <span className="text-white" suppressHydrationWarning>
+        {String(value).padStart(2, "0")}
+      </span>
       <span className="text-[9px] text-white/60">{label}</span>
     </span>
   );
