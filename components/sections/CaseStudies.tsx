@@ -17,6 +17,8 @@ import { CASE_STUDIES } from "@/lib/constants";
 const CASE_IMAGES: Record<string, string> = {
   "bmw-g30": "/images/case-bmw-real.jpg",
   "vw-tiguan": "/images/case-tiguan-real.jpg",
+  "audi-a6": "/images/case-audi-a6.jpg",
+  "kia-sportage": "/images/case-kia-sportage.jpg",
 };
 
 // ============================================================

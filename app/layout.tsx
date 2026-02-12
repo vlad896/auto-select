@@ -9,6 +9,7 @@ import {
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { StickyMessenger } from "@/components/layout/StickyMessenger";
+import { PromoBanner } from "@/components/layout/PromoBanner";
 import "./globals.css";
 
 // ============================================================
@@ -148,6 +149,7 @@ export default function RootLayout({
           Перейти к основному содержимому
         </a>
 
+        <PromoBanner />
         <Header />
         {children}
         <Footer />
