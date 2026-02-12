@@ -148,6 +148,11 @@
   th {
     @apply text-left font-semibold;
   }
+
+  /* Promo banner offset — set dynamically by PromoBanner component */
+  :root {
+    --promo-h: 0px;
+  }
 }
 
 /* ============================================================

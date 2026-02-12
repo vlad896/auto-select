@@ -57,11 +57,12 @@ export function Header() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`fixed left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
           ? "bg-surface-950/95 backdrop-blur-md shadow-lg shadow-black/30 border-b border-white/5"
           : "bg-surface-950/80 backdrop-blur-sm"
       }`}
+      style={{ top: "var(--promo-h, 0px)" }}
       role="banner"
     >
       <Container>
@@ -157,7 +158,8 @@ export function Header() {
       {/* Mobile Menu Overlay */}
       {isMenuOpen && (
         <div
-          className="fixed inset-0 top-16 z-40 bg-black/60 lg:hidden"
+          className="fixed inset-0 z-40 bg-black/60 lg:hidden"
+          style={{ top: "calc(4rem + var(--promo-h, 0px))" }}
           onClick={closeMenu}
           aria-hidden="true"
         />
@@ -166,9 +168,13 @@ export function Header() {
       {/* Mobile Menu Panel */}
       <nav
         id="mobile-menu"
-        className={`fixed top-16 right-0 z-50 h-[calc(100dvh-4rem)] w-72 transform bg-surface-950 border-l border-white/10 shadow-2xl transition-transform duration-300 ease-out lg:hidden ${
+        className={`fixed right-0 z-50 w-72 transform bg-surface-950 border-l border-white/10 shadow-2xl transition-transform duration-300 ease-out lg:hidden ${
           isMenuOpen ? "translate-x-0" : "translate-x-full"
         }`}
+        style={{
+          top: "calc(4rem + var(--promo-h, 0px))",
+          height: "calc(100dvh - 4rem - var(--promo-h, 0px))",
+        }}
         aria-label="Мобильная навигация"
         aria-hidden={!isMenuOpen}
       >

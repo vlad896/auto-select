@@ -18,7 +18,10 @@ import { OfficeMap } from "@/components/sections/OfficeMap";
 
 export default function HomePage() {
   return (
-    <main id="main-content" className="pt-16 lg:pt-18">
+    <main
+      id="main-content"
+      style={{ paddingTop: "calc(4rem + var(--promo-h, 0px))" }}
+    >
       {/* 1. Захват внимания — первый экран */}
       <HeroSection />
 
