@@ -29,11 +29,14 @@ export function CtaBannerPrimary() {
           {/* Text */}
           <div className="flex-1">
             <h2 className="text-2xl font-bold text-white sm:text-3xl lg:text-4xl">
-              Нашли автомобиль на av.by?
+              Уже нашли автомобиль?
             </h2>
             <p className="mt-3 max-w-xl text-base text-white/80 sm:text-lg">
-              Не рискуйте деньгами — закажите проверку эксперта.{" "}
-              <strong className="text-white">Средний торг окупает услугу в 3 раза.</strong>
+              Не покупайте, пока эксперт не проверит.{" "}
+              <strong className="text-white">
+                3 из 5 авто на av.by имеют скрытые дефекты.
+              </strong>{" "}
+              Мы найдём их за 2 часа — и поможем сторговать.
             </p>
             <div className="mt-3 flex flex-wrap items-center gap-4 justify-center lg:justify-start">
               <span className="flex items-center gap-1.5 text-sm text-white/70">
@@ -55,7 +58,7 @@ export function CtaBannerPrimary() {
               size="lg"
               className="border-white/30 bg-white text-primary-700 hover:bg-white/90 hover:text-primary-800 shadow-lg"
             >
-              Заказать проверку
+              Оставить заявку
               <ArrowRight className="h-5 w-5" aria-hidden="true" />
             </Button>
             <Button
@@ -65,7 +68,7 @@ export function CtaBannerPrimary() {
               className="border-white/30 text-white hover:bg-white/15"
             >
               <Phone className="h-5 w-5" aria-hidden="true" />
-              Позвонить
+              Позвонить сейчас
             </Button>
           </div>
         </div>
@@ -91,29 +94,29 @@ export function CtaBannerSecondary() {
       <Container className="relative z-10">
         <div className="mx-auto max-w-3xl text-center">
           <p className="mb-2 text-sm font-semibold uppercase tracking-widest text-primary-500">
-            Бесплатная консультация
+            Вы уже посчитали выгоду
           </p>
           <h2 className="text-2xl font-bold text-white sm:text-3xl">
-            Не уверены, какую услугу выбрать?
+            Средний торг окупает нашу работу в&nbsp;3&nbsp;раза
           </h2>
           <p className="mt-3 text-neutral-400 sm:text-lg">
-            Позвоните или напишите — эксперт поможет определиться за 5 минут.
-            Расскажем, на что обратить внимание именно в вашем бюджете.
+            Осталось только оставить заявку. Позвоните или напишите — эксперт
+            свяжется за&nbsp;15&nbsp;минут и ответит на все вопросы.
           </p>
 
           <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:justify-center sm:gap-4">
-            <Button href={SITE.whatsapp} variant="primary" size="lg" target="_blank" rel="noopener noreferrer">
-              Написать в WhatsApp
+            <Button href="#quiz" variant="primary" size="lg">
+              Рассчитать стоимость подбора
               <ArrowRight className="h-5 w-5" aria-hidden="true" />
             </Button>
-            <Button href={`tel:${SITE.phone}`} variant="secondary" size="lg">
+            <Button href={SITE.whatsapp} variant="secondary" size="lg" target="_blank" rel="noopener noreferrer">
               <Phone className="h-5 w-5" aria-hidden="true" />
-              {SITE.phoneDisplay}
+              Написать в WhatsApp
             </Button>
           </div>
 
           <p className="mt-4 text-xs text-neutral-600">
-            Ответим в течение 15 минут в рабочее время
+            Бесплатная консультация · Без обязательств
           </p>
         </div>
       </Container>

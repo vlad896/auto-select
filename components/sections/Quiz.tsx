@@ -95,13 +95,14 @@ export function Quiz() {
         {/* Section label */}
         <div className="mb-8 text-center sm:mb-10">
           <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-primary-500">
-            Быстрый расчёт
+            Рассчитать стоимость
           </p>
           <h2 id="quiz-heading" className="text-balance">
-            Узнайте стоимость подбора за 1 минуту
+            Получите персональный расчёт за&nbsp;60&nbsp;секунд
           </h2>
           <p className="mt-3 text-neutral-400">
-            Ответьте на 5 вопросов — и получите персональный расчёт
+            5 вопросов → индивидуальное предложение → эксперт перезвонит
+            в&nbsp;течение 15&nbsp;минут
           </p>
         </div>
 

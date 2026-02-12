@@ -1,4 +1,4 @@
-import { Check, X, ArrowRight } from "lucide-react";
+import { Check, X, ArrowRight, AlertTriangle } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Button } from "@/components/ui/Button";
@@ -70,11 +70,33 @@ export function WhyUs() {
     >
       <Container className="max-w-4xl">
         <SectionHeading
-          label="Сравнение"
-          subtitle="Почему профессиональный автоподбор выгоднее, чем самостоятельная проверка или покупка в салоне."
+          label="Зачем нужен эксперт"
+          subtitle="По нашей статистике, 3 из 5 автомобилей на av.by имеют скрытые дефекты: скрученный пробег, скрытый окрас, юридические проблемы."
         >
-          <span id="whyus-heading">Почему выбирают нас</span>
+          <span id="whyus-heading">Проверяете авто сами? Сравните</span>
         </SectionHeading>
+
+        {/* Problem awareness */}
+        <div className="mb-8 grid gap-3 sm:grid-cols-3 sm:mb-10">
+          {[
+            { stat: "60%", text: "авто со скрученным пробегом" },
+            { stat: "35%", text: "с повторным окрасом или шпатлёвкой" },
+            { stat: "12%", text: "с юридическими проблемами" },
+          ].map((item) => (
+            <div
+              key={item.stat}
+              className="flex items-center gap-3 rounded-xl border border-amber-500/15 bg-amber-500/5 px-4 py-3"
+            >
+              <AlertTriangle
+                className="h-5 w-5 shrink-0 text-amber-500"
+                aria-hidden="true"
+              />
+              <p className="text-sm text-neutral-300">
+                <strong className="text-amber-400">{item.stat}</strong> {item.text}
+              </p>
+            </div>
+          ))}
+        </div>
 
         {/* Desktop table */}
         <div className="hidden overflow-hidden rounded-2xl border border-white/10 sm:block">

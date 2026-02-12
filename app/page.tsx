@@ -16,64 +16,74 @@ import { CaseStudies } from "@/components/sections/CaseStudies";
 import { FAQSection } from "@/components/sections/FAQSection";
 import { OfficeMap } from "@/components/sections/OfficeMap";
 
+// ============================================================
+// Marketing funnel structure — AIDA model
+//
+// PHASE 1: ATTENTION — захват внимания
+//   Hero → первый экран, УТП, CTA
+//
+// PHASE 2: INTEREST — "зачем мне это?"
+//   WhyUs → таблица "мы vs сам vs салон" (отвечает на главный вопрос)
+//   CaseStudies → реальные примеры (скрученный пробег, экономия $2000)
+//   ServicesGrid → конкретные услуги и цены
+//
+// PHASE 3: DESIRE — "хочу, но нужны детали"
+//   CTA #1 → горячий конверсионный блок для тех кто уже готов
+//   ProcessSteps → 5 шагов от заявки до покупки (снимаем "а что будет?")
+//   Methodology → глубина проверки 140+ пунктов
+//   ToolsProof → оборудование (для скептиков)
+//   VideoShowcase → видео работы
+//
+// PHASE 4: EVALUATION — "стоит ли своих денег?"
+//   PricingTable → прозрачные цены
+//   Calculator → ROI "торг окупает в 3 раза"
+//   CTA #2 → для сомневающихся, бесплатная консультация
+//
+// PHASE 5: TRUST — "можно ли доверять?"
+//   Guarantees → договор, ответственность
+//   LegalCheck → VIN, угон, залоги
+//   Testimonials → эмоции клиентов
+//
+// PHASE 6: ACTION — конверсия
+//   Quiz → квиз-лидогенерация (клиент уже образован и мотивирован)
+//   FAQ → снимаем последние возражения
+//   OfficeMap → физический адрес = финальное доверие
+// ============================================================
+
 export default function HomePage() {
   return (
     <main
       id="main-content"
       style={{ paddingTop: "calc(4rem + var(--promo-h, 0px))" }}
     >
-      {/* 1. Захват внимания — первый экран */}
+      {/* ═══ PHASE 1: ATTENTION ═══ */}
       <HeroSection />
 
-      {/* 2. Квиз — лидогенерация (пока пользователь "горячий") */}
-      <Quiz />
-
-      {/* 3. Доверие — оборудование и экспертиза */}
-      <ToolsProof />
-
-      {/* 4. Услуги — что предлагаем */}
+      {/* ═══ PHASE 2: INTEREST — создаём потребность ═══ */}
+      <WhyUs />
+      <CaseStudies />
       <ServicesGrid />
 
-      {/* === CTA BREAK #1 — конверсионный баннер после услуг === */}
+      {/* ═══ PHASE 3: DESIRE — детали и экспертиза ═══ */}
       <CtaBannerPrimary />
-
-      {/* 5. Методология — как проверяем */}
-      <Methodology />
-
-      {/* 6. Цены — прозрачность */}
-      <PricingTable />
-
-      {/* 7. Калькулятор — интерактив + убиваем возражение "дорого" */}
-      <Calculator />
-
-      {/* 8. Почему мы — сравнение с конкурентами */}
-      <WhyUs />
-
-      {/* 9. Этапы работы — снимаем страх "а как это будет?" */}
       <ProcessSteps />
-
-      {/* === CTA BREAK #2 — для тех кто сомневается === */}
-      <CtaBannerSecondary />
-
-      {/* 10. Гарантии — доверие и юридическая защита */}
-      <Guarantees />
-
-      {/* 11. Юридическая проверка — снимаем страх "не нарвусь ли на угон" */}
-      <LegalCheck />
-
-      {/* 12. Отзывы — социальное доказательство */}
-      <Testimonials />
-
-      {/* 13. Видео — визуальный контент */}
+      <Methodology />
+      <ToolsProof />
       <VideoShowcase />
 
-      {/* 14. Кейсы — конкретные результаты */}
-      <CaseStudies />
+      {/* ═══ PHASE 4: EVALUATION — цена и окупаемость ═══ */}
+      <PricingTable />
+      <Calculator />
+      <CtaBannerSecondary />
 
-      {/* 15. FAQ — снимаем последние возражения */}
+      {/* ═══ PHASE 5: TRUST — доверие и снятие страхов ═══ */}
+      <Guarantees />
+      <LegalCheck />
+      <Testimonials />
+
+      {/* ═══ PHASE 6: ACTION — конверсия ═══ */}
+      <Quiz />
       <FAQSection />
-
-      {/* 16. Карта — финальный штрих доверия */}
       <OfficeMap />
     </main>
   );
