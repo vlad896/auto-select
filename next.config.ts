@@ -4,6 +4,12 @@ const nextConfig: NextConfig = {
   // ── Trailing slash: /podbor → 308 → /podbor/ (убирает дубли) ──
   trailingSlash: true,
 
+  // ── Critical CSS inlining: инлайнит above-the-fold CSS в HTML,
+  //    остальное загружается асинхронно (убирает render-blocking) ──
+  experimental: {
+    optimizeCss: true,
+  },
+
   images: {
     formats: ["image/avif", "image/webp"],
     deviceSizes: [480, 640, 768, 1024, 1280, 1536],

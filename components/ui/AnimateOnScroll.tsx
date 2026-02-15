@@ -1,11 +1,13 @@
 "use client";
 
 import { useRef } from "react";
-import { motion, useInView, type Variant } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 
 type AnimationVariant = "fadeUp" | "fadeIn" | "slideLeft" | "slideRight" | "scaleIn" | "zoomIn";
 
-const variants: Record<AnimationVariant, { hidden: Variant; visible: Variant }> = {
+type MotionVariant = Record<string, string | number>;
+
+const variants: Record<AnimationVariant, { hidden: MotionVariant; visible: MotionVariant }> = {
   fadeUp: {
     hidden: { opacity: 0, y: 32 },
     visible: { opacity: 1, y: 0 },

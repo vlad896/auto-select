@@ -66,7 +66,7 @@ export function LeadPopup() {
       clearTimeout(timer);
       document.removeEventListener("mouseleave", handleMouseLeave);
     };
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, []);
 
   // ── Focus trap + Escape close ──
   useEffect(() => {

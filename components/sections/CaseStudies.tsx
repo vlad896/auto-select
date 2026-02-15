@@ -106,9 +106,9 @@ export function CaseStudies() {
                 <div className="p-5 sm:p-6">
                   {/* Car info */}
                   <div className="mb-4">
-                    <h4 className="text-lg font-bold text-white sm:text-xl">
+                    <h3 className="text-lg font-bold text-white sm:text-xl">
                       {study.car}
-                    </h4>
+                    </h3>
                     <p className="mt-1 flex items-center gap-1.5 text-sm text-neutral-500">
                       <MapPin
                         className="h-3.5 w-3.5"
