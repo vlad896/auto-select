@@ -115,15 +115,17 @@ export const metadata: Metadata = {
   alternates: {
     canonical: `${SITE.url}/`,
   },
+  // TODO: Раскомментировать когда сайт готов к индексации
   robots: {
-    index: true,
-    follow: true,
+    index: false,     // ← заменить на true
+    follow: false,    // ← заменить на true
     googleBot: {
-      index: true,
-      follow: true,
-      "max-video-preview": -1,
-      "max-image-preview": "large",
-      "max-snippet": -1,
+      index: false,   // ← заменить на true
+      follow: false,  // ← заменить на true
+      // "max-video-preview": -1,
+      // "max-image-preview": "large",
+      // "max-snippet": -1,
+      noimageindex: true, // ← удалить эту строку
     },
   },
 };
