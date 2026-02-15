@@ -9,6 +9,7 @@ import { StickyCTA } from "@/components/layout/StickyCTA";
 import { CursorSpotlight } from "@/components/layout/CursorSpotlight";
 import { PromoBanner } from "@/components/layout/PromoBanner";
 import { ServiceWorkerRegistration } from "@/components/layout/ServiceWorkerRegistration";
+import { LeadPopup } from "@/components/layout/LeadPopup";
 import "./globals.css";
 
 // ============================================================
@@ -165,6 +166,7 @@ export default function RootLayout({
         <StickyMessenger />
         <StickyCTA />
         <ServiceWorkerRegistration />
+        <LeadPopup />
       </body>
     </html>
   );
