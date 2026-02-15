@@ -9,6 +9,7 @@ import Image from "next/image";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { PROCESS_STEPS } from "@/lib/constants";
+import { StaggerChildren } from "@/components/ui/StaggerChildren";
 
 // ============================================================
 // Step icons (mapped to PROCESS_STEPS by index)
@@ -63,7 +64,7 @@ export function ProcessSteps() {
             aria-hidden="true"
           />
 
-          <ol className="relative grid gap-8 lg:grid-cols-5 lg:gap-4">
+          <StaggerChildren as="ol" className="relative grid gap-8 lg:grid-cols-5 lg:gap-4">
             {PROCESS_STEPS.map((step, i) => {
               const Icon = STEP_ICONS[i] ?? FileSignature;
               const isLast = i === PROCESS_STEPS.length - 1;
@@ -71,7 +72,7 @@ export function ProcessSteps() {
               return (
                 <li key={step.step} className="relative flex gap-4 lg:flex-col lg:items-center lg:text-center">
                   {/* Step circle */}
-                  <div className="relative z-10 flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl border border-white/10 bg-surface-200 shadow-sm transition-colors lg:mx-auto">
+                  <div className="relative z-10 flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl border border-white/10 bg-surface-200 shadow-sm transition-colors icon-bounce lg:mx-auto">
                     <Icon
                       className="h-6 w-6 text-primary-400"
                       aria-hidden="true"
@@ -94,7 +95,7 @@ export function ProcessSteps() {
                 </li>
               );
             })}
-          </ol>
+          </StaggerChildren>
         </div>
       </Container>
     </section>

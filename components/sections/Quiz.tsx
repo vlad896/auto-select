@@ -9,10 +9,21 @@ import {
   Loader2,
   ClipboardCheck,
 } from "lucide-react";
+import confetti from "canvas-confetti";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import { QUIZ_STEPS } from "@/lib/constants";
 import { submitQuizLead } from "@/app/actions";
+
+function fireConfetti() {
+  confetti({
+    particleCount: 80,
+    spread: 70,
+    origin: { y: 0.6 },
+    colors: ["#dc2626", "#ef4444", "#f87171", "#ffffff", "#fca5a5"],
+    disableForReducedMotion: true,
+  });
+}
 
 // ============================================================
 // Quiz Section — dark theme
@@ -79,6 +90,7 @@ export function Quiz() {
       if (result.success) {
         setSuccessMessage(result.message);
         setPhase("success");
+        fireConfetti();
       } else {
         setPhoneError(result.message);
       }

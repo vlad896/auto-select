@@ -2,6 +2,7 @@ import { Download, ArrowRight } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Button } from "@/components/ui/Button";
+import { StaggerChildren } from "@/components/ui/StaggerChildren";
 import { PRICING_TABLE } from "@/lib/constants";
 
 // ============================================================
@@ -74,11 +75,11 @@ export function PricingTable() {
         </div>
 
         {/* ===== Mobile cards ===== */}
-        <div className="flex flex-col gap-3 sm:hidden">
+        <StaggerChildren className="flex flex-col gap-3 sm:hidden">
           {PRICING_TABLE.map((row) => (
             <div
               key={row.service}
-              className="rounded-xl border border-white/10 bg-surface-200/30 p-4"
+              className="card-hover rounded-xl border border-white/10 bg-surface-200/30 p-4"
             >
               <div className="mb-2 flex items-center justify-between">
                 <p className="text-sm font-semibold text-white">
@@ -93,7 +94,7 @@ export function PricingTable() {
               </p>
             </div>
           ))}
-        </div>
+        </StaggerChildren>
 
         {/* CTAs below table */}
         <div className="mt-8 flex flex-col items-center gap-3 sm:mt-10 sm:flex-row sm:justify-center sm:gap-4">

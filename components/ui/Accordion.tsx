@@ -77,16 +77,21 @@ interface AccordionProps {
   }[];
   /** Allow multiple panels open simultaneously */
   allowMultiple?: boolean;
+  /** Index of the item to open by default (-1 = none) */
+  defaultOpen?: number;
   className?: string;
 }
 
 export function Accordion({
   items,
   allowMultiple = false,
+  defaultOpen = -1,
   className = "",
 }: AccordionProps) {
   const baseId = useId();
-  const [openIndexes, setOpenIndexes] = useState<Set<number>>(new Set());
+  const [openIndexes, setOpenIndexes] = useState<Set<number>>(
+    defaultOpen >= 0 ? new Set([defaultOpen]) : new Set(),
+  );
 
   const handleToggle = useCallback(
     (index: number) => {

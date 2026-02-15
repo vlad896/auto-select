@@ -5,6 +5,7 @@ import { Star, ChevronLeft, ChevronRight, Quote, Car } from "lucide-react";
 import Image from "next/image";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
+import { CountUp } from "@/components/ui/CountUp";
 
 // ============================================================
 // Testimonial data
@@ -89,14 +90,14 @@ export function Testimonials() {
                 />
               ))}
             </div>
-            <span className="text-sm font-semibold text-white">5.0</span>
+            <CountUp end={5} decimals={1} suffix="" className="text-sm font-semibold text-white" />
             <span className="text-sm text-neutral-500">на Google Maps</span>
           </div>
           <div className="text-sm text-neutral-400">
-            <span className="font-bold text-white">500+</span> проверенных авто
+            <CountUp end={500} suffix="+" className="font-bold text-white" /> проверенных авто
           </div>
           <div className="text-sm text-neutral-400">
-            <span className="font-bold text-white">98%</span> рекомендуют нас друзьям
+            <CountUp end={98} suffix="%" className="font-bold text-white" /> рекомендуют нас друзьям
           </div>
         </div>
 

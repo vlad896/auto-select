@@ -9,6 +9,7 @@ import Image from "next/image";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Button } from "@/components/ui/Button";
+import { StaggerChildren } from "@/components/ui/StaggerChildren";
 import { SITE } from "@/lib/constants";
 
 // ============================================================
@@ -44,7 +45,7 @@ export function OfficeMap() {
 
         <div className="grid gap-6 lg:grid-cols-5 lg:gap-8">
           {/* === Left: Contact info cards === */}
-          <div className="lg:col-span-2 space-y-4">
+          <StaggerChildren className="lg:col-span-2 space-y-4">
             {/* Address card */}
             <div className="rounded-2xl border border-white/10 bg-surface-100 p-5 sm:p-6">
               <div className="mb-4 flex items-center gap-3">
@@ -112,7 +113,7 @@ export function OfficeMap() {
                 Построить маршрут
               </Button>
             </div>
-          </div>
+          </StaggerChildren>
 
           {/* === Right: Google Map === */}
           <div className="lg:col-span-3">

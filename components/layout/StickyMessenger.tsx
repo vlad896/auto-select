@@ -31,7 +31,7 @@ export function StickyMessenger() {
   if (!isVisible) return null;
 
   return (
-    <div className="fixed bottom-5 right-5 z-40 flex flex-col items-end gap-3">
+    <div className="fixed bottom-20 right-5 z-40 flex flex-col items-end gap-3">
       {/* Expanded messenger options */}
       {isOpen && (
         <div className="animate-slide-up mb-1 flex flex-col gap-2 rounded-2xl bg-surface-100 p-3 shadow-2xl border border-white/10">

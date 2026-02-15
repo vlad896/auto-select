@@ -43,8 +43,27 @@ export function FAQSection() {
         </SectionHeading>
 
         <div className="rounded-2xl border border-white/10 bg-surface-100 px-5 shadow-sm sm:px-6">
-          <Accordion items={accordionItems} />
+          <Accordion items={accordionItems} defaultOpen={0} />
         </div>
+
+        {/*
+          SEO: full FAQ content for crawlers.
+          Googlebot renders JS, but as a safety net we duplicate all
+          answers inside a <noscript> block so they are always in the
+          static HTML. The JSON-LD FAQPage schema on the homepage
+          provides structured data; this ensures the raw text is also
+          indexable even if JS execution is delayed or skipped.
+        */}
+        <noscript>
+          <div className="sr-only">
+            {FAQ_ITEMS.map((item) => (
+              <details key={item.question} open>
+                <summary>{item.question}</summary>
+                <p>{item.answer}</p>
+              </details>
+            ))}
+          </div>
+        </noscript>
 
         {/* CTA below FAQ */}
         <div className="mt-8 text-center sm:mt-10">

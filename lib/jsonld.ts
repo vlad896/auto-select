@@ -60,9 +60,9 @@ function getOrganizationJsonLd() {
     url: SITE.url,
     logo: {
       "@type": "ImageObject",
-      url: `${SITE.url}/logo.png`,
-      width: 180,
-      height: 180,
+      url: `${SITE.url}/icon-512.png`,
+      width: 512,
+      height: 512,
     },
     description:
       "Профессиональный автоподбор и комплексная диагностика автомобилей в Минске. Сканер Launch X431, толщиномер Etari ET-700, юридическая проверка.",

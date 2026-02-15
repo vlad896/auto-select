@@ -1,4 +1,5 @@
 import { type ReactNode } from "react";
+import { AnimateOnScroll } from "./AnimateOnScroll";
 
 interface SectionHeadingProps {
   /** The heading text or JSX */
@@ -27,15 +28,21 @@ export function SectionHeading({
   return (
     <div className={`mb-10 sm:mb-12 lg:mb-14 ${alignClass} ${className}`}>
       {label && (
-        <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-primary-500">
-          {label}
-        </p>
+        <AnimateOnScroll variant="fadeIn" duration={0.4}>
+          <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-primary-500">
+            {label}
+          </p>
+        </AnimateOnScroll>
       )}
-      <Tag className="text-balance">{children}</Tag>
+      <AnimateOnScroll variant="fadeUp" delay={label ? 0.1 : 0} duration={0.5}>
+        <Tag className="text-balance">{children}</Tag>
+      </AnimateOnScroll>
       {subtitle && (
-        <p className="mt-4 max-w-2xl text-base leading-relaxed text-neutral-400 sm:text-lg mx-auto">
-          {subtitle}
-        </p>
+        <AnimateOnScroll variant="fadeUp" delay={label ? 0.2 : 0.1} duration={0.5}>
+          <p className="mt-4 max-w-2xl text-base leading-relaxed text-neutral-400 sm:text-lg mx-auto">
+            {subtitle}
+          </p>
+        </AnimateOnScroll>
       )}
     </div>
   );

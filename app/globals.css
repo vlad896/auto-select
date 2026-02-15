@@ -188,4 +188,103 @@
   .scrollbar-hide::-webkit-scrollbar {
     display: none;
   }
+
+  /* ── Micro-animations (CSS-only, zero JS) ── */
+
+  /* Soft pulse glow for CTA buttons */
+  .pulse-glow {
+    animation: pulse-glow 2.5s ease-in-out infinite;
+  }
+
+  /* Gentle float for decorative elements */
+  .float {
+    animation: float 4s ease-in-out infinite;
+  }
+
+  /* Card hover lift */
+  .card-hover {
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+  .card-hover:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 32px -8px rgba(0, 0, 0, 0.4);
+  }
+
+  /* Icon draw-in (stroke animation for SVGs) */
+  .icon-draw {
+    stroke-dasharray: 100;
+    stroke-dashoffset: 100;
+    animation: draw-stroke 1s ease-out forwards;
+  }
+
+  /* Icon bounce-in (for step icons) */
+  .icon-bounce {
+    animation: icon-bounce-in 0.6s ease-out both;
+  }
+
+  /* Slow spin for search/scan-related icons */
+  .icon-spin-slow {
+    animation: icon-spin-slow 8s linear infinite;
+  }
+}
+
+/* ── Keyframes (outside @layer for global scope) ── */
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(220, 38, 38, 0);
+  }
+  50% {
+    box-shadow: 0 0 20px 4px rgba(220, 38, 38, 0.2);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+/* Marquee scroll for brand/trust ticker */
+@keyframes marquee-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* Step icon bounce-in on scroll */
+@keyframes icon-bounce-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.5) rotate(-10deg);
+  }
+  60% {
+    transform: scale(1.15) rotate(2deg);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(0);
+  }
+}
+
+/* Continuous subtle rotate for scan/search icons */
+@keyframes icon-spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes draw-stroke {
+  to {
+    stroke-dashoffset: 0;
+  }
 }

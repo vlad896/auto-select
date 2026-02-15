@@ -6,6 +6,7 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Button } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/Badge";
 import { SERVICES } from "@/lib/constants";
+import { StaggerChildren } from "@/components/ui/StaggerChildren";
 
 const SERVICE_LINKS: Record<string, string> = {
   diagnostic: "/diagnostika/",
@@ -44,11 +45,11 @@ export function ServicesGrid() {
           <span id="services-heading">Выберите подходящий формат</span>
         </SectionHeading>
 
-        <div className="grid gap-5 sm:gap-6 lg:grid-cols-3">
+        <StaggerChildren className="grid gap-5 sm:gap-6 lg:grid-cols-3">
           {SERVICES.map((service) => (
             <article
               key={service.id}
-              className={`relative flex flex-col overflow-hidden rounded-2xl border-2 bg-surface-200/30 p-5 transition-all duration-300 sm:p-7 ${
+              className={`card-hover relative flex h-full flex-col overflow-hidden rounded-2xl border-2 bg-surface-200/30 p-5 transition-all duration-300 sm:p-7 ${
                 service.popular
                   ? "border-primary-600 shadow-lg shadow-primary-600/10"
                   : "border-white/10 hover:border-primary-600/30"
@@ -127,7 +128,7 @@ export function ServicesGrid() {
               </div>
             </article>
           ))}
-        </div>
+        </StaggerChildren>
       </Container>
     </section>
   );

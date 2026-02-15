@@ -13,6 +13,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
+import { StaggerChildren } from "@/components/ui/StaggerChildren";
 
 // ============================================================
 // Methodology — REDESIGNED for readability and user-friendliness
@@ -168,7 +169,7 @@ export function Methodology() {
           </div>
         </div>
 
-        <div className="space-y-6">
+        <StaggerChildren className="space-y-6">
           {/* === Step 1: Computer diagnostics === */}
           <StepCard
             icon={Cpu}
@@ -265,7 +266,7 @@ export function Methodology() {
               <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </Link>
           </div>
-        </div>
+        </StaggerChildren>
       </Container>
     </section>
   );

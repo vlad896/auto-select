@@ -3,6 +3,7 @@ import Image from "next/image";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { TOOLS } from "@/lib/constants";
+import { StaggerChildren } from "@/components/ui/StaggerChildren";
 
 // ============================================================
 // Map icon string names to Lucide components
@@ -42,13 +43,13 @@ export function ToolsProof() {
           <div className="absolute inset-0 bg-gradient-to-t from-surface-950/60 to-transparent" />
         </div>
 
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4 sm:gap-6">
+        <StaggerChildren className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4 sm:gap-6">
           {TOOLS.map((tool) => {
             const Icon = ICON_MAP[tool.icon] ?? Cpu;
             return (
               <article
                 key={tool.model}
-                className="group relative overflow-hidden rounded-2xl border border-white/10 bg-surface-100 p-5 transition-all duration-300 hover:border-primary-600/30 hover:bg-surface-200/50 sm:p-6"
+                className="card-hover group relative h-full overflow-hidden rounded-2xl border border-white/10 bg-surface-100 p-5 transition-all duration-300 hover:border-primary-600/30 hover:bg-surface-200/50 sm:p-6"
               >
                 {/* Icon */}
                 <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-primary-600/15 text-primary-400 transition-colors group-hover:bg-primary-600/25">
@@ -76,7 +77,7 @@ export function ToolsProof() {
               </article>
             );
           })}
-        </div>
+        </StaggerChildren>
       </Container>
     </section>
   );

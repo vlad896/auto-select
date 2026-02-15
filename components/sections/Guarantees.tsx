@@ -8,6 +8,7 @@ import {
 } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
+import { StaggerChildren } from "@/components/ui/StaggerChildren";
 
 // ============================================================
 // Guarantee items
@@ -65,13 +66,13 @@ export function Guarantees() {
           <span id="guarantees-heading">Почему нам доверяют</span>
         </SectionHeading>
 
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 sm:gap-6">
+        <StaggerChildren className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 sm:gap-6">
           {GUARANTEES.map((g) => {
             const Icon = g.icon;
             return (
               <div
                 key={g.title}
-                className="group rounded-2xl border border-white/10 bg-surface-100 p-5 transition-all duration-300 hover:border-primary-600/20 sm:p-6"
+                className="card-hover group h-full rounded-2xl border border-white/10 bg-surface-100 p-5 transition-all duration-300 hover:border-primary-600/20 sm:p-6"
               >
                 <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-primary-600/15 text-primary-400 transition-colors group-hover:bg-primary-600/25">
                   <Icon className="h-6 w-6" aria-hidden="true" />
@@ -85,7 +86,7 @@ export function Guarantees() {
               </div>
             );
           })}
-        </div>
+        </StaggerChildren>
       </Container>
     </section>
   );

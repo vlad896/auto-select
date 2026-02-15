@@ -12,7 +12,7 @@ export const SITE = {
   viber: "viber://chat?number=%2B375291234567",
   address: "ул. Тимирязева, 23, Минск",
   workingHours: "Ежедневно 09:00 — 21:00",
-  email: "info@site.by",
+  email: "info@автоподборминск.бел",
 } as const;
 
 // ============================================================

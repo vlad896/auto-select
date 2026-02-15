@@ -1,7 +1,9 @@
 import { ArrowRight, Phone, Shield, Clock } from "lucide-react";
 import Image from "next/image";
 import { Container } from "@/components/ui/Container";
+import { Parallax } from "@/components/ui/Parallax";
 import { Button } from "@/components/ui/Button";
+import { AnimateOnScroll } from "@/components/ui/AnimateOnScroll";
 import { SITE } from "@/lib/constants";
 
 // ============================================================
@@ -13,7 +15,7 @@ export function CtaBannerPrimary() {
   return (
     <section className="relative overflow-hidden bg-primary-600 py-12 sm:py-16" aria-label="Призыв к действию: заказать диагностику автомобиля">
       {/* Background pattern */}
-      <div className="absolute inset-0 opacity-10" aria-hidden="true">
+      <Parallax offset={30} className="absolute inset-0 opacity-10" aria-hidden="true">
         <Image
           src="/images/hero-bg.jpg"
           alt="" aria-hidden="true"
@@ -21,13 +23,13 @@ export function CtaBannerPrimary() {
           className="object-cover"
           sizes="100vw"
         />
-      </div>
+      </Parallax>
       <div className="absolute inset-0 bg-gradient-to-r from-primary-700 via-primary-600 to-primary-700" />
 
       <Container className="relative z-10">
         <div className="flex flex-col items-center gap-6 text-center lg:flex-row lg:text-left lg:gap-10">
           {/* Text */}
-          <div className="flex-1">
+          <AnimateOnScroll variant="fadeUp" className="flex-1">
             <h2 className="text-2xl font-bold text-white sm:text-3xl lg:text-4xl">
               Уже нашли автомобиль?
             </h2>
@@ -48,7 +50,7 @@ export function CtaBannerPrimary() {
                 Выезд за 60 минут
               </span>
             </div>
-          </div>
+          </AnimateOnScroll>
 
           {/* CTA buttons */}
           <div className="flex shrink-0 flex-col gap-3 sm:flex-row">
@@ -81,18 +83,20 @@ export function CtaBannerSecondary() {
   return (
     <section className="relative overflow-hidden bg-surface-950 py-12 sm:py-16" aria-label="Призыв к действию: рассчитать стоимость подбора автомобиля">
       <div className="absolute inset-0" aria-hidden="true">
-        <Image
-          src="/images/bg-car-front.jpg"
-          alt="" aria-hidden="true"
-          fill
-          className="object-cover opacity-20"
-          sizes="100vw"
-        />
+        <Parallax offset={30} className="absolute inset-0">
+          <Image
+            src="/images/bg-car-front.jpg"
+            alt="" aria-hidden="true"
+            fill
+            className="object-cover opacity-20"
+            sizes="100vw"
+          />
+        </Parallax>
         <div className="absolute inset-0 bg-gradient-to-r from-surface-950 via-surface-950/90 to-surface-950" />
       </div>
 
       <Container className="relative z-10">
-        <div className="mx-auto max-w-3xl text-center">
+        <AnimateOnScroll variant="fadeUp" className="mx-auto max-w-3xl text-center">
           <p className="mb-2 text-sm font-semibold uppercase tracking-widest text-primary-500">
             Вы уже посчитали выгоду
           </p>
@@ -118,7 +122,7 @@ export function CtaBannerSecondary() {
           <p className="mt-4 text-xs text-neutral-600">
             Бесплатная консультация · Без обязательств
           </p>
-        </div>
+        </AnimateOnScroll>
       </Container>
     </section>
   );

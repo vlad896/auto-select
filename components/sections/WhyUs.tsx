@@ -2,6 +2,9 @@ import { Check, X, ArrowRight, AlertTriangle } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Button } from "@/components/ui/Button";
+import { CountUp } from "@/components/ui/CountUp";
+import { TextHighlight } from "@/components/ui/TextHighlight";
+import { StaggerChildren } from "@/components/ui/StaggerChildren";
 
 // ============================================================
 // Comparison data
@@ -77,14 +80,14 @@ export function WhyUs() {
         </SectionHeading>
 
         {/* Problem awareness */}
-        <div className="mb-8 grid gap-3 sm:grid-cols-3 sm:mb-10">
+        <StaggerChildren className="mb-8 grid gap-3 sm:grid-cols-3 sm:mb-10">
           {[
-            { stat: "60%", text: "авто со скрученным пробегом" },
-            { stat: "35%", text: "с повторным окрасом или шпатлёвкой" },
-            { stat: "12%", text: "с юридическими проблемами" },
+            { num: 60, suffix: "%", text: "авто со скрученным пробегом" },
+            { num: 35, suffix: "%", text: "с повторным окрасом или шпатлёвкой" },
+            { num: 12, suffix: "%", text: "с юридическими проблемами" },
           ].map((item) => (
             <div
-              key={item.stat}
+              key={`${item.num}-${item.text}`}
               className="flex items-center gap-3 rounded-xl border border-amber-500/15 bg-amber-500/5 px-4 py-3"
             >
               <AlertTriangle
@@ -92,11 +95,14 @@ export function WhyUs() {
                 aria-hidden="true"
               />
               <p className="text-sm text-neutral-300">
-                <strong className="text-amber-400">{item.stat}</strong> {item.text}
+                <TextHighlight color="amber" variant="glow">
+                  <CountUp end={item.num} suffix={item.suffix} duration={1.8} />
+                </TextHighlight>{" "}
+                {item.text}
               </p>
             </div>
           ))}
-        </div>
+        </StaggerChildren>
 
         {/* Desktop table */}
         <div className="hidden overflow-hidden rounded-2xl border border-white/10 sm:block">

@@ -1,10 +1,37 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  // ── Trailing slash: /podbor → 308 → /podbor/ (убирает дубли) ──
+  trailingSlash: true,
+
   images: {
     formats: ["image/avif", "image/webp"],
     deviceSizes: [480, 640, 768, 1024, 1280, 1536],
   },
+
+  // ── Redirects: зеркала и нормализация ──
+  redirects: async () => [
+    // www → non-www (301 permanent)
+    {
+      source: "/:path*",
+      has: [{ type: "host", value: "www.автоподборминск.бел" }],
+      destination: "https://автоподборминск.бел/:path*",
+      permanent: true,
+    },
+    // Punycode www → non-www (для DNS, которые резолвят IDN в punycode)
+    {
+      source: "/:path*",
+      has: [
+        {
+          type: "host",
+          value: "www.xn--80aafgkdcbpkjhgmfcdo6o.xn--d1acj3b",
+        },
+      ],
+      destination: "https://автоподборминск.бел/:path*",
+      permanent: true,
+    },
+  ],
+
   headers: async () => [
     {
       source: "/(.*)",

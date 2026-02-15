@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
+import { AnimateOnScroll } from "@/components/ui/AnimateOnScroll";
 
 // ============================================================
 // LegalCheck — dark theme
@@ -59,6 +60,7 @@ export function LegalCheck() {
 
         <div className="grid gap-10 lg:grid-cols-2 lg:gap-14">
           {/* === Column 1 === */}
+          <AnimateOnScroll variant="slideLeft">
           <div className="rounded-2xl border border-white/10 bg-surface-100 p-5 sm:p-6">
             <div className="mb-6 flex items-center gap-3">
               <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary-600/20">
@@ -87,8 +89,10 @@ export function LegalCheck() {
               </CheckItem>
             </div>
           </div>
+          </AnimateOnScroll>
 
           {/* === Column 2 === */}
+          <AnimateOnScroll variant="slideRight" delay={0.15}>
           <div className="rounded-2xl border border-white/10 bg-surface-100 p-5 sm:p-6">
             <div className="mb-6 flex items-center gap-3">
               <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary-600/20">
@@ -115,6 +119,7 @@ export function LegalCheck() {
               </CheckItem>
             </div>
           </div>
+          </AnimateOnScroll>
         </div>
 
         {/* Summary callout */}

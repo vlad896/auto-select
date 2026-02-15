@@ -5,6 +5,8 @@ import { getMainPageJsonLd } from "@/lib/jsonld";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { StickyMessenger } from "@/components/layout/StickyMessenger";
+import { StickyCTA } from "@/components/layout/StickyCTA";
+import { CursorSpotlight } from "@/components/layout/CursorSpotlight";
 import { PromoBanner } from "@/components/layout/PromoBanner";
 import { ServiceWorkerRegistration } from "@/components/layout/ServiceWorkerRegistration";
 import "./globals.css";
@@ -110,7 +112,7 @@ export const metadata: Metadata = {
     images: ["/images/og-image.jpg"],
   },
   alternates: {
-    canonical: SITE.url,
+    canonical: `${SITE.url}/`,
   },
   robots: {
     index: true,
@@ -147,6 +149,7 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-screen bg-surface-950 font-sans text-neutral-300 antialiased" suppressHydrationWarning>
+        <CursorSpotlight />
         {/* Skip to content — WCAG 2.2 keyboard nav */}
         <a
           href="#main-content"
@@ -160,6 +163,7 @@ export default function RootLayout({
         {children}
         <Footer />
         <StickyMessenger />
+        <StickyCTA />
         <ServiceWorkerRegistration />
       </body>
     </html>

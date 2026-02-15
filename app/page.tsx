@@ -1,4 +1,5 @@
 import { HeroSection } from "@/components/sections/HeroSection";
+import { Marquee } from "@/components/ui/Marquee";
 import { Quiz } from "@/components/sections/Quiz";
 import { ToolsProof } from "@/components/sections/ToolsProof";
 import { ServicesGrid } from "@/components/sections/ServicesGrid";
@@ -58,6 +59,17 @@ export default function HomePage() {
     >
       {/* ═══ PHASE 1: ATTENTION ═══ */}
       <HeroSection />
+
+      {/* Brand trust marquee */}
+      <section className="border-y border-white/5 bg-surface-100/50 py-4" aria-label="Марки автомобилей">
+        <Marquee speed={35} pauseOnHover>
+          {["BMW (ISTA+)", "Volkswagen / Audi (ODIS)", "Mercedes (Xentry)", "Geely (профиль)", "Toyota (Techstream)", "Kia / Hyundai", "Škoda / SEAT", "Volvo (VIDA)", "140+ пунктов проверки", "500+ проверенных авто", "95% успешный торг"].map((item) => (
+            <span key={item} className="whitespace-nowrap text-sm font-medium text-neutral-500">
+              {item}
+            </span>
+          ))}
+        </Marquee>
+      </section>
 
       {/* ═══ PHASE 2: INTEREST — создаём потребность ═══ */}
       <WhyUs />

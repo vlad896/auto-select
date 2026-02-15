@@ -11,6 +11,7 @@ import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
+import { StaggerChildren } from "@/components/ui/StaggerChildren";
 import { CASE_STUDIES } from "@/lib/constants";
 
 // Case study — real car photos
@@ -42,7 +43,7 @@ export function CaseStudies() {
           </span>
         </SectionHeading>
 
-        <div className="grid gap-6 md:grid-cols-2">
+        <StaggerChildren className="grid gap-6 md:grid-cols-2">
           {CASE_STUDIES.map((study) => {
             const isRejected = study.result === "rejected";
             const imageUrl = CASE_IMAGES[study.id];
@@ -50,7 +51,7 @@ export function CaseStudies() {
             return (
               <article
                 key={study.id}
-                className={`relative overflow-hidden rounded-2xl border-2 bg-surface-200/30 transition-shadow hover:shadow-lg hover:shadow-black/20 ${
+                className={`card-hover relative h-full overflow-hidden rounded-2xl border-2 bg-surface-200/30 transition-shadow hover:shadow-lg hover:shadow-black/20 ${
                   isRejected
                     ? "border-danger-500/30"
                     : "border-success-500/30"
@@ -206,7 +207,7 @@ export function CaseStudies() {
               </article>
             );
           })}
-        </div>
+        </StaggerChildren>
 
         {/* CTA */}
         <div className="mt-8 text-center sm:mt-10">
