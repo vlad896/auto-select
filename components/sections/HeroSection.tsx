@@ -36,7 +36,7 @@ export function HeroSection() {
       <div className="absolute inset-0" aria-hidden="true">
         <Image
           src="/images/hero-bg.jpg"
-          alt=""
+          alt="" aria-hidden="true"
           fill
           priority
           className="object-cover object-center"

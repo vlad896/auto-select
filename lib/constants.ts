@@ -4,7 +4,7 @@
 
 export const SITE = {
   name: "Автоподбор в Минске",
-  url: "https://site.by",
+  url: "https://автоподборминск.бел",
   phone: "+375291234567",
   phoneDisplay: "+375 (29) 123-45-67",
   telegram: "https://t.me/autopodborminsk",

@@ -15,7 +15,7 @@ const nextConfig: NextConfig = {
         },
         {
           key: "X-Frame-Options",
-          value: "DENY",
+          value: "SAMEORIGIN",
         },
         {
           key: "X-XSS-Protection",
@@ -24,6 +24,32 @@ const nextConfig: NextConfig = {
         {
           key: "Referrer-Policy",
           value: "strict-origin-when-cross-origin",
+        },
+        {
+          key: "Permissions-Policy",
+          value:
+            "camera=(), microphone=(), geolocation=(self), interest-cohort=()",
+        },
+        {
+          key: "Strict-Transport-Security",
+          value: "max-age=63072000; includeSubDomains; preload",
+        },
+        {
+          key: "Content-Security-Policy",
+          value: [
+            "default-src 'self'",
+            "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com",
+            "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
+            "img-src 'self' data: blob: https: http:",
+            "font-src 'self' https://fonts.gstatic.com",
+            "frame-src 'self' https://www.youtube.com https://www.youtube-nocookie.com https://www.google.com https://maps.google.com",
+            "connect-src 'self' https://www.google-analytics.com https://vitals.vercel-insights.com",
+            "media-src 'self'",
+            "object-src 'none'",
+            "base-uri 'self'",
+            "form-action 'self'",
+            "frame-ancestors 'none'",
+          ].join("; "),
         },
       ],
     },

@@ -11,12 +11,12 @@ import { SITE } from "@/lib/constants";
 
 export function CtaBannerPrimary() {
   return (
-    <section className="relative overflow-hidden bg-primary-600 py-12 sm:py-16">
+    <section className="relative overflow-hidden bg-primary-600 py-12 sm:py-16" aria-label="Призыв к действию: заказать диагностику автомобиля">
       {/* Background pattern */}
       <div className="absolute inset-0 opacity-10" aria-hidden="true">
         <Image
           src="/images/hero-bg.jpg"
-          alt=""
+          alt="" aria-hidden="true"
           fill
           className="object-cover"
           sizes="100vw"
@@ -79,11 +79,11 @@ export function CtaBannerPrimary() {
 
 export function CtaBannerSecondary() {
   return (
-    <section className="relative overflow-hidden bg-surface-950 py-12 sm:py-16">
+    <section className="relative overflow-hidden bg-surface-950 py-12 sm:py-16" aria-label="Призыв к действию: рассчитать стоимость подбора автомобиля">
       <div className="absolute inset-0" aria-hidden="true">
         <Image
           src="/images/bg-car-front.jpg"
-          alt=""
+          alt="" aria-hidden="true"
           fill
           className="object-cover opacity-20"
           sizes="100vw"

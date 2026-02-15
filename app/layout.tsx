@@ -1,15 +1,12 @@
 import type { Metadata, Viewport } from "next";
 import { Inter, Manrope } from "next/font/google";
 import { SITE } from "@/lib/constants";
-import {
-  getMainPageJsonLd,
-  getLocalBusinessJsonLd,
-  getBreadcrumbJsonLd,
-} from "@/lib/jsonld";
+import { getMainPageJsonLd } from "@/lib/jsonld";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { StickyMessenger } from "@/components/layout/StickyMessenger";
 import { PromoBanner } from "@/components/layout/PromoBanner";
+import { ServiceWorkerRegistration } from "@/components/layout/ServiceWorkerRegistration";
 import "./globals.css";
 
 // ============================================================
@@ -65,6 +62,28 @@ export const metadata: Metadata = {
     telephone: true,
     email: true,
   },
+  // ── PWA: manifest is auto-linked via app/manifest.ts ──
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "black-translucent",
+    title: "АвтоПодбор",
+  },
+  other: {
+    "mobile-web-app-capable": "yes",
+    "apple-mobile-web-app-capable": "yes",
+    "application-name": "АвтоПодбор",
+    "msapplication-TileColor": "#dc2626",
+    "msapplication-config": "none",
+  },
+  icons: {
+    icon: [
+      { url: "/icon.svg", type: "image/svg+xml" },
+      { url: "/icon-512.png", sizes: "512x512", type: "image/png" },
+    ],
+    apple: [
+      { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
+    ],
+  },
   openGraph: {
     type: "website",
     locale: "ru_BY",
@@ -118,25 +137,12 @@ export default function RootLayout({
   return (
     <html lang="ru" className={`${inter.variable} ${manrope.variable}`}>
       <head>
-        {/* JSON-LD: Organization + Service + FAQ (combined @graph) */}
+        {/* JSON-LD: Combined @graph — WebSite, WebPage, Organization,
+            LocalBusiness, Service, FAQPage, BreadcrumbList */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify(getMainPageJsonLd()),
-          }}
-        />
-        {/* JSON-LD: Local Business */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(getLocalBusinessJsonLd()),
-          }}
-        />
-        {/* JSON-LD: Breadcrumbs */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(getBreadcrumbJsonLd()),
           }}
         />
       </head>
@@ -154,6 +160,7 @@ export default function RootLayout({
         {children}
         <Footer />
         <StickyMessenger />
+        <ServiceWorkerRegistration />
       </body>
     </html>
   );

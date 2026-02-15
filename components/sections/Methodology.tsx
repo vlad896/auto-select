@@ -133,7 +133,7 @@ export function Methodology() {
       <div className="absolute inset-0" aria-hidden="true">
         <Image
           src="/images/bg-car-dark.jpg"
-          alt=""
+          alt="" aria-hidden="true"
           fill
           className="object-cover opacity-15"
           sizes="100vw"

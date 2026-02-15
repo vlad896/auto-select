@@ -965,19 +965,25 @@ export default function DiagnostikaPage() {
                 <h2 className="mb-4 text-xl font-bold text-white">
                   С этой услугой также заказывают
                 </h2>
-                <div className="grid gap-4 sm:grid-cols-2">
+                <div className="grid gap-4 sm:grid-cols-3">
                   {[
                     {
-                      href: "/#services",
+                      href: "/podbor/",
                       title: "Автоподбор «под ключ»",
-                      text: "Полный цикл от поиска до переоформления. Мы берём на себя звонки, отсев, осмотры и торг.",
+                      text: "Полный цикл от поиска до переоформления. Звонки, отсев, осмотры и торг.",
                       price: "от 900 BYN",
                     },
                     {
-                      href: "/#services",
+                      href: "/podbor/expert-na-den/",
                       title: "Эксперт на день",
-                      text: "Осмотр 5-10 авто за рабочий день. Формат для приехавших из регионов.",
+                      text: "Осмотр 5-10 авто за рабочий день. Для приехавших из регионов.",
                       price: "от 380 BYN",
+                    },
+                    {
+                      href: "/marki/",
+                      title: "Подбор по маркам",
+                      text: "Профильная диагностика дилерским ПО: BMW, VAG, Mercedes, Geely.",
+                      price: "от 160 BYN",
                     },
                   ].map((item) => (
                     <Link

@@ -26,7 +26,7 @@ export function OfficeMap() {
       <div className="absolute inset-0" aria-hidden="true">
         <Image
           src="/images/bg-car-front.jpg"
-          alt=""
+          alt="" aria-hidden="true"
           fill
           className="object-cover opacity-10"
           sizes="100vw"

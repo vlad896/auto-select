@@ -1,10 +1,17 @@
 import { Check, ArrowRight, Star } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Button } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/Badge";
 import { SERVICES } from "@/lib/constants";
+
+const SERVICE_LINKS: Record<string, string> = {
+  diagnostic: "/diagnostika/",
+  turnkey: "/podbor/",
+  "expert-day": "/podbor/expert-na-den/",
+};
 
 // ============================================================
 // ServicesGrid — dark theme with background car image
@@ -21,7 +28,7 @@ export function ServicesGrid() {
       <div className="absolute inset-0" aria-hidden="true">
         <Image
           src="/images/bg-car-dark.jpg"
-          alt=""
+          alt="" aria-hidden="true"
           fill
           className="object-cover opacity-8"
           sizes="100vw"
@@ -111,14 +118,12 @@ export function ServicesGrid() {
                   Заказать
                   <ArrowRight className="h-4 w-4" aria-hidden="true" />
                 </Button>
-                <Button
-                  href="#pricing"
-                  variant="ghost"
-                  size="sm"
-                  className="w-full"
+                <Link
+                  href={SERVICE_LINKS[service.id] ?? "#pricing"}
+                  className="inline-flex w-full items-center justify-center gap-1.5 rounded-xl px-4 py-2 text-sm font-medium text-neutral-400 transition-colors hover:bg-white/5 hover:text-white"
                 >
                   Подробнее об услуге
-                </Button>
+                </Link>
               </div>
             </article>
           ))}
