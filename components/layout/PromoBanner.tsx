@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useRef } from "react";
 import { X, Zap, Clock } from "lucide-react";
 
 // ============================================================
@@ -38,21 +38,27 @@ export function PromoBanner() {
     setTimeLeft(getTimeLeft());
   }, []);
 
-  // Sync CSS variable with banner height
-  const syncHeight = useCallback(() => {
-    const h = isVisible && bannerRef.current ? bannerRef.current.offsetHeight : 0;
-    document.documentElement.style.setProperty("--promo-h", `${h}px`);
-  }, [isVisible]);
-
-  // Update CSS variable on mount, visibility change, and resize
+  // Sync CSS variable with banner height via ResizeObserver (no forced reflow)
   useEffect(() => {
-    syncHeight();
-    window.addEventListener("resize", syncHeight);
+    const el = bannerRef.current;
+    if (!isVisible || !el) {
+      document.documentElement.style.setProperty("--promo-h", "0px");
+      return;
+    }
+
+    const ro = new ResizeObserver((entries) => {
+      for (const entry of entries) {
+        const h = entry.borderBoxSize?.[0]?.blockSize ?? entry.contentRect.height;
+        document.documentElement.style.setProperty("--promo-h", `${Math.round(h)}px`);
+      }
+    });
+
+    ro.observe(el);
     return () => {
-      window.removeEventListener("resize", syncHeight);
+      ro.disconnect();
       document.documentElement.style.setProperty("--promo-h", "0px");
     };
-  }, [syncHeight]);
+  }, [isVisible]);
 
   // Countdown timer — tick every second (only after mount)
   useEffect(() => {
