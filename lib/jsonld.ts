@@ -66,7 +66,7 @@ function getOrganizationJsonLd() {
     },
     description:
       "Профессиональный автоподбор и комплексная диагностика автомобилей в Минске. Сканер Launch X431, толщиномер Etari ET-700, юридическая проверка.",
-    telephone: SITE.phone,
+    telephone: [SITE.phone, SITE.phone2],
     email: SITE.email,
     address: {
       "@type": "PostalAddress",
@@ -79,6 +79,13 @@ function getOrganizationJsonLd() {
       {
         "@type": "ContactPoint",
         telephone: SITE.phone,
+        contactType: "customer service",
+        availableLanguage: ["Russian", "Belarusian"],
+        areaServed: { "@type": "Country", name: "BY" },
+      },
+      {
+        "@type": "ContactPoint",
+        telephone: SITE.phone2,
         contactType: "customer service",
         availableLanguage: ["Russian", "Belarusian"],
         areaServed: { "@type": "Country", name: "BY" },
@@ -98,7 +105,7 @@ export function getLocalBusinessJsonLd() {
     "@id": `${SITE.url}/#localbusiness`,
     name: SITE.name,
     image: `${SITE.url}/images/og-image.jpg`,
-    telephone: SITE.phone,
+    telephone: [SITE.phone, SITE.phone2],
     email: SITE.email,
     url: SITE.url,
     address: {

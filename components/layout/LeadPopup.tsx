@@ -14,6 +14,8 @@ const SHOW_DELAY_MS = 25_000;
 const STORAGE_KEY = "lead_popup_dismissed";
 /** Сколько дней не показывать после закрытия */
 const DISMISS_DAYS = 3;
+/** Событие для открытия попапа по клику на кнопку «Срочный выезд на осмотр» */
+const OPEN_POPUP_EVENT = "open-lead-popup";
 
 // ============================================================
 // LeadPopup — маркетинговый pop-up с крючком
@@ -24,6 +26,7 @@ export function LeadPopup() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [phone, setPhone] = useState("");
+  const [consentAccepted, setConsentAccepted] = useState(false);
   const [error, setError] = useState("");
   const dialogRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -68,6 +71,20 @@ export function LeadPopup() {
     };
   }, []);
 
+  // ── Открытие по клику на кнопку «Срочный выезд на осмотр» ──
+  useEffect(() => {
+    const handleOpen = () => {
+      setPhone("");
+      setConsentAccepted(false);
+      setError("");
+      setIsSuccess(false);
+      setIsVisible(true);
+      shownRef.current = true;
+    };
+    window.addEventListener(OPEN_POPUP_EVENT, handleOpen);
+    return () => window.removeEventListener(OPEN_POPUP_EVENT, handleOpen);
+  }, []);
+
   // ── Focus trap + Escape close ──
   useEffect(() => {
     if (!isVisible) return;
@@ -108,6 +125,11 @@ export function LeadPopup() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
+
+    if (!consentAccepted) {
+      setError("Необходимо согласие на обработку персональных данных");
+      return;
+    }
 
     // Простая валидация телефона
     const cleaned = phone.replace(/\D/g, "");
@@ -246,6 +268,22 @@ export function LeadPopup() {
                   )}
                 </div>
 
+                <label className="flex items-start gap-3 cursor-pointer group">
+                  <input
+                    type="checkbox"
+                    checked={consentAccepted}
+                    onChange={(e) => {
+                      setConsentAccepted(e.target.checked);
+                      if (error === "Необходимо согласие на обработку персональных данных") setError("");
+                    }}
+                    className="mt-1 h-4 w-4 rounded border-white/20 bg-surface-200 text-primary-600 focus:ring-2 focus:ring-primary-500 focus:ring-offset-0"
+                    aria-describedby="consent-desc"
+                  />
+                  <span id="consent-desc" className="text-xs text-neutral-400 leading-relaxed group-hover:text-neutral-300">
+                    Я соглашаюсь на обработку персональных данных в соответствии с политикой конфиденциальности
+                  </span>
+                </label>
+
                 <button
                   type="submit"
                   disabled={isSubmitting}
@@ -273,10 +311,6 @@ export function LeadPopup() {
                 </a>
               </div>
 
-              {/* Privacy note */}
-              <p className="text-xs text-center mt-4 text-neutral-400">
-                Нажимая кнопку, вы соглашаетесь с обработкой персональных данных
-              </p>
             </>
           ) : (
             /* ── Success state ── */

@@ -1,21 +1,77 @@
+import dynamic from "next/dynamic";
 import { HeroSection } from "@/components/sections/HeroSection";
 import { Marquee } from "@/components/ui/Marquee";
-import { Quiz } from "@/components/sections/Quiz";
-import { ToolsProof } from "@/components/sections/ToolsProof";
-import { ServicesGrid } from "@/components/sections/ServicesGrid";
-import { CtaBannerPrimary, CtaBannerSecondary } from "@/components/sections/CtaBanner";
-import { Methodology } from "@/components/sections/Methodology";
-import { PricingTable } from "@/components/sections/PricingTable";
-import { Calculator } from "@/components/sections/Calculator";
-import { WhyUs } from "@/components/sections/WhyUs";
-import { ProcessSteps } from "@/components/sections/ProcessSteps";
-import { Guarantees } from "@/components/sections/Guarantees";
-import { LegalCheck } from "@/components/sections/LegalCheck";
-import { Testimonials } from "@/components/sections/Testimonials";
-import { VideoShowcase } from "@/components/sections/VideoShowcase";
-import { CaseStudies } from "@/components/sections/CaseStudies";
-import { FAQSection } from "@/components/sections/FAQSection";
-import { OfficeMap } from "@/components/sections/OfficeMap";
+import { SITE } from "@/lib/constants";
+
+// Секции с framer-motion подгружаем динамически — чанк 370 не блокирует FCP/LCP (Lighthouse)
+const Quiz = dynamic(
+  () => import("@/components/sections/Quiz").then((m) => ({ default: m.Quiz })),
+  { ssr: true }
+);
+const ToolsProof = dynamic(
+  () => import("@/components/sections/ToolsProof").then((m) => ({ default: m.ToolsProof })),
+  { ssr: true }
+);
+const ServicesGrid = dynamic(
+  () => import("@/components/sections/ServicesGrid").then((m) => ({ default: m.ServicesGrid })),
+  { ssr: true }
+);
+const CtaBannerPrimary = dynamic(
+  () => import("@/components/sections/CtaBanner").then((m) => ({ default: m.CtaBannerPrimary })),
+  { ssr: true }
+);
+const CtaBannerSecondary = dynamic(
+  () => import("@/components/sections/CtaBanner").then((m) => ({ default: m.CtaBannerSecondary })),
+  { ssr: true }
+);
+const Methodology = dynamic(
+  () => import("@/components/sections/Methodology").then((m) => ({ default: m.Methodology })),
+  { ssr: true }
+);
+const PricingTable = dynamic(
+  () => import("@/components/sections/PricingTable").then((m) => ({ default: m.PricingTable })),
+  { ssr: true }
+);
+const Calculator = dynamic(
+  () => import("@/components/sections/Calculator").then((m) => ({ default: m.Calculator })),
+  { ssr: true }
+);
+const WhyUs = dynamic(
+  () => import("@/components/sections/WhyUs").then((m) => ({ default: m.WhyUs })),
+  { ssr: true }
+);
+const ProcessSteps = dynamic(
+  () => import("@/components/sections/ProcessSteps").then((m) => ({ default: m.ProcessSteps })),
+  { ssr: true }
+);
+const Guarantees = dynamic(
+  () => import("@/components/sections/Guarantees").then((m) => ({ default: m.Guarantees })),
+  { ssr: true }
+);
+const LegalCheck = dynamic(
+  () => import("@/components/sections/LegalCheck").then((m) => ({ default: m.LegalCheck })),
+  { ssr: true }
+);
+const Testimonials = dynamic(
+  () => import("@/components/sections/Testimonials").then((m) => ({ default: m.Testimonials })),
+  { ssr: true }
+);
+const VideoShowcase = dynamic(
+  () => import("@/components/sections/VideoShowcase").then((m) => ({ default: m.VideoShowcase })),
+  { ssr: true }
+);
+const CaseStudies = dynamic(
+  () => import("@/components/sections/CaseStudies").then((m) => ({ default: m.CaseStudies })),
+  { ssr: true }
+);
+const FAQSection = dynamic(
+  () => import("@/components/sections/FAQSection").then((m) => ({ default: m.FAQSection })),
+  { ssr: true }
+);
+const OfficeMap = dynamic(
+  () => import("@/components/sections/OfficeMap").then((m) => ({ default: m.OfficeMap })),
+  { ssr: true }
+);
 
 // ============================================================
 // Metadata — только для главной: alternate для LLM-документации
@@ -23,6 +79,7 @@ import { OfficeMap } from "@/components/sections/OfficeMap";
 
 export const metadata = {
   alternates: {
+    canonical: `${SITE.url}/`,
     types: {
       "text/plain": "/llms.txt",
     },

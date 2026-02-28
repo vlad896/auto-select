@@ -58,10 +58,14 @@ export function LegalCheck() {
           </span>
         </SectionHeading>
 
-        <div className="grid gap-10 lg:grid-cols-2 lg:gap-14">
+        {/* Карточки: на мобильной — карусель, на lg — сетка 2 колонки с одинаковой высотой */}
+        <div className="flex gap-6 overflow-x-auto snap-x snap-mandatory pb-2 -mx-4 px-4 lg:mx-0 lg:px-0 lg:grid lg:grid-cols-2 lg:gap-14 lg:overflow-visible lg:snap-none scrollbar-hide">
           {/* === Column 1 === */}
-          <AnimateOnScroll variant="slideLeft">
-          <div className="rounded-2xl border border-white/10 bg-surface-100 p-5 sm:p-6">
+          <AnimateOnScroll
+            variant="slideLeft"
+            className="min-w-[85vw] max-w-md flex-shrink-0 snap-center lg:min-w-0 lg:max-w-none lg:snap-align-none"
+          >
+          <div className="h-full rounded-2xl border border-white/10 bg-surface-100 p-5 sm:p-6">
             <div className="mb-6 flex items-center gap-3">
               <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary-600/20">
                 <ShieldCheck className="h-5 w-5 text-primary-400" aria-hidden="true" />
@@ -92,8 +96,12 @@ export function LegalCheck() {
           </AnimateOnScroll>
 
           {/* === Column 2 === */}
-          <AnimateOnScroll variant="slideRight" delay={0.15}>
-          <div className="rounded-2xl border border-white/10 bg-surface-100 p-5 sm:p-6">
+          <AnimateOnScroll
+            variant="slideRight"
+            delay={0.15}
+            className="min-w-[85vw] max-w-md flex-shrink-0 snap-center lg:min-w-0 lg:max-w-none lg:snap-align-none"
+          >
+          <div className="h-full rounded-2xl border border-white/10 bg-surface-100 p-5 sm:p-6">
             <div className="mb-6 flex items-center gap-3">
               <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary-600/20">
                 <FileSearch className="h-5 w-5 text-primary-400" aria-hidden="true" />

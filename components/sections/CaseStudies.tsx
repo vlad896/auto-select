@@ -11,7 +11,6 @@ import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
-import { StaggerChildren } from "@/components/ui/StaggerChildren";
 import { CASE_STUDIES } from "@/lib/constants";
 
 // Case study — real car photos
@@ -43,7 +42,8 @@ export function CaseStudies() {
           </span>
         </SectionHeading>
 
-        <StaggerChildren className="grid gap-6 md:grid-cols-2">
+        {/* Мобильная версия: карусель (горизонтальный скролл со snap). Десктоп: сетка 2 колонки */}
+        <div className="flex gap-6 overflow-x-auto snap-x snap-mandatory pb-2 -mx-4 px-4 md:mx-0 md:px-0 md:grid md:grid-cols-2 md:overflow-visible md:snap-none scrollbar-hide">
           {CASE_STUDIES.map((study) => {
             const isRejected = study.result === "rejected";
             const imageUrl = CASE_IMAGES[study.id];
@@ -51,7 +51,7 @@ export function CaseStudies() {
             return (
               <article
                 key={study.id}
-                className={`card-hover relative h-full overflow-hidden rounded-2xl border-2 bg-surface-200/30 transition-shadow hover:shadow-lg hover:shadow-black/20 ${
+                className={`card-hover relative flex h-full min-w-[85vw] max-w-md flex-shrink-0 snap-center overflow-hidden rounded-2xl border-2 bg-surface-200/30 transition-shadow hover:shadow-lg hover:shadow-black/20 md:min-w-0 md:max-w-none md:snap-align-none ${
                   isRejected
                     ? "border-danger-500/30"
                     : "border-success-500/30"
@@ -207,12 +207,20 @@ export function CaseStudies() {
               </article>
             );
           })}
-        </StaggerChildren>
+        </div>
 
-        {/* CTA */}
-        <div className="mt-8 text-center sm:mt-10">
+        {/* CTA + ссылка на страницу кейсов */}
+        <div className="mt-8 flex flex-col items-center gap-3 sm:mt-10 sm:flex-row sm:justify-center sm:gap-4">
           <Button href="#quiz" variant="primary" size="md">
             Хочу такую же проверку
+            <ArrowRight className="h-4 w-4" aria-hidden="true" />
+          </Button>
+          <Button
+            href="/cases/"
+            variant="secondary"
+            size="md"
+          >
+            Посмотреть больше кейсов
             <ArrowRight className="h-4 w-4" aria-hidden="true" />
           </Button>
         </div>

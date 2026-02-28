@@ -1,10 +1,11 @@
 "use client";
 
 import { useState, useCallback } from "react";
-import { Play, X } from "lucide-react";
+import { Play, X, ArrowRight } from "lucide-react";
 import Image from "next/image";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
+import { Button } from "@/components/ui/Button";
 
 // ============================================================
 // Video data — replace YouTube IDs with your real videos
@@ -68,14 +69,14 @@ export function VideoShowcase() {
           <span id="video-heading">Видеоподбор автомобилей</span>
         </SectionHeading>
 
-        {/* Video grid — 2x2 on desktop, 1 column on mobile */}
-        <div className="grid gap-4 sm:grid-cols-2 sm:gap-6">
+        {/* Видео: на мобильной — карусель, на sm+ — сетка 2 колонки */}
+        <div className="flex gap-4 overflow-x-auto snap-x snap-mandatory pb-2 -mx-4 px-4 sm:mx-0 sm:px-0 sm:grid sm:grid-cols-2 sm:gap-6 sm:overflow-visible sm:snap-none scrollbar-hide">
           {VIDEOS.map((video) => (
             <button
               key={video.id}
               type="button"
               onClick={() => openVideo(video.id)}
-              className="group relative cursor-pointer overflow-hidden rounded-2xl border border-white/10 bg-surface-200/30 text-left transition-all duration-300 hover:border-primary-600/30 hover:shadow-lg hover:shadow-black/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 focus-visible:ring-offset-surface-950"
+              className="group relative flex min-w-[85vw] max-w-md flex-shrink-0 snap-center cursor-pointer overflow-hidden rounded-2xl border border-white/10 bg-surface-200/30 text-left transition-all duration-300 hover:border-primary-600/30 hover:shadow-lg hover:shadow-black/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 focus-visible:ring-offset-surface-950 sm:min-w-0 sm:max-w-none sm:snap-align-none"
               aria-label={`Смотреть видео: ${video.title}`}
             >
               {/* Thumbnail */}
@@ -114,10 +115,16 @@ export function VideoShowcase() {
           ))}
         </div>
 
-        {/* Instruction */}
+        {/* Instruction + ссылка на кейсы */}
         <p className="mt-6 text-center text-xs text-neutral-400">
           Нажмите на видео, чтобы посмотреть полный процесс проверки
         </p>
+        <div className="mt-6 flex justify-center">
+          <Button href="/cases/" variant="secondary" size="md">
+            Наши кейсы
+            <ArrowRight className="h-4 w-4" aria-hidden="true" />
+          </Button>
+        </div>
       </Container>
 
       {/* ===== Video Modal ===== */}

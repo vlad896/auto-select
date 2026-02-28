@@ -3,17 +3,16 @@ import {
   Clock,
   FileCheck,
   ArrowRight,
-  MessageCircle,
   CheckCircle,
 } from "lucide-react";
 import Image from "next/image";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
+import { LeadPopupTrigger } from "@/components/ui/LeadPopupTrigger";
 import { Odometer } from "@/components/ui/Odometer";
 import { MagneticButton } from "@/components/ui/MagneticButton";
 import { Parallax } from "@/components/ui/Parallax";
 import { AnimateOnScroll } from "@/components/ui/AnimateOnScroll";
-import { SITE } from "@/lib/constants";
 
 // ============================================================
 // Trust stats shown below the CTAs
@@ -128,19 +127,7 @@ export function HeroSection() {
                 <ArrowRight className="h-5 w-5" aria-hidden="true" />
               </Button>
             </MagneticButton>
-            <MagneticButton>
-              <Button
-                href={SITE.whatsapp}
-                variant="secondary"
-                size="lg"
-                fullWidthMobile
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <MessageCircle className="h-5 w-5" aria-hidden="true" />
-                Срочный выезд на осмотр
-              </Button>
-            </MagneticButton>
+            <LeadPopupTrigger />
           </div>
 
           {/* Trust micro-copy */}

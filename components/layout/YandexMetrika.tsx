@@ -1,96 +1,32 @@
 "use client";
 
-import { usePathname } from "next/navigation";
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 
-const YANDEX_METRIKA_ID = 107049640;
-const TAG_SCRIPT_URL = "https://mc.yandex.ru/metrika/tag.js";
+// Код счётчика Яндекс.Метрики 107049640 — без изменений (как в интерфейсе Метрики)
+const METRIKA_SCRIPT = `(function(m,e,t,r,i,k,a){
+    m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+    m[i].l=1*new Date();
+    for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+    k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+})(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=107049640', 'ym');
 
-declare global {
-  interface Window {
-    ym?: YmQueueFn;
-    yandex_metrika_init?: boolean;
-  }
-}
-
-type YmQueueFn = {
-  (id: number, method: string, ...args: unknown[]): void;
-  a?: unknown[];
-  l?: number;
-};
-
-// ============================================================
-// Yandex.Metrika — SPA: очередь ym, загрузка tag.js, init, hit при смене маршрута
-// ============================================================
-
-function ensureYmQueue() {
-  if (typeof window === "undefined") return;
-  const w = window as Window & { ym?: YmQueueFn };
-  if (w.ym) return;
-  const queue: YmQueueFn = function (id: number, method: string, ...args: unknown[]) {
-    (queue.a = queue.a || []).push([id, method, ...args]);
-  } as YmQueueFn;
-  queue.a = [];
-  queue.l = 1 * Date.now();
-  w.ym = queue;
-}
+ym(107049640, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});`;
 
 export function YandexMetrika() {
-  const pathname = usePathname();
-  const initialized = useRef(false);
-
   useEffect(() => {
-    ensureYmQueue();
-
-    // Отложенная загрузка Метрики после LCP: не конкурируем с критическим путём (Lighthouse)
-    const loadMetrika = () => {
-      for (let j = 0; j < document.scripts.length; j++) {
-        if ((document.scripts[j] as HTMLScriptElement).src === TAG_SCRIPT_URL) return;
-      }
-      const script = document.createElement("script");
-      script.async = true;
-      script.src = TAG_SCRIPT_URL;
-      script.onload = () => {
-        if (typeof window === "undefined" || window.ym == null || window.yandex_metrika_init) return;
-        window.ym(YANDEX_METRIKA_ID, "init", {
-          ssr: true,
-          webvisor: true,
-          clickmap: true,
-          ecommerce: "dataLayer",
-          referrer: document.referrer || undefined,
-          url: window.location.href,
-          accurateTrackBounce: true,
-          trackLinks: true,
-        });
-        window.yandex_metrika_init = true;
-        initialized.current = true;
-      };
-      const firstScript = document.getElementsByTagName("script")[0];
-      firstScript?.parentNode?.insertBefore(script, firstScript);
-    };
-
-    if (typeof requestIdleCallback !== "undefined") {
-      requestIdleCallback(loadMetrika, { timeout: 3500 });
-    } else {
-      setTimeout(loadMetrika, 1500);
-    }
+    if (typeof document === "undefined") return;
+    const script = document.createElement("script");
+    script.type = "text/javascript";
+    script.textContent = METRIKA_SCRIPT;
+    document.head.appendChild(script);
   }, []);
-
-  // При смене маршрута (SPA) отправляем hit с текущим URL
-  useEffect(() => {
-    if (typeof window === "undefined" || pathname == null) return;
-    if (!initialized.current || window.ym == null) return;
-
-    const fullUrl = window.location.origin + pathname + (window.location.search || "");
-    window.ym(YANDEX_METRIKA_ID, "hit", fullUrl);
-  }, [pathname]);
 
   return (
     <noscript>
       <div>
-        {/* eslint-disable-next-line @next/next/no-img-element -- Yandex Metrika noscript pixel; external 1x1 tracking, next/image not applicable */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src={`https://mc.yandex.ru/watch/${YANDEX_METRIKA_ID}`}
+          src="https://mc.yandex.ru/watch/107049640"
           style={{ position: "absolute", left: "-9999px" }}
           alt=""
         />

@@ -1,7 +1,7 @@
-import { Check, X, ArrowRight, AlertTriangle } from "lucide-react";
+import { Check, X, AlertTriangle } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { Button } from "@/components/ui/Button";
+import { OpenLeadPopupButton } from "@/components/ui/OpenLeadPopupButton";
 import { CountUp } from "@/components/ui/CountUp";
 import { TextHighlight } from "@/components/ui/TextHighlight";
 import { StaggerChildren } from "@/components/ui/StaggerChildren";
@@ -104,21 +104,21 @@ export function WhyUs() {
           ))}
         </StaggerChildren>
 
-        {/* Desktop table */}
-        <div className="hidden overflow-hidden rounded-2xl border border-white/10 sm:block">
-          <table className="w-full">
+        {/* Table — одна и та же на всех экранах; на мобильных горизонтальный скролл */}
+        <div className="overflow-x-auto -mx-4 sm:mx-0 rounded-2xl border border-white/10 sm:overflow-hidden">
+          <table className="w-full min-w-[520px]">
             <thead>
               <tr className="border-b border-white/10 bg-white/[0.03]">
-                <th className="px-5 py-4 text-left text-sm font-semibold text-neutral-400 lg:px-6">
+                <th className="px-4 py-4 text-left text-sm font-semibold text-neutral-400 lg:px-6">
                   Критерий
                 </th>
-                <th className="px-4 py-4 text-center text-sm font-bold text-primary-400 lg:px-6">
+                <th className="px-3 py-4 text-center text-sm font-bold text-primary-400 lg:px-6">
                   АвтоПодбор
                 </th>
-                <th className="px-4 py-4 text-center text-sm font-semibold text-neutral-400 lg:px-6">
+                <th className="px-3 py-4 text-center text-sm font-semibold text-neutral-400 lg:px-6">
                   Сам по av.by
                 </th>
-                <th className="px-4 py-4 text-center text-sm font-semibold text-neutral-400 lg:px-6">
+                <th className="px-3 py-4 text-center text-sm font-semibold text-neutral-400 lg:px-6">
                   Автосалон
                 </th>
               </tr>
@@ -131,24 +131,24 @@ export function WhyUs() {
                     i % 2 === 0 ? "" : "bg-white/[0.02]"
                   }`}
                 >
-                  <td className="px-5 py-3.5 text-sm text-neutral-300 lg:px-6">
+                  <td className="px-4 py-3.5 text-sm text-neutral-300 lg:px-6">
                     {item.feature}
                   </td>
-                  <td className="px-4 py-3.5 text-center lg:px-6">
+                  <td className="px-3 py-3.5 text-center lg:px-6">
                     {item.us ? (
                       <Check className="mx-auto h-5 w-5 text-primary-500" aria-label="Да" />
                     ) : (
                       <X className="mx-auto h-5 w-5 text-neutral-500" aria-label="Нет" />
                     )}
                   </td>
-                  <td className="px-4 py-3.5 text-center lg:px-6">
+                  <td className="px-3 py-3.5 text-center lg:px-6">
                     {item.diy ? (
                       <Check className="mx-auto h-5 w-5 text-neutral-400" aria-label="Да" />
                     ) : (
                       <X className="mx-auto h-5 w-5 text-neutral-500" aria-label="Нет" />
                     )}
                   </td>
-                  <td className="px-4 py-3.5 text-center lg:px-6">
+                  <td className="px-3 py-3.5 text-center lg:px-6">
                     {item.dealer ? (
                       <Check className="mx-auto h-5 w-5 text-neutral-400" aria-label="Да" />
                     ) : (
@@ -161,47 +161,9 @@ export function WhyUs() {
           </table>
         </div>
 
-        {/* Mobile cards */}
-        <div className="space-y-3 sm:hidden">
-          {COMPARISON_ITEMS.map((item) => (
-            <div key={item.feature} className="rounded-xl border border-white/10 bg-surface-200/30 p-4">
-              <p className="mb-2.5 text-sm font-medium text-neutral-300">{item.feature}</p>
-              <div className="flex items-center gap-4">
-                <div className="flex items-center gap-1.5">
-                  {item.us ? (
-                    <Check className="h-4 w-4 text-primary-500" aria-hidden="true" />
-                  ) : (
-                    <X className="h-4 w-4 text-neutral-700" aria-hidden="true" />
-                  )}
-                  <span className="text-xs text-primary-400 font-medium">Мы</span>
-                </div>
-                <div className="flex items-center gap-1.5">
-                  {item.diy ? (
-                    <Check className="h-4 w-4 text-neutral-400" aria-hidden="true" />
-                  ) : (
-                    <X className="h-4 w-4 text-neutral-700" aria-hidden="true" />
-                  )}
-                  <span className="text-xs text-neutral-400">Сам</span>
-                </div>
-                <div className="flex items-center gap-1.5">
-                  {item.dealer ? (
-                    <Check className="h-4 w-4 text-neutral-400" aria-hidden="true" />
-                  ) : (
-                    <X className="h-4 w-4 text-neutral-700" aria-hidden="true" />
-                  )}
-                  <span className="text-xs text-neutral-400">Салон</span>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-
         {/* CTA */}
         <div className="mt-8 text-center sm:mt-10">
-          <Button href="#quiz" variant="primary" size="md">
-            Заказать проверку от экспертов
-            <ArrowRight className="h-4 w-4" aria-hidden="true" />
-          </Button>
+          <OpenLeadPopupButton variant="primary" size="md" />
         </div>
       </Container>
     </section>

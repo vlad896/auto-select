@@ -39,7 +39,7 @@ export function SectionHeading({
       </AnimateOnScroll>
       {subtitle && (
         <AnimateOnScroll variant="fadeUp" delay={label ? 0.2 : 0.1} duration={0.5}>
-          <p className="mt-4 max-w-2xl text-base leading-relaxed text-neutral-400 sm:text-lg mx-auto">
+          <p className={`mt-4 max-w-2xl text-base leading-relaxed text-neutral-400 sm:text-lg ${align === "center" ? "mx-auto" : ""}`}>
             {subtitle}
           </p>
         </AnimateOnScroll>

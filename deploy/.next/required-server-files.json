@@ -15,7 +15,7 @@
     "cleanDistDir": true,
     "assetPrefix": "",
     "cacheMaxMemorySize": 52428800,
-    "configOrigin": "next.config.ts",
+    "configOrigin": "next.config.mjs",
     "useFileSystemPublicRoutes": true,
     "generateEtags": true,
     "pageExtensions": [
@@ -76,7 +76,7 @@
     "sassOptions": {},
     "trailingSlash": true,
     "i18n": null,
-    "productionBrowserSourceMaps": false,
+    "productionBrowserSourceMaps": true,
     "excludeDefaultMomentLocales": true,
     "serverRuntimeConfig": {},
     "publicRuntimeConfig": {},
@@ -287,7 +287,7 @@
     },
     "htmlLimitedBots": "[\\w-]+-Google|Google-[\\w-]+|Chrome-Lighthouse|Slurp|DuckDuckBot|baiduspider|yandex|sogou|bitlybot|tumblr|vkShare|quora link preview|redditbot|ia_archiver|Bingbot|BingPreview|applebot|facebookexternalhit|facebookcatalog|Twitterbot|LinkedInBot|Slackbot|Discordbot|WhatsApp|SkypeUriPreview|Yeti|googleweblight",
     "bundlePagesRouterDependencies": false,
-    "configFileName": "next.config.ts",
+    "configFileName": "next.config.mjs",
     "turbopack": {
       "root": "D:\\Project\\Auto"
     },
@@ -337,7 +337,7 @@
     ".next\\server\\next-font-manifest.js",
     ".next\\server\\next-font-manifest.json",
     ".next\\required-server-files.json",
-    ".next\\static\\css\\c8016ac6d4678723.css"
+    ".next\\static\\css\\a5b3e75279493eac.css"
   ],
   "ignore": [
     "node_modules\\next\\dist\\compiled\\@ampproject\\toolbox-optimizer\\**\\*"
