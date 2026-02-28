@@ -42,7 +42,7 @@ export function CaseStudies() {
           </span>
         </SectionHeading>
 
-        {/* Мобильная версия: карусель (горизонтальный скролл со snap). Десктоп: сетка 2 колонки */}
+        {/* Десктоп: сетка 2 колонки. Карточка: фото слева, контент справа (как было). Мобильная: карусель с той же структурой карточки. */}
         <div className="flex gap-6 overflow-x-auto snap-x snap-mandatory pb-2 -mx-4 px-4 md:mx-0 md:px-0 md:grid md:grid-cols-2 md:overflow-visible md:snap-none scrollbar-hide">
           {CASE_STUDIES.map((study) => {
             const isRejected = study.result === "rejected";
@@ -57,79 +57,74 @@ export function CaseStudies() {
                     : "border-success-500/30"
                 }`}
               >
-                {/* Real car photo */}
+                {/* Левая половина: фото авто */}
                 {imageUrl && (
-                  <div className="relative aspect-[16/9] overflow-hidden bg-surface-200">
+                  <div className="relative w-[42%] min-w-[140px] flex-shrink-0 bg-surface-200 aspect-[3/4] sm:aspect-[4/5]">
                     <Image
                       src={imageUrl}
                       alt={`${study.car} — реальное фото автомобиля`}
                       fill
                       className="object-cover"
-                      sizes="(max-width: 768px) 100vw, 50vw"
+                      sizes="(max-width: 768px) 40vw, 25vw"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-surface-200/80 to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-r from-surface-200/60 to-transparent md:from-transparent" />
                   </div>
                 )}
 
-                {/* Status ribbon */}
-                <div
-                  className={`flex items-center gap-2 px-5 py-3 sm:px-6 ${
-                    isRejected
-                      ? "bg-danger-500/5"
-                      : "bg-success-500/5"
-                  }`}
-                >
-                  {isRejected ? (
-                    <XCircle
-                      className="h-5 w-5 text-danger-500"
-                      aria-hidden="true"
-                    />
-                  ) : (
-                    <CheckCircle
-                      className="h-5 w-5 text-success-500"
-                      aria-hidden="true"
-                    />
-                  )}
-                  <Badge
-                    variant={isRejected ? "danger" : "success"}
-                    size="md"
-                  >
-                    {isRejected ? "Отказ от покупки" : "Куплен с дисконтом"}
-                  </Badge>
-                  {study.savings && (
-                    <Badge variant="success" size="md" className="ml-auto">
-                      Экономия {study.savings}
+                {/* Правая половина: контент */}
+                <div className="flex flex-1 flex-col p-4 sm:p-5">
+                  {/* Статус: на границе фото/контент */}
+                  <div className="-ml-12 mt-2 flex flex-wrap items-center gap-2 sm:-ml-14 sm:mt-3">
+                    {isRejected ? (
+                      <XCircle
+                        className="h-5 w-5 text-danger-500"
+                        aria-hidden="true"
+                      />
+                    ) : (
+                      <CheckCircle
+                        className="h-5 w-5 text-success-500"
+                        aria-hidden="true"
+                      />
+                    )}
+                    <Badge
+                      variant={isRejected ? "danger" : "success"}
+                      size="md"
+                    >
+                      {isRejected ? "Отказ от покупки" : "Куплен с дисконтом"}
                     </Badge>
-                  )}
-                </div>
+                    {study.savings && (
+                      <Badge variant="success" size="md">
+                        Экономия {study.savings}
+                      </Badge>
+                    )}
+                  </div>
 
-                <div className="p-5 sm:p-6">
-                  {/* Car info */}
-                  <div className="mb-4">
+                  {/* Авто + происхождение */}
+                  <div className="mb-3 mt-auto">
                     <h3 className="text-lg font-bold text-white sm:text-xl">
                       {study.car}
                     </h3>
                     <p className="mt-1 flex items-center gap-1.5 text-sm text-neutral-400">
                       <MapPin
-                        className="h-3.5 w-3.5"
+                        className="h-3.5 w-3.5 shrink-0"
                         aria-hidden="true"
                       />
                       {study.origin}
                     </p>
                   </div>
 
-                  {/* Claimed vs Reality */}
-                  <div className="mb-5 grid gap-3 sm:grid-cols-2">
-                    <div className="rounded-xl bg-white/5 p-3.5">
+                  {/* Заявлено vs Реальность */}
+                  <div className="mb-4 grid gap-2 sm:grid-cols-2 sm:gap-3">
+                    <div className="rounded-xl bg-white/5 p-3">
                       <p className="mb-1 text-xs font-semibold uppercase tracking-wider text-neutral-400">
                         Заявлено
                       </p>
-                      <p className="text-sm text-neutral-400">
+                      <p className="text-sm leading-snug text-neutral-400">
                         {study.claimed}
                       </p>
                     </div>
                     <div
-                      className={`rounded-xl p-3.5 ${
+                      className={`rounded-xl p-3 ${
                         isRejected ? "bg-danger-500/10" : "bg-success-500/10"
                       }`}
                     >
@@ -143,7 +138,7 @@ export function CaseStudies() {
                         Реальность
                       </p>
                       <p
-                        className={`text-sm font-medium ${
+                        className={`text-sm font-medium leading-snug ${
                           isRejected
                             ? "text-danger-400"
                             : "text-success-400"
@@ -154,16 +149,16 @@ export function CaseStudies() {
                     </div>
                   </div>
 
-                  {/* Findings */}
-                  <div className="mb-5">
-                    <p className="mb-2.5 text-xs font-semibold uppercase tracking-wider text-neutral-400">
+                  {/* Что обнаружено */}
+                  <div className="mb-4">
+                    <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-neutral-400">
                       Что обнаружено
                     </p>
-                    <ul className="space-y-2">
+                    <ul className="space-y-1.5">
                       {study.findings.map((finding) => (
                         <li
                           key={finding}
-                          className="flex items-start gap-2.5 text-sm text-neutral-400"
+                          className="flex items-start gap-2 text-sm text-neutral-400"
                         >
                           <AlertTriangle
                             className={`mt-0.5 h-3.5 w-3.5 shrink-0 ${
@@ -179,9 +174,9 @@ export function CaseStudies() {
                     </ul>
                   </div>
 
-                  {/* Result quote */}
+                  {/* Итог */}
                   <div
-                    className={`flex items-start gap-2.5 rounded-xl p-3.5 ${
+                    className={`flex items-start gap-2 rounded-xl p-3 ${
                       isRejected ? "bg-white/5" : "bg-success-500/10"
                     }`}
                   >

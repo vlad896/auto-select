@@ -69,41 +69,37 @@ export function VideoShowcase() {
           <span id="video-heading">Видеоподбор автомобилей</span>
         </SectionHeading>
 
-        {/* Видео: на мобильной — карусель, на sm+ — сетка 2 колонки */}
+        {/* Видео: карточка — превью слева, заголовок и описание справа. Сетка 2 колонки (sm+), на мобильной — карусель с той же структурой. */}
         <div className="flex gap-4 overflow-x-auto snap-x snap-mandatory pb-2 -mx-4 px-4 sm:mx-0 sm:px-0 sm:grid sm:grid-cols-2 sm:gap-6 sm:overflow-visible sm:snap-none scrollbar-hide">
           {VIDEOS.map((video) => (
             <button
               key={video.id}
               type="button"
               onClick={() => openVideo(video.id)}
-              className="group relative flex min-w-[85vw] max-w-md flex-shrink-0 snap-center cursor-pointer overflow-hidden rounded-2xl border border-white/10 bg-surface-200/30 text-left transition-all duration-300 hover:border-primary-600/30 hover:shadow-lg hover:shadow-black/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 focus-visible:ring-offset-surface-950 sm:min-w-0 sm:max-w-none sm:snap-align-none"
+              className="group relative flex min-w-[85vw] flex-shrink-0 snap-center cursor-pointer overflow-hidden rounded-2xl border border-white/10 bg-surface-200/30 text-left transition-all duration-300 hover:border-primary-600/30 hover:shadow-lg hover:shadow-black/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 focus-visible:ring-offset-surface-950 sm:min-w-0 sm:snap-align-none sm:flex-row"
               aria-label={`Смотреть видео: ${video.title}`}
             >
-              {/* Thumbnail */}
-              <div className="relative aspect-video overflow-hidden">
+              {/* Превью слева — широкая колонка */}
+              <div className="relative w-full flex-shrink-0 bg-surface-200 aspect-video sm:w-[52%]">
                 <Image
                   src={video.thumbnail}
                   alt={video.title}
                   fill
                   className="object-cover transition-transform duration-500 group-hover:scale-105"
-                  sizes="(max-width: 640px) 100vw, 50vw"
+                  sizes="(max-width: 640px) 85vw, 45vw"
                 />
-                {/* Dark overlay */}
                 <div className="absolute inset-0 bg-black/40 transition-colors group-hover:bg-black/30" />
-
-                {/* Play button */}
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="flex h-16 w-16 items-center justify-center rounded-full bg-primary-600/90 text-white shadow-lg shadow-primary-600/30 transition-all duration-300 group-hover:scale-110 group-hover:bg-primary-500 sm:h-20 sm:w-20">
+                  <div className="flex h-14 w-14 items-center justify-center rounded-full bg-primary-600/90 text-white shadow-lg shadow-primary-600/30 transition-all duration-300 group-hover:scale-110 group-hover:bg-primary-500 sm:h-16 sm:w-16">
                     <Play
-                      className="h-7 w-7 fill-white sm:h-8 sm:w-8"
+                      className="h-6 w-6 fill-white sm:h-7 sm:w-7"
                       aria-hidden="true"
                     />
                   </div>
                 </div>
               </div>
-
-              {/* Video info */}
-              <div className="p-4 sm:p-5">
+              {/* Текст справа */}
+              <div className="flex flex-1 flex-col justify-center p-4 sm:p-5">
                 <h3 className="text-base font-semibold text-white transition-colors group-hover:text-primary-400 sm:text-lg">
                   {video.title}
                 </h3>
