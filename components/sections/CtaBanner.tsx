@@ -119,7 +119,7 @@ export function CtaBannerSecondary() {
             </Button>
           </div>
 
-          <p className="mt-4 text-xs text-neutral-600">
+          <p className="mt-4 text-xs text-neutral-400">
             Бесплатная консультация · Без обязательств
           </p>
         </AnimateOnScroll>

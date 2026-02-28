@@ -91,7 +91,7 @@ export function Testimonials() {
               ))}
             </div>
             <CountUp end={5} decimals={1} suffix="" className="text-sm font-semibold text-white" />
-            <span className="text-sm text-neutral-500">на Google Maps</span>
+            <span className="text-sm text-neutral-400">на Google Maps</span>
           </div>
           <div className="text-sm text-neutral-400">
             <CountUp end={500} suffix="+" className="font-bold text-white" /> проверенных авто
@@ -117,32 +117,37 @@ export function Testimonials() {
             <button
               type="button"
               onClick={goPrev}
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/5 text-neutral-400 transition-colors hover:bg-white/10 hover:text-white cursor-pointer"
+              className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-white/10 bg-white/5 text-neutral-400 transition-colors hover:bg-white/10 hover:text-white cursor-pointer"
               aria-label="Предыдущий отзыв"
             >
               <ChevronLeft className="h-5 w-5" aria-hidden="true" />
             </button>
 
-            <div className="flex gap-2">
+            <div className="flex items-center gap-2">
               {TESTIMONIALS.map((_, i) => (
                 <button
                   key={i}
                   type="button"
                   onClick={() => setCurrentIndex(i)}
-                  className={`h-2 rounded-full transition-all cursor-pointer ${
-                    i === currentIndex
-                      ? "w-6 bg-primary-500"
-                      : "w-2 bg-white/20"
-                  }`}
+                  className="flex h-11 min-w-[44px] items-center justify-center rounded-full transition-all cursor-pointer"
                   aria-label={`Отзыв ${i + 1}`}
-                />
+                >
+                  <span
+                    className={`block rounded-full transition-all ${
+                      i === currentIndex
+                        ? "h-2 w-6 bg-primary-500"
+                        : "h-2 w-2 bg-white/20"
+                    }`}
+                    aria-hidden="true"
+                  />
+                </button>
               ))}
             </div>
 
             <button
               type="button"
               onClick={goNext}
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/5 text-neutral-400 transition-colors hover:bg-white/10 hover:text-white cursor-pointer"
+              className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-white/10 bg-white/5 text-neutral-400 transition-colors hover:bg-white/10 hover:text-white cursor-pointer"
               aria-label="Следующий отзыв"
             >
               <ChevronRight className="h-5 w-5" aria-hidden="true" />
@@ -179,8 +184,8 @@ function TestimonialCard({
         <div>
           <p className="font-semibold text-white">{t.name}</p>
           <div className="flex items-center gap-2">
-            <Car className="h-3.5 w-3.5 text-neutral-500" aria-hidden="true" />
-            <p className="text-sm text-neutral-500">{t.car}</p>
+            <Car className="h-3.5 w-3.5 text-neutral-400" aria-hidden="true" />
+            <p className="text-sm text-neutral-400">{t.car}</p>
           </div>
         </div>
         <div className="ml-auto">

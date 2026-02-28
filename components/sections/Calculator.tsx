@@ -124,7 +124,7 @@ export function Calculator() {
 
             <div className="relative mb-4">
               <DollarSign
-                className="absolute left-3.5 top-1/2 h-5 w-5 -translate-y-1/2 text-neutral-600"
+                className="absolute left-3.5 top-1/2 h-5 w-5 -translate-y-1/2 text-neutral-400"
                 aria-hidden="true"
               />
               <input
@@ -134,11 +134,11 @@ export function Calculator() {
                 value={priceInput}
                 onChange={handleInputChange}
                 placeholder="12000"
-                className="w-full rounded-xl border-2 border-white/10 bg-white/5 py-3.5 pl-10 pr-4 text-lg font-semibold text-white transition-colors focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/20 placeholder:text-neutral-600"
+                className="w-full rounded-xl border-2 border-white/10 bg-white/5 py-3.5 pl-10 pr-4 text-lg font-semibold text-white transition-colors focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/20 placeholder:text-neutral-400"
                 aria-describedby="price-hint"
               />
             </div>
-            <p id="price-hint" className="mb-4 text-xs text-neutral-600">
+            <p id="price-hint" className="mb-4 text-xs text-neutral-400">
               Введите примерную цену авто, которое планируете покупать
             </p>
 
@@ -151,7 +151,7 @@ export function Calculator() {
                   className={`rounded-lg border px-3 py-1.5 text-xs font-medium transition-all cursor-pointer ${
                     priceUsd === preset
                       ? "border-primary-500 bg-primary-600/15 text-primary-400"
-                      : "border-white/10 bg-white/5 text-neutral-500 hover:border-primary-600/30 hover:text-primary-400"
+                      : "border-white/10 bg-white/5 text-neutral-400 hover:border-primary-600/30 hover:text-primary-400"
                   }`}
                 >
                   {formatUsd(preset)}
@@ -203,7 +203,7 @@ export function Calculator() {
                   </span>
                   <span className="text-sm font-medium text-neutral-300">
                     {formatUsd(results.serviceCostUsd)}{" "}
-                    <span className="text-neutral-500">
+                    <span className="text-neutral-400">
                       ({formatByn(results.serviceCostByn)})
                     </span>
                   </span>
@@ -254,10 +254,10 @@ export function Calculator() {
             ) : (
               <div className="flex flex-col items-center justify-center py-8 text-center">
                 <DollarSign
-                  className="mb-3 h-10 w-10 text-neutral-600"
+                  className="mb-3 h-10 w-10 text-neutral-400"
                   aria-hidden="true"
                 />
-                <p className="text-sm text-neutral-500">
+                <p className="text-sm text-neutral-400">
                   Введите стоимость авто от $1 000,
                   <br />
                   чтобы увидеть расчёт
@@ -267,7 +267,7 @@ export function Calculator() {
           </div>
         </div>
 
-        <p className="mt-6 text-center text-xs text-neutral-600">
+        <p className="mt-6 text-center text-xs text-neutral-400">
           * Расчёт основан на средних данных за 2025–2026 гг. по рынку
           подержанных авто в Минске.
         </p>

@@ -115,10 +115,10 @@ export function WhyUs() {
                 <th className="px-4 py-4 text-center text-sm font-bold text-primary-400 lg:px-6">
                   АвтоПодбор
                 </th>
-                <th className="px-4 py-4 text-center text-sm font-semibold text-neutral-500 lg:px-6">
+                <th className="px-4 py-4 text-center text-sm font-semibold text-neutral-400 lg:px-6">
                   Сам по av.by
                 </th>
-                <th className="px-4 py-4 text-center text-sm font-semibold text-neutral-500 lg:px-6">
+                <th className="px-4 py-4 text-center text-sm font-semibold text-neutral-400 lg:px-6">
                   Автосалон
                 </th>
               </tr>
@@ -138,21 +138,21 @@ export function WhyUs() {
                     {item.us ? (
                       <Check className="mx-auto h-5 w-5 text-primary-500" aria-label="Да" />
                     ) : (
-                      <X className="mx-auto h-5 w-5 text-neutral-600" aria-label="Нет" />
+                      <X className="mx-auto h-5 w-5 text-neutral-500" aria-label="Нет" />
                     )}
                   </td>
                   <td className="px-4 py-3.5 text-center lg:px-6">
                     {item.diy ? (
-                      <Check className="mx-auto h-5 w-5 text-neutral-500" aria-label="Да" />
+                      <Check className="mx-auto h-5 w-5 text-neutral-400" aria-label="Да" />
                     ) : (
-                      <X className="mx-auto h-5 w-5 text-neutral-700" aria-label="Нет" />
+                      <X className="mx-auto h-5 w-5 text-neutral-500" aria-label="Нет" />
                     )}
                   </td>
                   <td className="px-4 py-3.5 text-center lg:px-6">
                     {item.dealer ? (
-                      <Check className="mx-auto h-5 w-5 text-neutral-500" aria-label="Да" />
+                      <Check className="mx-auto h-5 w-5 text-neutral-400" aria-label="Да" />
                     ) : (
-                      <X className="mx-auto h-5 w-5 text-neutral-700" aria-label="Нет" />
+                      <X className="mx-auto h-5 w-5 text-neutral-500" aria-label="Нет" />
                     )}
                   </td>
                 </tr>
@@ -177,19 +177,19 @@ export function WhyUs() {
                 </div>
                 <div className="flex items-center gap-1.5">
                   {item.diy ? (
-                    <Check className="h-4 w-4 text-neutral-500" aria-hidden="true" />
+                    <Check className="h-4 w-4 text-neutral-400" aria-hidden="true" />
                   ) : (
                     <X className="h-4 w-4 text-neutral-700" aria-hidden="true" />
                   )}
-                  <span className="text-xs text-neutral-500">Сам</span>
+                  <span className="text-xs text-neutral-400">Сам</span>
                 </div>
                 <div className="flex items-center gap-1.5">
                   {item.dealer ? (
-                    <Check className="h-4 w-4 text-neutral-500" aria-hidden="true" />
+                    <Check className="h-4 w-4 text-neutral-400" aria-hidden="true" />
                   ) : (
                     <X className="h-4 w-4 text-neutral-700" aria-hidden="true" />
                   )}
-                  <span className="text-xs text-neutral-500">Салон</span>
+                  <span className="text-xs text-neutral-400">Салон</span>
                 </div>
               </div>
             </div>

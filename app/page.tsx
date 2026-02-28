@@ -76,7 +76,7 @@ export default function HomePage() {
       <section className="border-y border-white/5 bg-surface-100/50 py-4" aria-label="Марки автомобилей">
         <Marquee speed={35} pauseOnHover>
           {["BMW (ISTA+)", "Volkswagen / Audi (ODIS)", "Mercedes (Xentry)", "Geely (профиль)", "Toyota (Techstream)", "Kia / Hyundai", "Škoda / SEAT", "Volvo (VIDA)", "140+ пунктов проверки", "500+ проверенных авто", "95% успешный торг"].map((item) => (
-            <span key={item} className="whitespace-nowrap text-sm font-medium text-neutral-500">
+            <span key={item} className="whitespace-nowrap text-sm font-medium text-neutral-400">
               {item}
             </span>
           ))}

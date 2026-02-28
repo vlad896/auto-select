@@ -122,7 +122,7 @@ export function Quiz() {
         <div className="rounded-3xl border border-white/10 bg-surface-200/50 p-5 shadow-lg shadow-black/20 sm:p-8">
           {/* Progress bar */}
           <div className="mb-6 sm:mb-8">
-            <div className="mb-2 flex items-center justify-between text-xs text-neutral-500">
+            <div className="mb-2 flex items-center justify-between text-xs text-neutral-400">
               <span>
                 {phase === "success"
                   ? "Готово!"
@@ -192,7 +192,7 @@ export function Quiz() {
                   <button
                     type="button"
                     onClick={handleBack}
-                    className="inline-flex items-center gap-1.5 text-sm text-neutral-500 transition-colors hover:text-white cursor-pointer"
+                    className="inline-flex items-center gap-1.5 text-sm text-neutral-400 transition-colors hover:text-white cursor-pointer"
                   >
                     <ArrowLeft className="h-4 w-4" aria-hidden="true" />
                     Назад
@@ -239,7 +239,7 @@ export function Quiz() {
                   }}
                   placeholder="+375 (__) ___-__-__"
                   autoComplete="tel"
-                  className={`w-full rounded-xl border-2 bg-white/5 px-4 py-3.5 text-base text-white placeholder:text-neutral-600 transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500/30 ${
+                  className={`w-full rounded-xl border-2 bg-white/5 px-4 py-3.5 text-base text-white placeholder:text-neutral-400 transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500/30 ${
                     phoneError
                       ? "border-danger-500 focus:border-danger-500"
                       : "border-white/10 focus:border-primary-500"
@@ -274,7 +274,7 @@ export function Quiz() {
                   )}
                 </Button>
 
-                <p className="mt-3 text-center text-xs text-neutral-600">
+                <p className="mt-3 text-center text-xs text-neutral-400">
                   Нажимая кнопку, вы соглашаетесь с политикой обработки
                   персональных данных
                 </p>
@@ -284,7 +284,7 @@ export function Quiz() {
                 <button
                   type="button"
                   onClick={handleBack}
-                  className="inline-flex items-center gap-1.5 text-sm text-neutral-500 transition-colors hover:text-white cursor-pointer"
+                  className="inline-flex items-center gap-1.5 text-sm text-neutral-400 transition-colors hover:text-white cursor-pointer"
                 >
                   <ArrowLeft className="h-4 w-4" aria-hidden="true" />
                   Изменить ответы

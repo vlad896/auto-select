@@ -109,7 +109,7 @@ export function CaseStudies() {
                     <h3 className="text-lg font-bold text-white sm:text-xl">
                       {study.car}
                     </h3>
-                    <p className="mt-1 flex items-center gap-1.5 text-sm text-neutral-500">
+                    <p className="mt-1 flex items-center gap-1.5 text-sm text-neutral-400">
                       <MapPin
                         className="h-3.5 w-3.5"
                         aria-hidden="true"
@@ -121,7 +121,7 @@ export function CaseStudies() {
                   {/* Claimed vs Reality */}
                   <div className="mb-5 grid gap-3 sm:grid-cols-2">
                     <div className="rounded-xl bg-white/5 p-3.5">
-                      <p className="mb-1 text-xs font-semibold uppercase tracking-wider text-neutral-600">
+                      <p className="mb-1 text-xs font-semibold uppercase tracking-wider text-neutral-400">
                         Заявлено
                       </p>
                       <p className="text-sm text-neutral-400">
@@ -156,7 +156,7 @@ export function CaseStudies() {
 
                   {/* Findings */}
                   <div className="mb-5">
-                    <p className="mb-2.5 text-xs font-semibold uppercase tracking-wider text-neutral-600">
+                    <p className="mb-2.5 text-xs font-semibold uppercase tracking-wider text-neutral-400">
                       Что обнаружено
                     </p>
                     <ul className="space-y-2">
@@ -188,7 +188,7 @@ export function CaseStudies() {
                     <Quote
                       className={`mt-0.5 h-4 w-4 shrink-0 ${
                         isRejected
-                          ? "text-neutral-600"
+                          ? "text-neutral-400"
                           : "text-success-500"
                       }`}
                       aria-hidden="true"

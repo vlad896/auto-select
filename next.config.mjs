@@ -4,6 +4,9 @@ const nextConfig = {
 
   trailingSlash: true,
 
+  // Source maps в production: устраняет предупреждение Lighthouse и ошибку парсинга .map (404 → "Not Found" as JSON)
+  productionBrowserSourceMaps: true,
+
   experimental: {
     optimizeCss: true,
   },

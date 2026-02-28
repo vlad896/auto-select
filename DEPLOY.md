@@ -27,7 +27,7 @@
 
 ## 5. Переменные окружения
 
-- **`NODE_ENV=production`** — желательно задать на хостинге.
+- **`NODE_ENV=production`** — желательно задать на хостинге. Если не задана, приложение всё равно запускается в режиме production (режим dev только при явном `NODE_ENV=development`).
 - **`PORT`** — Passenger обычно подставляет сам; если нет — задайте порт, на котором слушает приложение (например, 3000).
 
 ## 6. Ошибка «Web application could not be started»
@@ -38,6 +38,10 @@
   - стартовый файл указан неверно — должен быть **`server.js`** или команда **`npm start`**;
   - приложение падает при старте — смотрите полный текст ошибки в логе.
 
-## 7. WebSocket `ws://localhost:8081`
+## 7. WebSocket и консоль браузера (Lighthouse Best Practices)
 
-- В production Next.js не подключается к localhost:8081. Такое сообщение в консоли браузера обычно даёт **расширение** (например, React DevTools). На работу сайта и Nginx это не влияет.
+- **`ws://localhost:8081`** — в production Next.js к этому адресу не подключается. Сообщение обычно даёт **расширение** (React DevTools и т.п.). На работу сайта не влияет.
+- **`wss://ваш-домен/_next/webpack-hmr` failed (ERR_NAME_NOT_RESOLVED и т.п.)** — подключение к HMR (Hot Module Replacement) появляется только в режиме разработки (`next dev`). При запуске через `npm start` (production) этого кода в сборке нет. Если ошибка видна при проверке боевого сайта:
+  - убедитесь, что на хостинге запускается именно **`npm start`** и задан **`NODE_ENV=production`** (или не задан — по умолчанию считается production);
+  - если аудит запускали не на боевом URL, а на копии в dev — перезапустите проверку на продакшн-URL.
+- **Missing source maps / SyntaxError "Not Found" is not valid JSON** — в проекте включены production source maps (`productionBrowserSourceMaps: true`). После нового деплоя с `npm run build` карты источников отдаются с сайта, предупреждение Lighthouse исчезает.

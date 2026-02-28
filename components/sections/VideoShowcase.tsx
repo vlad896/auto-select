@@ -106,7 +106,7 @@ export function VideoShowcase() {
                 <h3 className="text-base font-semibold text-white transition-colors group-hover:text-primary-400 sm:text-lg">
                   {video.title}
                 </h3>
-                <p className="mt-1.5 text-sm leading-relaxed text-neutral-500">
+                <p className="mt-1.5 text-sm leading-relaxed text-neutral-400">
                   {video.description}
                 </p>
               </div>
@@ -115,7 +115,7 @@ export function VideoShowcase() {
         </div>
 
         {/* Instruction */}
-        <p className="mt-6 text-center text-xs text-neutral-600">
+        <p className="mt-6 text-center text-xs text-neutral-400">
           Нажмите на видео, чтобы посмотреть полный процесс проверки
         </p>
       </Container>

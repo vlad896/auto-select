@@ -274,7 +274,7 @@ export function LeadPopup() {
               </div>
 
               {/* Privacy note */}
-              <p className="text-neutral-600 text-xs text-center mt-4">
+              <p className="text-xs text-center mt-4 text-neutral-400">
                 Нажимая кнопку, вы соглашаетесь с обработкой персональных данных
               </p>
             </>

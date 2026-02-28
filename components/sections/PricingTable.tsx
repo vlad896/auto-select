@@ -89,7 +89,7 @@ export function PricingTable() {
                   {row.price}
                 </p>
               </div>
-              <p className="text-xs text-neutral-500 leading-relaxed">
+              <p className="text-xs text-neutral-400 leading-relaxed">
                 {row.includes}
               </p>
             </div>
@@ -114,7 +114,7 @@ export function PricingTable() {
           </Button>
         </div>
 
-        <p className="mt-5 text-center text-xs text-neutral-600">
+        <p className="mt-5 text-center text-xs text-neutral-400">
           Стоимость указана для Минска и минского района. Выезд за МКАД — +0,50 BYN/км.
         </p>
       </Container>

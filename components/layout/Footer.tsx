@@ -100,7 +100,7 @@ function ContactForm() {
           </>
         )}
       </Button>
-      <p className="text-xs text-white/40 text-center">
+      <p className="text-xs text-white/60 text-center">
         Нажимая кнопку, вы соглашаетесь с политикой обработки персональных данных
       </p>
     </form>
@@ -264,7 +264,7 @@ export function Footer() {
 
       {/* Bottom bar */}
       <div className="border-t border-white/10">
-        <Container className="flex flex-col items-center justify-between gap-2 py-5 text-xs text-white/40 sm:flex-row">
+        <Container className="flex flex-col items-center justify-between gap-2 py-5 text-xs text-white/60 sm:flex-row">
           <p>&copy; {new Date().getFullYear()} {SITE.name}. Все права защищены.</p>
           <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1">
             <a
