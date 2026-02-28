@@ -8,10 +8,16 @@ const TAG_SCRIPT_URL = "https://mc.yandex.ru/metrika/tag.js";
 
 declare global {
   interface Window {
-    ym?: (id: number, method: string, ...args: unknown[]) => void;
+    ym?: YmQueueFn;
     yandex_metrika_init?: boolean;
   }
 }
+
+type YmQueueFn = {
+  (id: number, method: string, ...args: unknown[]): void;
+  a?: unknown[];
+  l?: number;
+};
 
 // ============================================================
 // Yandex.Metrika — SPA: очередь ym, загрузка tag.js, init, hit при смене маршрута
@@ -19,13 +25,14 @@ declare global {
 
 function ensureYmQueue() {
   if (typeof window === "undefined") return;
-  const w = window as Window & { ym?: (id: number, method: string, ...a: unknown[]) => void; _ymQueue?: unknown[] };
+  const w = window as Window & { ym?: YmQueueFn };
   if (w.ym) return;
-  w.ym = function (id: number, method: string, ...args: unknown[]) {
-    (w.ym!.a = w.ym!.a || []).push([id, method, ...args]);
-  };
-  (w.ym as unknown as { a?: unknown[] }).a = [];
-  (w.ym as unknown as { l?: number }).l = 1 * Date.now();
+  const queue: YmQueueFn = function (id: number, method: string, ...args: unknown[]) {
+    (queue.a = queue.a || []).push([id, method, ...args]);
+  } as YmQueueFn;
+  queue.a = [];
+  queue.l = 1 * Date.now();
+  w.ym = queue;
 }
 
 export function YandexMetrika() {
@@ -74,6 +81,7 @@ export function YandexMetrika() {
   return (
     <noscript>
       <div>
+        {/* eslint-disable-next-line @next/next/no-img-element -- Yandex Metrika noscript pixel; external 1x1 tracking, next/image not applicable */}
         <img
           src={`https://mc.yandex.ru/watch/${YANDEX_METRIKA_ID}`}
           style={{ position: "absolute", left: "-9999px" }}
