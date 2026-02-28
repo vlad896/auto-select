@@ -10,6 +10,7 @@ import Image from "next/image";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Button } from "@/components/ui/Button";
+import { CarouselWithDots } from "@/components/ui/CarouselWithDots";
 import { CASE_STUDIES } from "@/lib/constants";
 
 // Case study — real car photos
@@ -28,7 +29,7 @@ export function CaseStudies() {
   return (
     <section
       id="cases"
-      className="section-padding bg-surface-100"
+      className="section-padding overflow-x-hidden bg-surface-100"
       aria-labelledby="cases-heading"
     >
       <Container>
@@ -41,8 +42,12 @@ export function CaseStudies() {
           </span>
         </SectionHeading>
 
-        {/* Мобильная: карусель внутри контейнера (без -mx), карточка на всю ширину. md+ — сетка 2 колонки. */}
-        <div className="flex gap-4 overflow-x-auto snap-x snap-mandatory pb-2 md:grid md:grid-cols-2 md:gap-6 md:overflow-visible md:snap-none scrollbar-hide">
+        {/* Мобильная: карусель с точками снизу. md+: сетка 2 колонки. */}
+        <CarouselWithDots
+          count={CASE_STUDIES.length}
+          hideDotsAbove="md"
+          scrollContainerClassName="w-full min-w-0 max-w-full flex gap-4 overflow-x-auto snap-x snap-mandatory pb-2 scrollbar-hide md:grid md:grid-cols-2 md:gap-6 md:overflow-visible md:snap-none"
+        >
           {CASE_STUDIES.map((study) => {
             const isRejected = study.result === "rejected";
             const imageUrl = CASE_IMAGES[study.id];
@@ -50,10 +55,10 @@ export function CaseStudies() {
             return (
               <article
                 key={study.id}
-                className={`card-hover relative flex h-full min-w-[100%] flex-shrink-0 snap-center flex-col overflow-hidden rounded-2xl border-2 bg-surface-200/30 transition-shadow hover:shadow-lg hover:shadow-black/20 md:min-w-0 md:snap-align-none ${
+                className={`card-hover relative flex h-full min-w-[100%] max-w-full flex-shrink-0 snap-center flex-col overflow-hidden rounded-2xl border-2 bg-surface-200/30 transition-all duration-300 hover:shadow-lg hover:shadow-black/20 md:min-w-0 md:max-w-none md:snap-align-none ${
                   isRejected
-                    ? "border-danger-500/30"
-                    : "border-success-500/30"
+                    ? "border-danger-500/30 hover:border-danger-500/50"
+                    : "border-success-500/30 hover:border-primary-600/30"
                 }`}
               >
                 {/* Верх карточки: крупное фото авто (~40–50% высоты) */}
@@ -198,7 +203,7 @@ export function CaseStudies() {
               </article>
             );
           })}
-        </div>
+        </CarouselWithDots>
 
         {/* CTA + ссылка на страницу кейсов */}
         <div className="mt-8 flex flex-col items-center gap-3 sm:mt-10 sm:flex-row sm:justify-center sm:gap-4">

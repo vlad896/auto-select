@@ -6,6 +6,7 @@ import Image from "next/image";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Button } from "@/components/ui/Button";
+import { CarouselWithDots } from "@/components/ui/CarouselWithDots";
 
 // ============================================================
 // Video data — replace YouTube IDs with your real videos
@@ -58,7 +59,7 @@ export function VideoShowcase() {
   return (
     <section
       id="video"
-      className="section-padding bg-surface-100"
+      className="section-padding overflow-x-hidden bg-surface-100"
       aria-labelledby="video-heading"
     >
       <Container>
@@ -69,14 +70,18 @@ export function VideoShowcase() {
           <span id="video-heading">Видеоподбор автомобилей</span>
         </SectionHeading>
 
-        {/* Мобильная: карусель внутри контейнера (без -mx), карточка на всю ширину. sm+ — сетка 2 колонки. */}
-        <div className="flex gap-4 overflow-x-auto snap-x snap-mandatory pb-2 sm:grid sm:grid-cols-2 sm:gap-6 sm:overflow-visible sm:snap-none scrollbar-hide">
+        {/* Мобильная: карусель с точками снизу. sm+: сетка 2 колонки. */}
+        <CarouselWithDots
+          count={VIDEOS.length}
+          hideDotsAbove="sm"
+          scrollContainerClassName="w-full min-w-0 max-w-full flex gap-4 overflow-x-auto snap-x snap-mandatory pb-2 scrollbar-hide sm:grid sm:grid-cols-2 sm:gap-6 sm:overflow-visible sm:snap-none"
+        >
           {VIDEOS.map((video) => (
             <button
               key={video.id}
               type="button"
               onClick={() => openVideo(video.id)}
-              className="group relative flex min-w-[100%] flex-shrink-0 snap-center cursor-pointer flex-col overflow-hidden rounded-2xl border border-white/10 bg-surface-200/30 text-left transition-all duration-300 hover:border-primary-600/30 hover:shadow-lg hover:shadow-black/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 focus-visible:ring-offset-surface-950 sm:min-w-0 sm:snap-align-none"
+              className="group relative flex h-full min-w-[100%] max-w-full flex-shrink-0 snap-center cursor-pointer flex-col overflow-hidden rounded-2xl border border-white/10 bg-surface-200/30 text-left transition-all duration-300 hover:border-primary-600/30 hover:shadow-lg hover:shadow-black/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 focus-visible:ring-offset-surface-950 sm:min-w-0 sm:max-w-none sm:snap-align-none"
               aria-label={`Смотреть видео: ${video.title}`}
             >
               {/* Крупное превью сверху (16:9) */}
@@ -86,7 +91,7 @@ export function VideoShowcase() {
                   alt={video.title}
                   fill
                   className="object-cover transition-transform duration-500 group-hover:scale-105"
-                  sizes="(max-width: 640px) 85vw, 50vw"
+                  sizes="(max-width: 640px) 100vw, 50vw"
                 />
                 <div className="absolute inset-0 bg-black/40 transition-colors group-hover:bg-black/30" />
                 <div className="absolute inset-0 flex items-center justify-center">
@@ -109,7 +114,7 @@ export function VideoShowcase() {
               </div>
             </button>
           ))}
-        </div>
+        </CarouselWithDots>
 
         {/* Instruction + ссылка на кейсы */}
         <p className="mt-6 text-center text-xs text-neutral-400">

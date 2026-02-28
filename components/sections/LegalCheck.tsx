@@ -11,6 +11,7 @@ import {
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { AnimateOnScroll } from "@/components/ui/AnimateOnScroll";
+import { CarouselWithDots } from "@/components/ui/CarouselWithDots";
 
 // ============================================================
 // LegalCheck — dark theme
@@ -44,7 +45,7 @@ export function LegalCheck() {
   return (
     <section
       id="legal"
-      className="section-padding bg-surface-950"
+      className="section-padding overflow-x-hidden bg-surface-950"
       aria-labelledby="legal-heading"
     >
       <Container>
@@ -58,14 +59,16 @@ export function LegalCheck() {
           </span>
         </SectionHeading>
 
-        {/* Карточки: на мобильной — карусель без выхода за контейнер (контент в границах), на lg — сетка 2 колонки */}
-        <div className="flex gap-4 overflow-x-auto snap-x snap-mandatory pb-2 lg:grid lg:grid-cols-2 lg:gap-14 lg:overflow-visible lg:snap-none scrollbar-hide">
+        {/* Мобильная: карусель с точками снизу. lg: сетка 2 колонки. */}
+        <CarouselWithDots
+          count={2}
+          hideDotsAbove="lg"
+          scrollContainerClassName="w-full min-w-0 max-w-full flex gap-4 overflow-x-auto snap-x snap-mandatory pb-2 scrollbar-hide lg:grid lg:grid-cols-2 lg:gap-14 lg:overflow-visible lg:snap-none"
+        >
           {/* === Column 1 === */}
-          <AnimateOnScroll
-            variant="slideLeft"
-            className="min-w-[100%] flex-shrink-0 snap-center lg:min-w-0 lg:snap-align-none"
-          >
-          <div className="h-full rounded-2xl border border-white/10 bg-surface-100 p-5 sm:p-6">
+          <AnimateOnScroll variant="slideLeft" className="min-w-[100%] max-w-full flex-shrink-0 snap-center lg:min-w-0 lg:max-w-none lg:snap-align-none">
+          <article className="card-hover relative flex h-full flex-col overflow-hidden rounded-2xl border border-white/10 bg-surface-200/30 transition-all duration-300">
+            <div className="flex flex-1 flex-col p-5 sm:p-6">
             <div className="mb-6 flex items-center gap-3">
               <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary-600/20">
                 <ShieldCheck className="h-5 w-5 text-primary-400" aria-hidden="true" />
@@ -93,15 +96,13 @@ export function LegalCheck() {
               </CheckItem>
             </div>
           </div>
+          </article>
           </AnimateOnScroll>
 
           {/* === Column 2 === */}
-          <AnimateOnScroll
-            variant="slideRight"
-            delay={0.15}
-            className="min-w-[100%] flex-shrink-0 snap-center lg:min-w-0 lg:snap-align-none"
-          >
-          <div className="h-full rounded-2xl border border-white/10 bg-surface-100 p-5 sm:p-6">
+          <AnimateOnScroll variant="slideRight" delay={0.15} className="min-w-[100%] max-w-full flex-shrink-0 snap-center lg:min-w-0 lg:max-w-none lg:snap-align-none">
+          <article className="card-hover relative flex h-full flex-col overflow-hidden rounded-2xl border border-white/10 bg-surface-200/30 transition-all duration-300">
+            <div className="flex flex-1 flex-col p-5 sm:p-6">
             <div className="mb-6 flex items-center gap-3">
               <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary-600/20">
                 <FileSearch className="h-5 w-5 text-primary-400" aria-hidden="true" />
@@ -127,8 +128,9 @@ export function LegalCheck() {
               </CheckItem>
             </div>
           </div>
+          </article>
           </AnimateOnScroll>
-        </div>
+        </CarouselWithDots>
 
         {/* Summary callout */}
         <div className="mt-10 rounded-2xl border border-primary-600/20 bg-primary-950/30 p-5 sm:mt-12 sm:p-6">
