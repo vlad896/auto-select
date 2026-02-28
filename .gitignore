@@ -21,6 +21,7 @@
 # misc
 .DS_Store
 *.pem
+components.zip
 
 # debug
 npm-debug.log*
