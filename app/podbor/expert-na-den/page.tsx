@@ -96,7 +96,7 @@ export default function ExpertNaDenPage() {
             {[
               { icon: Clock, text: "8 часов" },
               { icon: Car, text: "До 10 осмотров" },
-              { icon: CircleDollarSign, text: "380 BYN" },
+              { icon: CircleDollarSign, text: "500 BYN" },
             ].map(({ icon: Icon, text }) => (
               <span key={text} className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3.5 py-1.5 text-xs font-medium text-neutral-300 sm:text-sm">
                 <Icon className="h-3.5 w-3.5 text-primary-500" aria-hidden="true" />
@@ -140,7 +140,7 @@ export default function ExpertNaDenPage() {
                   </ol>
                 </nav>
                 <div className="mt-4 rounded-2xl border border-primary-600/20 bg-primary-950/30 p-5">
-                  <p className="mb-1 text-sm font-semibold text-white">380 BYN / день</p>
+                  <p className="mb-1 text-sm font-semibold text-white">500 BYN / день</p>
                   <p className="mb-3 text-xs text-neutral-400">Эксперт + авто + оборудование</p>
                   <Button href="/#quiz" variant="primary" size="sm" className="w-full">
                     Забронировать
@@ -188,7 +188,7 @@ export default function ExpertNaDenPage() {
                       icon: Calculator,
                       title: "Прагматики, умеющие считать",
                       subtitle: "Математика выгоды",
-                      text: "5 разовых × 130 BYN = 650 BYN. «Эксперт на день» = 380 BYN. Выгода очевидна уже на 3-м осмотре.",
+                      text: "5 разовых × 130 BYN = 650 BYN. «Эксперт на день» = 500 BYN. Выгода очевидна уже на 3-м осмотре.",
                     },
                   ].map((item) => (
                     <div key={item.title} className="rounded-2xl border border-white/10 bg-surface-100 p-5">
@@ -227,7 +227,7 @@ export default function ExpertNaDenPage() {
                       <tr>
                         <td className="px-4 py-3 font-medium text-primary-400">Эксперт на день</td>
                         <td className="px-4 py-3 text-center font-semibold text-white">5–10</td>
-                        <td className="px-4 py-3 text-right font-bold text-emerald-400">380 BYN</td>
+                        <td className="px-4 py-3 text-right font-bold text-emerald-400">500 BYN</td>
                       </tr>
                     </tbody>
                   </table>
@@ -392,7 +392,7 @@ export default function ExpertNaDenPage() {
                       <p className="mt-1 text-xs text-neutral-500">Сделок — скидка перекрывает стоимость услуги</p>
                     </div>
                     <div className="text-center">
-                      <p className="text-2xl font-bold text-emerald-400">380 BYN</p>
+                      <p className="text-2xl font-bold text-emerald-400">500 BYN</p>
                       <p className="mt-1 text-xs text-neutral-500">Окупается на первом же автомобиле</p>
                     </div>
                   </div>
@@ -532,7 +532,7 @@ export default function ExpertNaDenPage() {
                   <Handshake className="h-5 w-5 shrink-0 text-primary-400" aria-hidden="true" />
                   <div>
                     <p className="text-sm font-semibold text-white">Автоподбор под ключ</p>
-                    <p className="text-xs text-neutral-500">Полный цикл от мониторинга до оформления. 900 BYN.</p>
+                    <p className="text-xs text-neutral-500">Полный цикл от мониторинга до оформления. 1200 BYN.</p>
                   </div>
                   <ArrowRight className="ml-auto h-4 w-4 shrink-0 text-primary-500" aria-hidden="true" />
                 </Link>

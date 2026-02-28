@@ -29,9 +29,24 @@ export const metadata: Metadata = {
 };
 
 function getPageJsonLd() {
+  const pageUrl = `${SITE.url}/diagnostika/proverka-kuzova-lkp/`;
   return {
     "@context": "https://schema.org",
     "@graph": [
+      {
+        "@type": "WebPage",
+        "@id": `${pageUrl}#webpage`,
+        url: pageUrl,
+        name: "Проверка кузова и ЛКП автомобиля в Минске — толщиномер Etari ET-700 | АвтоПодбор",
+        description:
+          "Комплексный аудит кузова: замер ЛКП в 5-10 точках на элемент, силовая структура, заводские швы, маркировка стёкол, системы SRS. Детекция скрытых ДТП. От 40 BYN.",
+        isPartOf: { "@id": `${SITE.url}/#website` },
+        inLanguage: "ru",
+        primaryImageOfPage: {
+          "@type": "ImageObject",
+          url: `${SITE.url}/images/diag-paint-thickness.jpg`,
+        },
+      },
       {
         "@type": "TechArticle",
         headline:
@@ -53,6 +68,10 @@ function getPageJsonLd() {
       },
       {
         "@type": "FAQPage",
+        "@id": `${pageUrl}#faq`,
+        url: pageUrl,
+        inLanguage: "ru",
+        mainEntityOfPage: { "@id": `${pageUrl}#webpage` },
         mainEntity: [
           {
             "@type": "Question",

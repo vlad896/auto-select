@@ -141,7 +141,7 @@ export default function PodborPage() {
                   </ol>
                 </nav>
                 <div className="mt-4 rounded-2xl border border-primary-600/20 bg-primary-950/30 p-5">
-                  <p className="mb-1 text-sm font-semibold text-white">900 BYN — фикс</p>
+                  <p className="mb-1 text-sm font-semibold text-white">1200 BYN — фикс</p>
                   <p className="mb-3 text-xs text-neutral-400">Подбор под ключ с гарантией 2 месяца</p>
                   <Button href="/#quiz" variant="primary" size="sm" className="w-full">
                     Оставить заявку
@@ -237,7 +237,7 @@ export default function PodborPage() {
                       { icon: Search, label: "Осмотры", value: "Не ограничены" },
                       { icon: Users, label: "Ваше участие", value: "Минимальное" },
                       { icon: ShieldCheck, label: "Гарантия", value: "2 месяца (ДВС, КПП)" },
-                      { icon: CircleDollarSign, label: "Цена", value: "900 BYN (фикс)" },
+                      { icon: CircleDollarSign, label: "Цена", value: "1200 BYN (фикс)" },
                     ].map(({ icon: Icon, label, value }) => (
                       <div key={label} className="flex items-start gap-3 rounded-xl border border-white/5 bg-white/[0.03] p-3">
                         <Icon className="mt-0.5 h-4 w-4 shrink-0 text-primary-500" aria-hidden="true" />
@@ -259,8 +259,8 @@ export default function PodborPage() {
                     Приехали из региона на 1–2 дня? Эксперт с полным оборудованием
                     (Launch, Etari, эндоскоп) в вашем распоряжении с 10:00 до 18:00.
                     До <strong className="text-neutral-200">10 осмотров</strong> за день.
-                    Стоимость — <strong className="text-neutral-200">380 BYN</strong>{" "}
-                    (экономия vs 7 разовых выездов &gt; 900 BYN).
+                    Стоимость — <strong className="text-neutral-200">500 BYN</strong>{" "}
+                    (экономия vs 7 разовых выездов &gt; 1200 BYN).
                   </p>
                   <Link href="/podbor/expert-na-den/" className="inline-flex items-center gap-1.5 text-sm font-medium text-primary-400 transition-colors hover:text-primary-300">
                     Подробнее об услуге «Эксперт на день»
@@ -671,7 +671,7 @@ export default function PodborPage() {
 
                 <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
                   {[
-                    { href: "/podbor/expert-na-den/", label: "Эксперт на день", desc: "8 часов, до 10 осмотров, 380 BYN" },
+                    { href: "/podbor/expert-na-den/", label: "Эксперт на день", desc: "8 часов, до 10 осмотров, 500 BYN" },
                     { href: "/podbor/yuridicheskaya-chistota/", label: "Юридическая проверка", desc: "Залоги, аресты, VIN-сверка" },
                     { href: "/marki/", label: "Подбор по маркам", desc: "BMW, VAG, Mercedes, Geely — профильным ПО" },
                     { href: "/diagnostika/proverka-kuzova-lkp/", label: "Проверка кузова и ЛКП", desc: "Толщиномер Etari ET-700" },

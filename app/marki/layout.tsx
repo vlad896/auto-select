@@ -28,9 +28,24 @@ export const metadata: Metadata = {
 };
 
 function getPageJsonLd() {
+  const pageUrl = `${SITE.url}/marki/`;
   return {
     "@context": "https://schema.org",
     "@graph": [
+      {
+        "@type": "WebPage",
+        "@id": `${pageUrl}#webpage`,
+        url: pageUrl,
+        name: "Подбор авто по маркам в Минске: диагностика профильным сканером (BMW, VAG, Mercedes, Geely) | АвтоПодбор",
+        description:
+          "Не ищите «просто подборщика». Выбирайте эксперта по вашей марке. Профильная диагностика дилерским оборудованием (ODIS, ISTA, Xentry). Глубокая проверка двигателей и КПП. Минск и выезд по РБ.",
+        isPartOf: { "@id": `${SITE.url}/#website` },
+        inLanguage: "ru",
+        primaryImageOfPage: {
+          "@type": "ImageObject",
+          url: `${SITE.url}/images/marki-hero-diagnostic.jpg`,
+        },
+      },
       {
         "@type": "Service",
         name: "Подбор автомобилей по маркам",
@@ -60,7 +75,7 @@ function getPageJsonLd() {
             {
               "@type": "Offer",
               name: "Подбор под ключ",
-              price: "900",
+              price: "1200",
               priceCurrency: "BYN",
               description: "Поиск до результата, полное сопровождение, торг",
             },
@@ -69,6 +84,10 @@ function getPageJsonLd() {
       },
       {
         "@type": "FAQPage",
+        "@id": `${pageUrl}#faq`,
+        url: pageUrl,
+        inLanguage: "ru",
+        mainEntityOfPage: { "@id": `${pageUrl}#webpage` },
         mainEntity: [
           {
             "@type": "Question",

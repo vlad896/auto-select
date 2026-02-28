@@ -132,8 +132,8 @@ const PRICING = [
   { service: "Разовый осмотр (Стандарт)", desc: "Выезд, кузов, Launch, тест-драйв, отчёт", price: "от 130 BYN" },
   { service: "Разовый осмотр (Премиум/Профиль)", desc: "Дилерская диагностика (BMW/VAG/MB) + детальный отчёт по блокам", price: "от 160 BYN" },
   { service: "Эндоскопия двигателя", desc: "Осмотр цилиндров камерой (задиры, нагар, хон)", price: "от 80 BYN" },
-  { service: "Эксперт на день", desc: "Неограниченное число осмотров 10:00 — 18:00", price: "380 BYN" },
-  { service: "Подбор под ключ", desc: "Поиск до результата, сопровождение, торг", price: "900 BYN" },
+  { service: "Эксперт на день", desc: "Неограниченное число осмотров 10:00 — 18:00", price: "500 BYN" },
+  { service: "Подбор под ключ", desc: "Поиск до результата, сопровождение, торг", price: "1200 BYN" },
 ] as const;
 
 export default function MarkiPage() {
@@ -619,7 +619,7 @@ export default function MarkiPage() {
                   <Search className="h-5 w-5 shrink-0 text-primary-400" aria-hidden="true" />
                   <div>
                     <p className="text-sm font-semibold text-white">Автоподбор под ключ</p>
-                    <p className="text-xs text-neutral-500">Полный цикл от мониторинга до оформления. 900 BYN.</p>
+                    <p className="text-xs text-neutral-500">Полный цикл от мониторинга до оформления. 1200 BYN.</p>
                   </div>
                   <ArrowRight className="ml-auto h-4 w-4 shrink-0 text-primary-500" aria-hidden="true" />
                 </Link>
@@ -628,7 +628,7 @@ export default function MarkiPage() {
                   {[
                     { href: "/diagnostika/", label: "Выездная диагностика", desc: "Полный протокол: кузов, электроника, ходовая" },
                     { href: "/podbor/yuridicheskaya-chistota/", label: "Юридическая проверка", desc: "Залоги, аресты, VIN-сверка" },
-                    { href: "/podbor/expert-na-den/", label: "Эксперт на день", desc: "8 часов, до 10 осмотров, 380 BYN" },
+                    { href: "/podbor/expert-na-den/", label: "Эксперт на день", desc: "8 часов, до 10 осмотров, 500 BYN" },
                     { href: "/diagnostika/kompyuternaya-diagnostika/", label: "Компьютерная диагностика", desc: "Launch X431 V+ PRO, Live Data" },
                     { href: "/diagnostika/proverka-kuzova-lkp/", label: "Проверка кузова и ЛКП", desc: "Толщиномер Etari ET-700" },
                     { href: "/diagnostika/endoskopiya-dvigatelya/", label: "Эндоскопия двигателя", desc: "Задиры ЦПГ, нагар, ГБЦ" },

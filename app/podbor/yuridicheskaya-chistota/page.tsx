@@ -441,14 +441,14 @@ export default function YuridicheskayaChistotaPage() {
                   <Handshake className="h-5 w-5 shrink-0 text-primary-400" aria-hidden="true" />
                   <div>
                     <p className="text-sm font-semibold text-white">Автоподбор под ключ</p>
-                    <p className="text-xs text-neutral-500">Полный цикл от мониторинга до оформления. 900 BYN.</p>
+                    <p className="text-xs text-neutral-500">Полный цикл от мониторинга до оформления. 1200 BYN.</p>
                   </div>
                   <ArrowRight className="ml-auto h-4 w-4 shrink-0 text-primary-500" aria-hidden="true" />
                 </Link>
 
                 <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
                   {[
-                    { href: "/podbor/expert-na-den/", label: "Эксперт на день", desc: "Проверить несколько авто за день. 380 BYN." },
+                    { href: "/podbor/expert-na-den/", label: "Эксперт на день", desc: "Проверить несколько авто за день. 500 BYN." },
                     { href: "/diagnostika/kompyuternaya-diagnostika/", label: "Компьютерная диагностика", desc: "Launch X431 V+, сверка VIN в блоках" },
                     { href: "/diagnostika/", label: "Выездная диагностика", desc: "Полный протокол: кузов, электроника, ходовая" },
                   ].map((link) => (

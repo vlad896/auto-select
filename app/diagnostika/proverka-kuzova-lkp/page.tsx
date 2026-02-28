@@ -656,7 +656,7 @@ export default function ProverkaKuzovaPage() {
                     href="/#services"
                     className="inline-flex items-center gap-1.5 text-sm font-medium text-primary-400 transition-colors hover:text-primary-300"
                   >
-                    Автоподбор «под ключ» — от 900 BYN
+                    Автоподбор «под ключ» — от 1200 BYN
                     <ExternalLink className="h-3 w-3" aria-hidden="true" />
                   </Link>
                 </div>

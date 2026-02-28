@@ -1,0 +1,15 @@
+# Пример для хостинга с Phusion Passenger + Nginx.
+# Замените /path/to/auto на реальный путь к проекту и подставьте свой домен.
+
+server {
+    listen 80;
+    server_name автоподборминск.бел www.автоподборминск.бел;
+
+    root /path/to/auto;
+    passenger_enabled on;
+    passenger_app_type node;
+    passenger_startup_file server.js;
+
+    # Корень приложения — каталог с package.json и server.js
+    passenger_app_root /path/to/auto;
+}

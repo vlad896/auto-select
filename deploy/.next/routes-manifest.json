@@ -1,0 +1,209 @@
+{
+  "version": 3,
+  "pages404": true,
+  "caseSensitive": false,
+  "basePath": "",
+  "redirects": [
+    {
+      "source": "/:file((?!\\.well-known(?:/.*)?)(?:[^/]+/)*[^/]+\\.\\w+)/",
+      "destination": "/:file",
+      "internal": true,
+      "missing": [
+        {
+          "type": "header",
+          "key": "x-nextjs-data"
+        }
+      ],
+      "statusCode": 308,
+      "regex": "^(?:/((?!\\.well-known(?:/.*)?)(?:[^/]+/)*[^/]+\\.\\w+))/$"
+    },
+    {
+      "source": "/:notfile((?!\\.well-known(?:/.*)?)(?:[^/]+/)*[^/\\.]+)",
+      "destination": "/:notfile/",
+      "internal": true,
+      "statusCode": 308,
+      "regex": "^(?:/((?!\\.well-known(?:/.*)?)(?:[^/]+/)*[^/\\.]+))$"
+    },
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.автоподборминск.бел"
+        }
+      ],
+      "destination": "https://автоподборминск.бел/:path*",
+      "statusCode": 308,
+      "regex": "^(?!/_next)(?:/((?:[^/]+?)(?:/(?:[^/]+?))*))?(?:/)?$"
+    },
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.xn--80aafgkdcbpkjhgmfcdo6o.xn--d1acj3b"
+        }
+      ],
+      "destination": "https://автоподборминск.бел/:path*",
+      "statusCode": 308,
+      "regex": "^(?!/_next)(?:/((?:[^/]+?)(?:/(?:[^/]+?))*))?(?:/)?$"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "SAMEORIGIN"
+        },
+        {
+          "key": "X-XSS-Protection",
+          "value": "1; mode=block"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "Permissions-Policy",
+          "value": "camera=(), microphone=(), geolocation=(self), interest-cohort=()"
+        },
+        {
+          "key": "Strict-Transport-Security",
+          "value": "max-age=63072000; includeSubDomains; preload"
+        },
+        {
+          "key": "Content-Security-Policy",
+          "value": "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: blob: https: http:; font-src 'self' https://fonts.gstatic.com; frame-src 'self' https://www.youtube.com https://www.youtube-nocookie.com https://www.google.com https://maps.google.com; connect-src 'self' https://www.google-analytics.com https://vitals.vercel-insights.com; media-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'"
+        }
+      ],
+      "regex": "^(?:/(.*))(?:/)?$"
+    }
+  ],
+  "rewrites": {
+    "beforeFiles": [],
+    "afterFiles": [],
+    "fallback": []
+  },
+  "dynamicRoutes": [],
+  "staticRoutes": [
+    {
+      "page": "/",
+      "regex": "^/(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/(?:/)?$"
+    },
+    {
+      "page": "/_not-found",
+      "regex": "^/_not\\-found(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/_not\\-found(?:/)?$"
+    },
+    {
+      "page": "/diagnostika",
+      "regex": "^/diagnostika(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/diagnostika(?:/)?$"
+    },
+    {
+      "page": "/diagnostika/endoskopiya-dvigatelya",
+      "regex": "^/diagnostika/endoskopiya\\-dvigatelya(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/diagnostika/endoskopiya\\-dvigatelya(?:/)?$"
+    },
+    {
+      "page": "/diagnostika/kompyuternaya-diagnostika",
+      "regex": "^/diagnostika/kompyuternaya\\-diagnostika(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/diagnostika/kompyuternaya\\-diagnostika(?:/)?$"
+    },
+    {
+      "page": "/diagnostika/proverka-kuzova-lkp",
+      "regex": "^/diagnostika/proverka\\-kuzova\\-lkp(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/diagnostika/proverka\\-kuzova\\-lkp(?:/)?$"
+    },
+    {
+      "page": "/diagnostika/proverka-probega",
+      "regex": "^/diagnostika/proverka\\-probega(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/diagnostika/proverka\\-probega(?:/)?$"
+    },
+    {
+      "page": "/icon.svg",
+      "regex": "^/icon\\.svg(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/icon\\.svg(?:/)?$"
+    },
+    {
+      "page": "/manifest.webmanifest",
+      "regex": "^/manifest\\.webmanifest(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/manifest\\.webmanifest(?:/)?$"
+    },
+    {
+      "page": "/marki",
+      "regex": "^/marki(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/marki(?:/)?$"
+    },
+    {
+      "page": "/offline",
+      "regex": "^/offline(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/offline(?:/)?$"
+    },
+    {
+      "page": "/podbor",
+      "regex": "^/podbor(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/podbor(?:/)?$"
+    },
+    {
+      "page": "/podbor/expert-na-den",
+      "regex": "^/podbor/expert\\-na\\-den(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/podbor/expert\\-na\\-den(?:/)?$"
+    },
+    {
+      "page": "/podbor/yuridicheskaya-chistota",
+      "regex": "^/podbor/yuridicheskaya\\-chistota(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/podbor/yuridicheskaya\\-chistota(?:/)?$"
+    },
+    {
+      "page": "/robots.txt",
+      "regex": "^/robots\\.txt(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/robots\\.txt(?:/)?$"
+    },
+    {
+      "page": "/sitemap.xml",
+      "regex": "^/sitemap\\.xml(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/sitemap\\.xml(?:/)?$"
+    }
+  ],
+  "dataRoutes": [],
+  "rsc": {
+    "header": "rsc",
+    "varyHeader": "rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch",
+    "prefetchHeader": "next-router-prefetch",
+    "didPostponeHeader": "x-nextjs-postponed",
+    "contentTypeHeader": "text/x-component",
+    "suffix": ".rsc",
+    "prefetchSuffix": ".prefetch.rsc",
+    "prefetchSegmentHeader": "next-router-segment-prefetch",
+    "prefetchSegmentSuffix": ".segment.rsc",
+    "prefetchSegmentDirSuffix": ".segments"
+  },
+  "rewriteHeaders": {
+    "pathHeader": "x-nextjs-rewritten-path",
+    "queryHeader": "x-nextjs-rewritten-query"
+  }
+}

@@ -35,9 +35,24 @@ export const metadata: Metadata = {
 };
 
 function getPageJsonLd() {
+  const pageUrl = `${SITE.url}/diagnostika/proverka-probega/`;
   return {
     "@context": "https://schema.org",
     "@graph": [
+      {
+        "@type": "WebPage",
+        "@id": `${pageUrl}#webpage`,
+        url: pageUrl,
+        name: "Как проверить реальный пробег автомобиля: методы детекции скруток | АвтоПодбор",
+        description:
+          "Профессиональная проверка пробега сканером Launch X431: дубли в ABS, АКПП, SRS, моточасы, базы Белтехосмотра. Выявляем скрученный одометр в Минске.",
+        isPartOf: { "@id": `${SITE.url}/#website` },
+        inLanguage: "ru",
+        primaryImageOfPage: {
+          "@type": "ImageObject",
+          url: `${SITE.url}/images/diag-scanner-launch.jpg`,
+        },
+      },
       {
         "@type": "TechArticle",
         headline:
@@ -52,6 +67,10 @@ function getPageJsonLd() {
       },
       {
         "@type": "FAQPage",
+        "@id": `${pageUrl}#faq`,
+        url: pageUrl,
+        inLanguage: "ru",
+        mainEntityOfPage: { "@id": `${pageUrl}#webpage` },
         mainEntity: [
           {
             "@type": "Question",

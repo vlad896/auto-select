@@ -19,9 +19,20 @@ export const metadata: Metadata = {
 };
 
 function getPageJsonLd() {
+  const pageUrl = `${SITE.url}/diagnostika/endoskopiya-dvigatelya/`;
   return {
     "@context": "https://schema.org",
     "@graph": [
+      {
+        "@type": "WebPage",
+        "@id": `${pageUrl}#webpage`,
+        url: pageUrl,
+        name: "Видеоэндоскопия двигателя в Минске: задиры, нагар, трещины ГБЦ | АвтоПодбор",
+        description:
+          "Эндоскопия цилиндров Full HD зондом: задиры ЦПГ, нагар на клапанах, трещины ГБЦ, разрушение катализатора. Проверка моторов G4KD, N20, TSI, M48. От 90 BYN.",
+        isPartOf: { "@id": `${SITE.url}/#website` },
+        inLanguage: "ru",
+      },
       {
         "@type": "Service",
         name: "Видеоэндоскопия двигателя",
@@ -35,6 +46,10 @@ function getPageJsonLd() {
       },
       {
         "@type": "FAQPage",
+        "@id": `${pageUrl}#faq`,
+        url: pageUrl,
+        inLanguage: "ru",
+        mainEntityOfPage: { "@id": `${pageUrl}#webpage` },
         mainEntity: [
           {
             "@type": "Question",

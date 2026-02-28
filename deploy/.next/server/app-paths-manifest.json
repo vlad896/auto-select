@@ -1,0 +1,18 @@
+{
+  "/_not-found/page": "app/_not-found/page.js",
+  "/manifest.webmanifest/route": "app/manifest.webmanifest/route.js",
+  "/icon.svg/route": "app/icon.svg/route.js",
+  "/robots.txt/route": "app/robots.txt/route.js",
+  "/sitemap.xml/route": "app/sitemap.xml/route.js",
+  "/page": "app/page.js",
+  "/offline/page": "app/offline/page.js",
+  "/diagnostika/page": "app/diagnostika/page.js",
+  "/marki/page": "app/marki/page.js",
+  "/podbor/page": "app/podbor/page.js",
+  "/diagnostika/kompyuternaya-diagnostika/page": "app/diagnostika/kompyuternaya-diagnostika/page.js",
+  "/diagnostika/proverka-probega/page": "app/diagnostika/proverka-probega/page.js",
+  "/diagnostika/proverka-kuzova-lkp/page": "app/diagnostika/proverka-kuzova-lkp/page.js",
+  "/podbor/expert-na-den/page": "app/podbor/expert-na-den/page.js",
+  "/diagnostika/endoskopiya-dvigatelya/page": "app/diagnostika/endoskopiya-dvigatelya/page.js",
+  "/podbor/yuridicheskaya-chistota/page": "app/podbor/yuridicheskaya-chistota/page.js"
+}

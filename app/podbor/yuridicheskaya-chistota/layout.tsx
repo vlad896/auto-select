@@ -27,9 +27,24 @@ export const metadata: Metadata = {
 };
 
 function getPageJsonLd() {
+  const pageUrl = `${SITE.url}/podbor/yuridicheskaya-chistota/`;
   return {
     "@context": "https://schema.org",
     "@graph": [
+      {
+        "@type": "WebPage",
+        "@id": `${pageUrl}#webpage`,
+        url: pageUrl,
+        name: "Юридическая проверка авто в Минске: базы залогов, арестов и розыска | АвтоПодбор",
+        description:
+          "Проверка юридической чистоты автомобиля перед покупкой. Реестр залогов РБ/РФ, проверка VIN, исполнительные производства. Экспертная сверка маркировок. Защита от «двойников».",
+        isPartOf: { "@id": `${SITE.url}/#website` },
+        inLanguage: "ru",
+        primaryImageOfPage: {
+          "@type": "ImageObject",
+          url: `${SITE.url}/images/legal-vin-check.jpg`,
+        },
+      },
       {
         "@type": "Service",
         name: "Юридическая проверка автомобиля",
@@ -41,6 +56,10 @@ function getPageJsonLd() {
       },
       {
         "@type": "FAQPage",
+        "@id": `${pageUrl}#faq`,
+        url: pageUrl,
+        inLanguage: "ru",
+        mainEntityOfPage: { "@id": `${pageUrl}#webpage` },
         mainEntity: [
           {
             "@type": "Question",

@@ -16,9 +16,24 @@ export const metadata: Metadata = {
 };
 
 function getPageJsonLd() {
+  const pageUrl = `${SITE.url}/diagnostika/kompyuternaya-diagnostika/`;
   return {
     "@context": "https://schema.org",
     "@graph": [
+      {
+        "@type": "WebPage",
+        "@id": `${pageUrl}#webpage`,
+        url: pageUrl,
+        name: "Компьютерная диагностика автомобиля в Минске — Launch X431 V+ | АвтоПодбор",
+        description:
+          "Глубокая компьютерная диагностика: опрос 80+ блоков, Live Data, Freeze Frame, проверка ГРМ и АКПП/DSG. Профессиональный сканер Launch X431 V+ PRO. От 50 BYN.",
+        isPartOf: { "@id": `${SITE.url}/#website` },
+        inLanguage: "ru",
+        primaryImageOfPage: {
+          "@type": "ImageObject",
+          url: `${SITE.url}/images/comp-diag-hero.jpg`,
+        },
+      },
       {
         "@type": "TechArticle",
         headline: "Глубокая компьютерная диагностика электроники авто",
@@ -35,6 +50,10 @@ function getPageJsonLd() {
       },
       {
         "@type": "FAQPage",
+        "@id": `${pageUrl}#faq`,
+        url: pageUrl,
+        inLanguage: "ru",
+        mainEntityOfPage: { "@id": `${pageUrl}#webpage` },
         mainEntity: [
           {
             "@type": "Question",

@@ -38,9 +38,24 @@ export const metadata: Metadata = {
 // ============================================================
 
 function getDiagnosticsJsonLd() {
+  const pageUrl = `${SITE.url}/diagnostika/`;
   return {
     "@context": "https://schema.org",
     "@graph": [
+      {
+        "@type": "WebPage",
+        "@id": `${pageUrl}#webpage`,
+        url: pageUrl,
+        name: "Выездная диагностика автомобиля перед покупкой в Минске — от 130 BYN | АвтоПодбор",
+        description:
+          "Комплексная проверка авто перед покупкой: кузов толщиномером Etari, компьютерная диагностика Launch X431, верификация пробега, эндоскопия двигателя. Выезд за 60 минут. Отчёт на 100+ фото.",
+        isPartOf: { "@id": `${SITE.url}/#website` },
+        inLanguage: "ru",
+        primaryImageOfPage: {
+          "@type": "ImageObject",
+          url: `${SITE.url}/images/diag-hero-bg.jpg`,
+        },
+      },
       {
         "@type": "Service",
         name: "Выездная диагностика автомобиля перед покупкой",
@@ -88,6 +103,10 @@ function getDiagnosticsJsonLd() {
       },
       {
         "@type": "FAQPage",
+        "@id": `${pageUrl}#faq`,
+        url: pageUrl,
+        inLanguage: "ru",
+        mainEntityOfPage: { "@id": `${pageUrl}#webpage` },
         mainEntity: [
           {
             "@type": "Question",

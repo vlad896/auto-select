@@ -266,7 +266,17 @@ export function Footer() {
       <div className="border-t border-white/10">
         <Container className="flex flex-col items-center justify-between gap-2 py-5 text-xs text-white/40 sm:flex-row">
           <p>&copy; {new Date().getFullYear()} {SITE.name}. Все права защищены.</p>
-          <p>Минск, Беларусь</p>
+          <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1">
+            <a
+              href="/llms.txt"
+              type="text/plain"
+              title="Автоподбор в Минске — документация для LLM и ИИ"
+              className="transition-colors hover:text-white/70"
+            >
+              Документация для ИИ и LLM
+            </a>
+            <p>Минск, Беларусь</p>
+          </div>
         </Container>
       </div>
     </footer>

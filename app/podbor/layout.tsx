@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   title:
     "Автоподбор под ключ в Минске — поиск авто с гарантией чистоты | АвтоПодбор",
   description:
-    "Профессиональный подбор автомобиля в Минске: мониторинг рынка, проверка по VIN, выездная диагностика, юридическая экспертиза, торг и сопровождение сделки. Гарантия 2 месяца. От 900 BYN.",
+    "Профессиональный подбор автомобиля в Минске: мониторинг рынка, проверка по VIN, выездная диагностика, юридическая экспертиза, торг и сопровождение сделки. Гарантия 2 месяца. От 1200 BYN.",
   alternates: { canonical: `${SITE.url}/podbor/` },
   openGraph: {
     title: "Автоподбор под ключ — найдем лучший авто в ваш бюджет",
@@ -27,9 +27,24 @@ export const metadata: Metadata = {
 };
 
 function getPageJsonLd() {
+  const pageUrl = `${SITE.url}/podbor/`;
   return {
     "@context": "https://schema.org",
     "@graph": [
+      {
+        "@type": "WebPage",
+        "@id": `${pageUrl}#webpage`,
+        url: pageUrl,
+        name: "Автоподбор под ключ в Минске — поиск авто с гарантией чистоты | АвтоПодбор",
+        description:
+          "Профессиональный подбор автомобиля в Минске: мониторинг рынка, проверка по VIN, выездная диагностика, юридическая экспертиза, торг и сопровождение сделки. Гарантия 2 месяца. От 1200 BYN.",
+        isPartOf: { "@id": `${SITE.url}/#website` },
+        inLanguage: "ru",
+        primaryImageOfPage: {
+          "@type": "ImageObject",
+          url: `${SITE.url}/images/podbor-expert-report.jpg`,
+        },
+      },
       {
         "@type": "Service",
         name: "Автоподбор автомобиля под ключ",
@@ -48,7 +63,7 @@ function getPageJsonLd() {
           {
             "@type": "Offer",
             name: "Подбор под ключ",
-            price: "900.00",
+            price: "1200.00",
             priceCurrency: "BYN",
             description:
               "Полный цикл подбора: мониторинг, диагностика, юридическая проверка, торг, сопровождение сделки.",
@@ -56,7 +71,7 @@ function getPageJsonLd() {
           {
             "@type": "Offer",
             name: "Эксперт на день",
-            price: "380.00",
+            price: "500.00",
             priceCurrency: "BYN",
             description:
               "Автоэксперт с полным оборудованием в вашем распоряжении на весь день. До 10 осмотров.",
@@ -67,6 +82,10 @@ function getPageJsonLd() {
       },
       {
         "@type": "FAQPage",
+        "@id": `${pageUrl}#faq`,
+        url: pageUrl,
+        inLanguage: "ru",
+        mainEntityOfPage: { "@id": `${pageUrl}#webpage` },
         mainEntity: [
           {
             "@type": "Question",

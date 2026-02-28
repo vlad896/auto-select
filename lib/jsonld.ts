@@ -128,7 +128,7 @@ export function getLocalBusinessJsonLd() {
       opens: "09:00",
       closes: "21:00",
     },
-    priceRange: "130-900 BYN",
+    priceRange: "130-1200 BYN",
     currenciesAccepted: "BYN",
     paymentAccepted: "Cash, Card",
     areaServed: {
@@ -163,14 +163,14 @@ function getServiceJsonLd() {
         {
           "@type": "Offer",
           itemOffered: { "@type": "Service", name: "Автоподбор под ключ" },
-          price: "900",
+          price: "1200",
           priceCurrency: "BYN",
           description: "Поиск до результата, полное сопровождение, торг",
         },
         {
           "@type": "Offer",
           itemOffered: { "@type": "Service", name: "Эксперт на день" },
-          price: "380",
+          price: "500",
           priceCurrency: "BYN",
           description: "Неограниченное число осмотров с 10:00 до 18:00",
         },
@@ -184,8 +184,12 @@ function getFAQJsonLd() {
   return {
     "@type": "FAQPage",
     "@id": `${SITE.url}/#faq`,
-    mainEntity: FAQ_ITEMS.map((item) => ({
+    url: SITE.url,
+    inLanguage: "ru",
+    mainEntityOfPage: { "@id": `${SITE.url}/#webpage` },
+    mainEntity: FAQ_ITEMS.map((item, i) => ({
       "@type": "Question",
+      "@id": `${SITE.url}/#faq-q-${i + 1}`,
       name: item.question,
       acceptedAnswer: {
         "@type": "Answer",

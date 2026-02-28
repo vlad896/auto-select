@@ -3,14 +3,14 @@ import { SITE } from "@/lib/constants";
 
 export const metadata: Metadata = {
   title:
-    "Услуга Эксперт на день в Минске: подбор авто за 380 BYN | АвтоПодбор",
+    "Услуга Эксперт на день в Минске: подбор авто за 500 BYN | АвтоПодбор",
   description:
     "Проверка неограниченного количества авто за один день. Эксперт на машине с оборудованием (Launch, Etari, эндоскоп). Экономия на разовых выездах до 50%. Забронируйте дату!",
   alternates: { canonical: `${SITE.url}/podbor/expert-na-den/` },
   openGraph: {
     title: "Эксперт на день — мобильный осмотр авто в Минске",
     description:
-      "8 часов, до 10 осмотров, Launch X431 + Etari + эндоскоп. Встречаем на вокзале, строим маршрут, торгуемся. 380 BYN.",
+      "8 часов, до 10 осмотров, Launch X431 + Etari + эндоскоп. Встречаем на вокзале, строим маршрут, торгуемся. 500 BYN.",
     url: `${SITE.url}/podbor/expert-na-den/`,
     siteName: SITE.name,
     locale: "ru_BY",
@@ -27,9 +27,24 @@ export const metadata: Metadata = {
 };
 
 function getPageJsonLd() {
+  const pageUrl = `${SITE.url}/podbor/expert-na-den/`;
   return {
     "@context": "https://schema.org",
     "@graph": [
+      {
+        "@type": "WebPage",
+        "@id": `${pageUrl}#webpage`,
+        url: pageUrl,
+        name: "Услуга Эксперт на день в Минске: подбор авто за 500 BYN | АвтоПодбор",
+        description:
+          "Проверка неограниченного количества авто за один день. Эксперт на машине с оборудованием (Launch, Etari, эндоскоп). Экономия на разовых выездах до 50%. Забронируйте дату!",
+        isPartOf: { "@id": `${SITE.url}/#website` },
+        inLanguage: "ru",
+        primaryImageOfPage: {
+          "@type": "ImageObject",
+          url: `${SITE.url}/images/expert-day-hero.jpg`,
+        },
+      },
       {
         "@type": "Service",
         name: "Эксперт на день — интенсивный подбор авто",
@@ -46,7 +61,7 @@ function getPageJsonLd() {
         areaServed: { "@type": "City", name: "Минск" },
         offers: {
           "@type": "Offer",
-          price: "380.00",
+          price: "500.00",
           priceCurrency: "BYN",
           description:
             "Автоэксперт с полным оборудованием в вашем распоряжении на 8 часов. До 10 качественных осмотров.",
@@ -54,6 +69,10 @@ function getPageJsonLd() {
       },
       {
         "@type": "FAQPage",
+        "@id": `${pageUrl}#faq`,
+        url: pageUrl,
+        inLanguage: "ru",
+        mainEntityOfPage: { "@id": `${pageUrl}#webpage` },
         mainEntity: [
           {
             "@type": "Question",

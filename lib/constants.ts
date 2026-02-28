@@ -62,8 +62,8 @@ export const SERVICES: ServiceItem[] = [
       "Аргументированный торг с продавцом",
       "Сопровождение сделки до ГАИ",
     ],
-    price: 900,
-    priceLabel: "от 900 BYN",
+    price: 1200,
+    priceLabel: "от 1200 BYN",
     popular: true,
   },
   {
@@ -80,8 +80,8 @@ export const SERVICES: ServiceItem[] = [
       "Рекомендации и торг в реальном времени",
       "Итоговый отчет по всем осмотренным авто",
     ],
-    price: 380,
-    priceLabel: "от 380 BYN",
+    price: 500,
+    priceLabel: "от 500 BYN",
   },
 ];
 
@@ -95,12 +95,12 @@ export const PRICING_TABLE = [
     service: "Эксперт на день",
     includes:
       "Неограниченное количество осмотров на авто эксперта (9:00–18:00)",
-    price: "от 380 BYN",
+    price: "от 500 BYN",
   },
   {
     service: "Автоподбор «под ключ»",
     includes: "Поиск по критериям до результата, юридическая проверка, торг",
-    price: "от 900 BYN",
+    price: "от 1200 BYN",
   },
   {
     service: "Удаленная проверка",

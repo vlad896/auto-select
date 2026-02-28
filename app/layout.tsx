@@ -9,6 +9,7 @@ import { StickyCTA } from "@/components/layout/StickyCTA";
 import { CursorSpotlight } from "@/components/layout/CursorSpotlight";
 import { PromoBanner } from "@/components/layout/PromoBanner";
 import { ServiceWorkerRegistration } from "@/components/layout/ServiceWorkerRegistration";
+import { YandexMetrika } from "@/components/layout/YandexMetrika";
 import { LeadPopup } from "@/components/layout/LeadPopup";
 import "./globals.css";
 
@@ -115,17 +116,14 @@ export const metadata: Metadata = {
   alternates: {
     canonical: `${SITE.url}/`,
   },
-  // TODO: Раскомментировать когда сайт готов к индексации
   robots: {
-    index: false,     // ← заменить на true
-    follow: false,    // ← заменить на true
+    index: true,
+    follow: true,
     googleBot: {
-      index: false,   // ← заменить на true
-      follow: false,  // ← заменить на true
-      // "max-video-preview": -1,
-      // "max-image-preview": "large",
-      // "max-snippet": -1,
-      noimageindex: true, // ← удалить эту строку
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
     },
   },
 };
@@ -168,6 +166,7 @@ export default function RootLayout({
         <StickyMessenger />
         <StickyCTA />
         <ServiceWorkerRegistration />
+        <YandexMetrika />
         <LeadPopup />
       </body>
     </html>

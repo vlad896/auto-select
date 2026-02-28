@@ -23,7 +23,7 @@ const NAV_LINKS: readonly NavLink[] = [
     label: "Автоподбор",
     parentLabel: "Все услуги автоподбора",
     children: [
-      { href: "/podbor/expert-na-den/", label: "Эксперт на день", desc: "8 часов, до 10 осмотров, 380 BYN" },
+      { href: "/podbor/expert-na-den/", label: "Эксперт на день", desc: "8 часов, до 10 осмотров, 500 BYN" },
       { href: "/podbor/yuridicheskaya-chistota/", label: "Юридическая проверка", desc: "Залоги, аресты, VIN-сверка" },
     ],
   },

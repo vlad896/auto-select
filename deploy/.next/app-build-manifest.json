@@ -1,0 +1,213 @@
+{
+  "pages": {
+    "/_not-found/page": [
+      "static/chunks/webpack-79ddd3c01d57908b.js",
+      "static/chunks/4bd1b696-c023c6e3521b1417.js",
+      "static/chunks/255-26b57428be06f1b3.js",
+      "static/chunks/main-app-e432fed971fa691e.js",
+      "static/chunks/app/_not-found/page-ce91b51d0a62e42f.js"
+    ],
+    "/not-found": [
+      "static/chunks/webpack-79ddd3c01d57908b.js",
+      "static/chunks/4bd1b696-c023c6e3521b1417.js",
+      "static/chunks/255-26b57428be06f1b3.js",
+      "static/chunks/main-app-e432fed971fa691e.js",
+      "static/chunks/619-ba102abea3e3d0e4.js",
+      "static/chunks/356-5d382234d7b840ee.js",
+      "static/chunks/370-be4e1611be940727.js",
+      "static/chunks/app/not-found-4c54532c9382a6f8.js"
+    ],
+    "/layout": [
+      "static/chunks/webpack-79ddd3c01d57908b.js",
+      "static/chunks/4bd1b696-c023c6e3521b1417.js",
+      "static/chunks/255-26b57428be06f1b3.js",
+      "static/chunks/main-app-e432fed971fa691e.js",
+      "static/css/c8016ac6d4678723.css",
+      "static/chunks/619-ba102abea3e3d0e4.js",
+      "static/chunks/app/layout-792845b83cf00107.js"
+    ],
+    "/manifest.webmanifest/route": [
+      "static/chunks/webpack-79ddd3c01d57908b.js",
+      "static/chunks/4bd1b696-c023c6e3521b1417.js",
+      "static/chunks/255-26b57428be06f1b3.js",
+      "static/chunks/main-app-e432fed971fa691e.js",
+      "static/chunks/app/manifest.webmanifest/route-ce91b51d0a62e42f.js"
+    ],
+    "/robots.txt/route": [
+      "static/chunks/webpack-79ddd3c01d57908b.js",
+      "static/chunks/4bd1b696-c023c6e3521b1417.js",
+      "static/chunks/255-26b57428be06f1b3.js",
+      "static/chunks/main-app-e432fed971fa691e.js",
+      "static/chunks/app/robots.txt/route-ce91b51d0a62e42f.js"
+    ],
+    "/sitemap.xml/route": [
+      "static/chunks/webpack-79ddd3c01d57908b.js",
+      "static/chunks/4bd1b696-c023c6e3521b1417.js",
+      "static/chunks/255-26b57428be06f1b3.js",
+      "static/chunks/main-app-e432fed971fa691e.js",
+      "static/chunks/app/sitemap.xml/route-ce91b51d0a62e42f.js"
+    ],
+    "/page": [
+      "static/chunks/webpack-79ddd3c01d57908b.js",
+      "static/chunks/4bd1b696-c023c6e3521b1417.js",
+      "static/chunks/255-26b57428be06f1b3.js",
+      "static/chunks/main-app-e432fed971fa691e.js",
+      "static/chunks/619-ba102abea3e3d0e4.js",
+      "static/chunks/356-5d382234d7b840ee.js",
+      "static/chunks/370-be4e1611be940727.js",
+      "static/chunks/640-35af22077e377334.js",
+      "static/chunks/app/page-d644cee94e99f693.js"
+    ],
+    "/offline/page": [
+      "static/chunks/webpack-79ddd3c01d57908b.js",
+      "static/chunks/4bd1b696-c023c6e3521b1417.js",
+      "static/chunks/255-26b57428be06f1b3.js",
+      "static/chunks/main-app-e432fed971fa691e.js",
+      "static/chunks/app/offline/page-ce91b51d0a62e42f.js"
+    ],
+    "/diagnostika/layout": [
+      "static/chunks/webpack-79ddd3c01d57908b.js",
+      "static/chunks/4bd1b696-c023c6e3521b1417.js",
+      "static/chunks/255-26b57428be06f1b3.js",
+      "static/chunks/main-app-e432fed971fa691e.js",
+      "static/chunks/app/diagnostika/layout-ce91b51d0a62e42f.js"
+    ],
+    "/diagnostika/page": [
+      "static/chunks/webpack-79ddd3c01d57908b.js",
+      "static/chunks/4bd1b696-c023c6e3521b1417.js",
+      "static/chunks/255-26b57428be06f1b3.js",
+      "static/chunks/main-app-e432fed971fa691e.js",
+      "static/chunks/619-ba102abea3e3d0e4.js",
+      "static/chunks/356-5d382234d7b840ee.js",
+      "static/chunks/app/diagnostika/page-99683a78f2962788.js"
+    ],
+    "/marki/layout": [
+      "static/chunks/webpack-79ddd3c01d57908b.js",
+      "static/chunks/4bd1b696-c023c6e3521b1417.js",
+      "static/chunks/255-26b57428be06f1b3.js",
+      "static/chunks/main-app-e432fed971fa691e.js",
+      "static/chunks/app/marki/layout-ce91b51d0a62e42f.js"
+    ],
+    "/marki/page": [
+      "static/chunks/webpack-79ddd3c01d57908b.js",
+      "static/chunks/4bd1b696-c023c6e3521b1417.js",
+      "static/chunks/255-26b57428be06f1b3.js",
+      "static/chunks/main-app-e432fed971fa691e.js",
+      "static/chunks/619-ba102abea3e3d0e4.js",
+      "static/chunks/356-5d382234d7b840ee.js",
+      "static/chunks/app/marki/page-1d4ccf366936f7fc.js"
+    ],
+    "/podbor/layout": [
+      "static/chunks/webpack-79ddd3c01d57908b.js",
+      "static/chunks/4bd1b696-c023c6e3521b1417.js",
+      "static/chunks/255-26b57428be06f1b3.js",
+      "static/chunks/main-app-e432fed971fa691e.js",
+      "static/chunks/app/podbor/layout-ce91b51d0a62e42f.js"
+    ],
+    "/podbor/page": [
+      "static/chunks/webpack-79ddd3c01d57908b.js",
+      "static/chunks/4bd1b696-c023c6e3521b1417.js",
+      "static/chunks/255-26b57428be06f1b3.js",
+      "static/chunks/main-app-e432fed971fa691e.js",
+      "static/chunks/619-ba102abea3e3d0e4.js",
+      "static/chunks/356-5d382234d7b840ee.js",
+      "static/chunks/app/podbor/page-1d4ccf366936f7fc.js"
+    ],
+    "/diagnostika/kompyuternaya-diagnostika/layout": [
+      "static/chunks/webpack-79ddd3c01d57908b.js",
+      "static/chunks/4bd1b696-c023c6e3521b1417.js",
+      "static/chunks/255-26b57428be06f1b3.js",
+      "static/chunks/main-app-e432fed971fa691e.js",
+      "static/chunks/app/diagnostika/kompyuternaya-diagnostika/layout-ce91b51d0a62e42f.js"
+    ],
+    "/diagnostika/kompyuternaya-diagnostika/page": [
+      "static/chunks/webpack-79ddd3c01d57908b.js",
+      "static/chunks/4bd1b696-c023c6e3521b1417.js",
+      "static/chunks/255-26b57428be06f1b3.js",
+      "static/chunks/main-app-e432fed971fa691e.js",
+      "static/chunks/619-ba102abea3e3d0e4.js",
+      "static/chunks/356-5d382234d7b840ee.js",
+      "static/chunks/app/diagnostika/kompyuternaya-diagnostika/page-1d4ccf366936f7fc.js"
+    ],
+    "/diagnostika/proverka-probega/layout": [
+      "static/chunks/webpack-79ddd3c01d57908b.js",
+      "static/chunks/4bd1b696-c023c6e3521b1417.js",
+      "static/chunks/255-26b57428be06f1b3.js",
+      "static/chunks/main-app-e432fed971fa691e.js",
+      "static/chunks/app/diagnostika/proverka-probega/layout-ce91b51d0a62e42f.js"
+    ],
+    "/diagnostika/proverka-probega/page": [
+      "static/chunks/webpack-79ddd3c01d57908b.js",
+      "static/chunks/4bd1b696-c023c6e3521b1417.js",
+      "static/chunks/255-26b57428be06f1b3.js",
+      "static/chunks/main-app-e432fed971fa691e.js",
+      "static/chunks/619-ba102abea3e3d0e4.js",
+      "static/chunks/356-5d382234d7b840ee.js",
+      "static/chunks/app/diagnostika/proverka-probega/page-1d4ccf366936f7fc.js"
+    ],
+    "/diagnostika/proverka-kuzova-lkp/layout": [
+      "static/chunks/webpack-79ddd3c01d57908b.js",
+      "static/chunks/4bd1b696-c023c6e3521b1417.js",
+      "static/chunks/255-26b57428be06f1b3.js",
+      "static/chunks/main-app-e432fed971fa691e.js",
+      "static/chunks/app/diagnostika/proverka-kuzova-lkp/layout-ce91b51d0a62e42f.js"
+    ],
+    "/diagnostika/proverka-kuzova-lkp/page": [
+      "static/chunks/webpack-79ddd3c01d57908b.js",
+      "static/chunks/4bd1b696-c023c6e3521b1417.js",
+      "static/chunks/255-26b57428be06f1b3.js",
+      "static/chunks/main-app-e432fed971fa691e.js",
+      "static/chunks/619-ba102abea3e3d0e4.js",
+      "static/chunks/356-5d382234d7b840ee.js",
+      "static/chunks/app/diagnostika/proverka-kuzova-lkp/page-1d4ccf366936f7fc.js"
+    ],
+    "/podbor/expert-na-den/layout": [
+      "static/chunks/webpack-79ddd3c01d57908b.js",
+      "static/chunks/4bd1b696-c023c6e3521b1417.js",
+      "static/chunks/255-26b57428be06f1b3.js",
+      "static/chunks/main-app-e432fed971fa691e.js",
+      "static/chunks/app/podbor/expert-na-den/layout-ce91b51d0a62e42f.js"
+    ],
+    "/podbor/expert-na-den/page": [
+      "static/chunks/webpack-79ddd3c01d57908b.js",
+      "static/chunks/4bd1b696-c023c6e3521b1417.js",
+      "static/chunks/255-26b57428be06f1b3.js",
+      "static/chunks/main-app-e432fed971fa691e.js",
+      "static/chunks/619-ba102abea3e3d0e4.js",
+      "static/chunks/356-5d382234d7b840ee.js",
+      "static/chunks/app/podbor/expert-na-den/page-1d4ccf366936f7fc.js"
+    ],
+    "/diagnostika/endoskopiya-dvigatelya/layout": [
+      "static/chunks/webpack-79ddd3c01d57908b.js",
+      "static/chunks/4bd1b696-c023c6e3521b1417.js",
+      "static/chunks/255-26b57428be06f1b3.js",
+      "static/chunks/main-app-e432fed971fa691e.js",
+      "static/chunks/app/diagnostika/endoskopiya-dvigatelya/layout-ce91b51d0a62e42f.js"
+    ],
+    "/diagnostika/endoskopiya-dvigatelya/page": [
+      "static/chunks/webpack-79ddd3c01d57908b.js",
+      "static/chunks/4bd1b696-c023c6e3521b1417.js",
+      "static/chunks/255-26b57428be06f1b3.js",
+      "static/chunks/main-app-e432fed971fa691e.js",
+      "static/chunks/619-ba102abea3e3d0e4.js",
+      "static/chunks/356-5d382234d7b840ee.js",
+      "static/chunks/app/diagnostika/endoskopiya-dvigatelya/page-1d4ccf366936f7fc.js"
+    ],
+    "/podbor/yuridicheskaya-chistota/layout": [
+      "static/chunks/webpack-79ddd3c01d57908b.js",
+      "static/chunks/4bd1b696-c023c6e3521b1417.js",
+      "static/chunks/255-26b57428be06f1b3.js",
+      "static/chunks/main-app-e432fed971fa691e.js",
+      "static/chunks/app/podbor/yuridicheskaya-chistota/layout-ce91b51d0a62e42f.js"
+    ],
+    "/podbor/yuridicheskaya-chistota/page": [
+      "static/chunks/webpack-79ddd3c01d57908b.js",
+      "static/chunks/4bd1b696-c023c6e3521b1417.js",
+      "static/chunks/255-26b57428be06f1b3.js",
+      "static/chunks/main-app-e432fed971fa691e.js",
+      "static/chunks/619-ba102abea3e3d0e4.js",
+      "static/chunks/356-5d382234d7b840ee.js",
+      "static/chunks/app/podbor/yuridicheskaya-chistota/page-1d4ccf366936f7fc.js"
+    ]
+  }
+}

@@ -18,6 +18,18 @@ import { FAQSection } from "@/components/sections/FAQSection";
 import { OfficeMap } from "@/components/sections/OfficeMap";
 
 // ============================================================
+// Metadata — только для главной: alternate для LLM-документации
+// ============================================================
+
+export const metadata = {
+  alternates: {
+    types: {
+      "text/plain": "/llms.txt",
+    },
+  },
+};
+
+// ============================================================
 // Marketing funnel structure — AIDA model
 //
 // PHASE 1: ATTENTION — захват внимания

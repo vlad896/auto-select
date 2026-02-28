@@ -864,7 +864,7 @@ export default function DiagnostikaPage() {
                         [
                           "Эксперт на день",
                           "Неограниченно осмотров 9:00–18:00",
-                          "380",
+                          "500",
                         ],
                       ].map(([service, includes, price], i) => (
                         <tr
@@ -971,13 +971,13 @@ export default function DiagnostikaPage() {
                       href: "/podbor/",
                       title: "Автоподбор «под ключ»",
                       text: "Полный цикл от поиска до переоформления. Звонки, отсев, осмотры и торг.",
-                      price: "от 900 BYN",
+                      price: "от 1200 BYN",
                     },
                     {
                       href: "/podbor/expert-na-den/",
                       title: "Эксперт на день",
                       text: "Осмотр 5-10 авто за рабочий день. Для приехавших из регионов.",
-                      price: "от 380 BYN",
+                      price: "от 500 BYN",
                     },
                     {
                       href: "/marki/",
