@@ -41,9 +41,8 @@ export function CaseStudies() {
           </span>
         </SectionHeading>
 
-        {/* Карточка кейса: фото сверху, бейджи на фото, под ним контент. На мобильной — карусель в обёртке без выхода за экран. */}
-        <div className="w-full overflow-x-hidden">
-          <div className="flex gap-6 overflow-x-auto snap-x snap-mandatory pb-2 -mx-4 px-4 md:mx-0 md:px-0 md:grid md:grid-cols-2 md:overflow-visible md:snap-none scrollbar-hide">
+        {/* Мобильная: карусель внутри контейнера (без -mx), карточка на всю ширину. md+ — сетка 2 колонки. */}
+        <div className="flex gap-4 overflow-x-auto snap-x snap-mandatory pb-2 md:grid md:grid-cols-2 md:gap-6 md:overflow-visible md:snap-none scrollbar-hide">
           {CASE_STUDIES.map((study) => {
             const isRejected = study.result === "rejected";
             const imageUrl = CASE_IMAGES[study.id];
@@ -51,7 +50,7 @@ export function CaseStudies() {
             return (
               <article
                 key={study.id}
-                className={`card-hover relative flex h-full min-w-[85vw] max-w-md flex-shrink-0 snap-center flex-col overflow-hidden rounded-2xl border-2 bg-surface-200/30 transition-shadow hover:shadow-lg hover:shadow-black/20 md:min-w-0 md:max-w-none md:snap-align-none ${
+                className={`card-hover relative flex h-full min-w-[100%] flex-shrink-0 snap-center flex-col overflow-hidden rounded-2xl border-2 bg-surface-200/30 transition-shadow hover:shadow-lg hover:shadow-black/20 md:min-w-0 md:snap-align-none ${
                   isRejected
                     ? "border-danger-500/30"
                     : "border-success-500/30"
@@ -93,7 +92,7 @@ export function CaseStudies() {
                 )}
 
                 {/* Контент под фото */}
-                <div className="flex flex-1 flex-col p-4 sm:p-5">
+                <div className="flex min-w-0 flex-1 flex-col p-4 sm:p-5">
                   {/* Авто + происхождение */}
                   <div className="mb-4">
                     <h3 className="text-lg font-bold text-white sm:text-xl">
@@ -199,7 +198,6 @@ export function CaseStudies() {
               </article>
             );
           })}
-          </div>
         </div>
 
         {/* CTA + ссылка на страницу кейсов */}

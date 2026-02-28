@@ -30,7 +30,7 @@ function CheckItem({
       <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-primary-600/15 text-primary-400">
         <Icon className="h-4.5 w-4.5" aria-hidden="true" />
       </div>
-      <div>
+      <div className="min-w-0">
         <p className="font-semibold text-white">{title}</p>
         <p className="mt-1 text-sm leading-relaxed text-neutral-400">
           {children}
@@ -58,13 +58,12 @@ export function LegalCheck() {
           </span>
         </SectionHeading>
 
-        {/* Карточки: на мобильной — карусель (скролл внутри обёртки, без выхода за экран), на lg — сетка 2 колонки */}
-        <div className="w-full overflow-x-hidden">
-          <div className="flex gap-6 overflow-x-auto snap-x snap-mandatory pb-2 -mx-4 px-4 lg:mx-0 lg:px-0 lg:grid lg:grid-cols-2 lg:gap-14 lg:overflow-visible lg:snap-none scrollbar-hide">
+        {/* Карточки: на мобильной — карусель без выхода за контейнер (контент в границах), на lg — сетка 2 колонки */}
+        <div className="flex gap-4 overflow-x-auto snap-x snap-mandatory pb-2 lg:grid lg:grid-cols-2 lg:gap-14 lg:overflow-visible lg:snap-none scrollbar-hide">
           {/* === Column 1 === */}
           <AnimateOnScroll
             variant="slideLeft"
-            className="min-w-[85vw] max-w-md flex-shrink-0 snap-center lg:min-w-0 lg:max-w-none lg:snap-align-none"
+            className="min-w-[100%] flex-shrink-0 snap-center lg:min-w-0 lg:snap-align-none"
           >
           <div className="h-full rounded-2xl border border-white/10 bg-surface-100 p-5 sm:p-6">
             <div className="mb-6 flex items-center gap-3">
@@ -100,7 +99,7 @@ export function LegalCheck() {
           <AnimateOnScroll
             variant="slideRight"
             delay={0.15}
-            className="min-w-[85vw] max-w-md flex-shrink-0 snap-center lg:min-w-0 lg:max-w-none lg:snap-align-none"
+            className="min-w-[100%] flex-shrink-0 snap-center lg:min-w-0 lg:snap-align-none"
           >
           <div className="h-full rounded-2xl border border-white/10 bg-surface-100 p-5 sm:p-6">
             <div className="mb-6 flex items-center gap-3">
@@ -129,7 +128,6 @@ export function LegalCheck() {
             </div>
           </div>
           </AnimateOnScroll>
-        </div>
         </div>
 
         {/* Summary callout */}

@@ -69,15 +69,14 @@ export function VideoShowcase() {
           <span id="video-heading">Видеоподбор автомобилей</span>
         </SectionHeading>
 
-        {/* Карточка по примеру: крупное превью сверху, под ним заголовок и описание. На мобильной — карусель в обёртке без выхода за экран. */}
-        <div className="w-full overflow-x-hidden">
-          <div className="flex gap-4 overflow-x-auto snap-x snap-mandatory pb-2 -mx-4 px-4 sm:mx-0 sm:px-0 sm:grid sm:grid-cols-2 sm:gap-6 sm:overflow-visible sm:snap-none scrollbar-hide">
+        {/* Мобильная: карусель внутри контейнера (без -mx), карточка на всю ширину. sm+ — сетка 2 колонки. */}
+        <div className="flex gap-4 overflow-x-auto snap-x snap-mandatory pb-2 sm:grid sm:grid-cols-2 sm:gap-6 sm:overflow-visible sm:snap-none scrollbar-hide">
           {VIDEOS.map((video) => (
             <button
               key={video.id}
               type="button"
               onClick={() => openVideo(video.id)}
-              className="group relative flex min-w-[85vw] flex-shrink-0 snap-center cursor-pointer flex-col overflow-hidden rounded-2xl border border-white/10 bg-surface-200/30 text-left transition-all duration-300 hover:border-primary-600/30 hover:shadow-lg hover:shadow-black/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 focus-visible:ring-offset-surface-950 sm:min-w-0 sm:snap-align-none"
+              className="group relative flex min-w-[100%] flex-shrink-0 snap-center cursor-pointer flex-col overflow-hidden rounded-2xl border border-white/10 bg-surface-200/30 text-left transition-all duration-300 hover:border-primary-600/30 hover:shadow-lg hover:shadow-black/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 focus-visible:ring-offset-surface-950 sm:min-w-0 sm:snap-align-none"
               aria-label={`Смотреть видео: ${video.title}`}
             >
               {/* Крупное превью сверху (16:9) */}
@@ -100,7 +99,7 @@ export function VideoShowcase() {
                 </div>
               </div>
               {/* Под превью: заголовок и описание */}
-              <div className="flex flex-1 flex-col p-4 sm:p-5">
+              <div className="flex min-w-0 flex-1 flex-col p-4 sm:p-5">
                 <h3 className="text-base font-semibold text-white transition-colors group-hover:text-primary-400 sm:text-lg">
                   {video.title}
                 </h3>
@@ -110,7 +109,6 @@ export function VideoShowcase() {
               </div>
             </button>
           ))}
-          </div>
         </div>
 
         {/* Instruction + ссылка на кейсы */}
