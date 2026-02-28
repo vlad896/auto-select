@@ -104,8 +104,8 @@ export function WhyUs() {
           ))}
         </StaggerChildren>
 
-        {/* Table — одна и та же на всех экранах; на мобильных горизонтальный скролл */}
-        <div className="overflow-x-auto -mx-4 sm:mx-0 rounded-2xl border border-white/10 sm:overflow-hidden">
+        {/* Table — на мобильных горизонтальный скролл с отступами по бокам; с sm — без отрицательного margin */}
+        <div className="overflow-x-auto -mx-4 px-4 sm:mx-0 sm:px-0 rounded-2xl border border-white/10 sm:overflow-hidden">
           <table className="w-full min-w-[520px]">
             <thead>
               <tr className="border-b border-white/10 bg-white/[0.03]">
