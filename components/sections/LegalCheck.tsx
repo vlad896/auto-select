@@ -58,8 +58,9 @@ export function LegalCheck() {
           </span>
         </SectionHeading>
 
-        {/* Карточки: на мобильной — карусель, на lg — сетка 2 колонки с одинаковой высотой */}
-        <div className="flex gap-6 overflow-x-auto snap-x snap-mandatory pb-2 -mx-4 px-4 lg:mx-0 lg:px-0 lg:grid lg:grid-cols-2 lg:gap-14 lg:overflow-visible lg:snap-none scrollbar-hide">
+        {/* Карточки: на мобильной — карусель (скролл внутри обёртки, без выхода за экран), на lg — сетка 2 колонки */}
+        <div className="w-full overflow-x-hidden">
+          <div className="flex gap-6 overflow-x-auto snap-x snap-mandatory pb-2 -mx-4 px-4 lg:mx-0 lg:px-0 lg:grid lg:grid-cols-2 lg:gap-14 lg:overflow-visible lg:snap-none scrollbar-hide">
           {/* === Column 1 === */}
           <AnimateOnScroll
             variant="slideLeft"
@@ -128,6 +129,7 @@ export function LegalCheck() {
             </div>
           </div>
           </AnimateOnScroll>
+        </div>
         </div>
 
         {/* Summary callout */}

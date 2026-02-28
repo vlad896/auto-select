@@ -9,7 +9,6 @@ import {
 import Image from "next/image";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import { CASE_STUDIES } from "@/lib/constants";
 
@@ -42,8 +41,9 @@ export function CaseStudies() {
           </span>
         </SectionHeading>
 
-        {/* Десктоп: сетка 2 колонки. Карточка: фото слева, контент справа (как было). Мобильная: карусель с той же структурой карточки. */}
-        <div className="flex gap-6 overflow-x-auto snap-x snap-mandatory pb-2 -mx-4 px-4 md:mx-0 md:px-0 md:grid md:grid-cols-2 md:overflow-visible md:snap-none scrollbar-hide">
+        {/* Карточка кейса: фото сверху, бейджи на фото, под ним контент. На мобильной — карусель в обёртке без выхода за экран. */}
+        <div className="w-full overflow-x-hidden">
+          <div className="flex gap-6 overflow-x-auto snap-x snap-mandatory pb-2 -mx-4 px-4 md:mx-0 md:px-0 md:grid md:grid-cols-2 md:overflow-visible md:snap-none scrollbar-hide">
           {CASE_STUDIES.map((study) => {
             const isRejected = study.result === "rejected";
             const imageUrl = CASE_IMAGES[study.id];
@@ -51,56 +51,51 @@ export function CaseStudies() {
             return (
               <article
                 key={study.id}
-                className={`card-hover relative flex h-full min-w-[85vw] max-w-md flex-shrink-0 snap-center overflow-hidden rounded-2xl border-2 bg-surface-200/30 transition-shadow hover:shadow-lg hover:shadow-black/20 md:min-w-0 md:max-w-none md:snap-align-none ${
+                className={`card-hover relative flex h-full min-w-[85vw] max-w-md flex-shrink-0 snap-center flex-col overflow-hidden rounded-2xl border-2 bg-surface-200/30 transition-shadow hover:shadow-lg hover:shadow-black/20 md:min-w-0 md:max-w-none md:snap-align-none ${
                   isRejected
                     ? "border-danger-500/30"
                     : "border-success-500/30"
                 }`}
               >
-                {/* Левая половина: фото авто */}
+                {/* Верх карточки: крупное фото авто (~40–50% высоты) */}
                 {imageUrl && (
-                  <div className="relative w-[42%] min-w-[140px] flex-shrink-0 bg-surface-200 aspect-[3/4] sm:aspect-[4/5]">
+                  <div className="relative aspect-[16/10] w-full flex-shrink-0 overflow-hidden bg-surface-200 sm:aspect-[16/9]">
                     <Image
                       src={imageUrl}
                       alt={`${study.car} — реальное фото автомобиля`}
                       fill
                       className="object-cover"
-                      sizes="(max-width: 768px) 40vw, 25vw"
+                      sizes="(max-width: 768px) 85vw, 50vw"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-r from-surface-200/60 to-transparent md:from-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                    {/* Бейджи поверх нижней части фото */}
+                    <div className="absolute bottom-3 left-3 right-3 flex flex-wrap items-center gap-2">
+                      {isRejected ? (
+                        <span className="inline-flex items-center gap-2 rounded-lg bg-danger-500/95 px-3 py-1.5 text-sm font-semibold text-white">
+                          <XCircle className="h-4 w-4" aria-hidden="true" />
+                          Отказ от покупки
+                        </span>
+                      ) : (
+                        <>
+                          <span className="inline-flex items-center gap-2 rounded-lg bg-success-500/95 px-3 py-1.5 text-sm font-semibold text-white">
+                            <CheckCircle className="h-4 w-4" aria-hidden="true" />
+                            Куплен с дисконтом
+                          </span>
+                          {study.savings && (
+                            <span className="rounded-lg bg-success-500/95 px-3 py-1.5 text-sm font-semibold text-white">
+                              Экономия {study.savings}
+                            </span>
+                          )}
+                        </>
+                      )}
+                    </div>
                   </div>
                 )}
 
-                {/* Правая половина: контент */}
+                {/* Контент под фото */}
                 <div className="flex flex-1 flex-col p-4 sm:p-5">
-                  {/* Статус: на границе фото/контент */}
-                  <div className="-ml-12 mt-2 flex flex-wrap items-center gap-2 sm:-ml-14 sm:mt-3">
-                    {isRejected ? (
-                      <XCircle
-                        className="h-5 w-5 text-danger-500"
-                        aria-hidden="true"
-                      />
-                    ) : (
-                      <CheckCircle
-                        className="h-5 w-5 text-success-500"
-                        aria-hidden="true"
-                      />
-                    )}
-                    <Badge
-                      variant={isRejected ? "danger" : "success"}
-                      size="md"
-                    >
-                      {isRejected ? "Отказ от покупки" : "Куплен с дисконтом"}
-                    </Badge>
-                    {study.savings && (
-                      <Badge variant="success" size="md">
-                        Экономия {study.savings}
-                      </Badge>
-                    )}
-                  </div>
-
                   {/* Авто + происхождение */}
-                  <div className="mb-3 mt-auto">
+                  <div className="mb-4">
                     <h3 className="text-lg font-bold text-white sm:text-xl">
                       {study.car}
                     </h3>
@@ -113,7 +108,7 @@ export function CaseStudies() {
                     </p>
                   </div>
 
-                  {/* Заявлено vs Реальность */}
+                  {/* Заявлено | Реальность */}
                   <div className="mb-4 grid gap-2 sm:grid-cols-2 sm:gap-3">
                     <div className="rounded-xl bg-white/5 p-3">
                       <p className="mb-1 text-xs font-semibold uppercase tracking-wider text-neutral-400">
@@ -131,8 +126,8 @@ export function CaseStudies() {
                       <p
                         className={`mb-1 text-xs font-semibold uppercase tracking-wider ${
                           isRejected
-                            ? "text-danger-500/60"
-                            : "text-success-500/60"
+                            ? "text-danger-500/80"
+                            : "text-success-500/80"
                         }`}
                       >
                         Реальность
@@ -174,10 +169,12 @@ export function CaseStudies() {
                     </ul>
                   </div>
 
-                  {/* Итог */}
+                  {/* Итоговая плашка на всю ширину (как в примере) */}
                   <div
-                    className={`flex items-start gap-2 rounded-xl p-3 ${
-                      isRejected ? "bg-white/5" : "bg-success-500/10"
+                    className={`mt-auto flex items-start gap-2 rounded-xl p-3.5 ${
+                      isRejected
+                        ? "bg-white/5"
+                        : "bg-success-500/15"
                     }`}
                   >
                     <Quote
@@ -202,6 +199,7 @@ export function CaseStudies() {
               </article>
             );
           })}
+          </div>
         </div>
 
         {/* CTA + ссылка на страницу кейсов */}
