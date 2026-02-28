@@ -140,6 +140,9 @@ export default function RootLayout({
   return (
     <html lang="ru" className={`${inter.variable} ${manrope.variable}`}>
       <head>
+        {/* Preconnect: reduce latency for Yandex Metrika (Lighthouse) */}
+        <link rel="preconnect" href="https://mc.yandex.ru" crossOrigin="" />
+        <link rel="dns-prefetch" href="https://mc.yandex.ru" />
         {/* JSON-LD: Combined @graph — WebSite, WebPage, Organization,
             LocalBusiness, Service, FAQPage, BreadcrumbList */}
         <script
