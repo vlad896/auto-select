@@ -37,6 +37,26 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
     },
 
+    // L2 — Кейсы, FAQ, Цены (важно для AI-цитирования и краулинга)
+    {
+      url: `${SITE.url}/cases/`,
+      lastModified: now,
+      changeFrequency: "weekly",
+      priority: 0.9,
+    },
+    {
+      url: `${SITE.url}/faq/`,
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.9,
+    },
+    {
+      url: `${SITE.url}/pricing/`,
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.9,
+    },
+
     // L3 — Подбор
     {
       url: `${SITE.url}/podbor/expert-na-den/`,

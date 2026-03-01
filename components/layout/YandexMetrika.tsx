@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import { COOKIE_CONSENT_KEY, COOKIE_CONSENT_ACCEPTED_EVENT } from "@/components/layout/CookieConsentBanner";
 
 // Код счётчика Яндекс.Метрики 107049640 — без изменений (как в интерфейсе Метрики)
 const METRIKA_SCRIPT = `(function(m,e,t,r,i,k,a){
@@ -12,13 +13,28 @@ const METRIKA_SCRIPT = `(function(m,e,t,r,i,k,a){
 
 ym(107049640, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});`;
 
+function loadMetrikaScript() {
+  if (typeof document === "undefined") return;
+  const script = document.createElement("script");
+  script.type = "text/javascript";
+  script.textContent = METRIKA_SCRIPT;
+  document.head.appendChild(script);
+}
+
 export function YandexMetrika() {
   useEffect(() => {
-    if (typeof document === "undefined") return;
-    const script = document.createElement("script");
-    script.type = "text/javascript";
-    script.textContent = METRIKA_SCRIPT;
-    document.head.appendChild(script);
+    if (typeof window === "undefined") return;
+    const consent = localStorage.getItem(COOKIE_CONSENT_KEY);
+    if (consent === "accepted") {
+      loadMetrikaScript();
+      return;
+    }
+    const onAccepted = () => {
+      loadMetrikaScript();
+      window.removeEventListener(COOKIE_CONSENT_ACCEPTED_EVENT, onAccepted);
+    };
+    window.addEventListener(COOKIE_CONSENT_ACCEPTED_EVENT, onAccepted);
+    return () => window.removeEventListener(COOKIE_CONSENT_ACCEPTED_EVENT, onAccepted);
   }, []);
 
   return (

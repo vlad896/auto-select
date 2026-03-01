@@ -671,9 +671,11 @@ export default function PodborPage() {
 
                 <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
                   {[
+                    { href: "/pricing/", label: "Цены", desc: "Прайс и калькулятор окупаемости" },
                     { href: "/podbor/expert-na-den/", label: "Эксперт на день", desc: "8 часов, до 10 осмотров, 500 BYN" },
                     { href: "/podbor/yuridicheskaya-chistota/", label: "Юридическая проверка", desc: "Залоги, аресты, VIN-сверка" },
                     { href: "/marki/", label: "Подбор по маркам", desc: "BMW, VAG, Mercedes, Geely — профильным ПО" },
+                    { href: "/faq/", label: "Частые вопросы", desc: "Ответы об услугах, сроках, гарантиях" },
                     { href: "/diagnostika/proverka-kuzova-lkp/", label: "Проверка кузова и ЛКП", desc: "Толщиномер Etari ET-700" },
                     { href: "/diagnostika/kompyuternaya-diagnostika/", label: "Компьютерная диагностика", desc: "Launch X431 V+ PRO" },
                     { href: "/diagnostika/endoskopiya-dvigatelya/", label: "Эндоскопия двигателя", desc: "Задиры ЦПГ, нагар, ГБЦ" },

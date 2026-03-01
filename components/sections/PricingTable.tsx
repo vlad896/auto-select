@@ -1,4 +1,5 @@
 import { Download, ArrowRight } from "lucide-react";
+import Link from "next/link";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Button } from "@/components/ui/Button";
@@ -116,6 +117,14 @@ export function PricingTable() {
 
         <p className="mt-5 text-center text-xs text-neutral-400">
           Стоимость указана для Минска и минского района. Выезд за МКАД — +0,50 BYN/км.
+        </p>
+        <p className="mt-3 text-center text-sm">
+          <Link
+            href="/pricing/"
+            className="font-medium text-primary-400 underline underline-offset-2 hover:text-primary-300"
+          >
+            Подробнее о ценах и условиях
+          </Link>
         </p>
       </Container>
     </section>

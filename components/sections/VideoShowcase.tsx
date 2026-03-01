@@ -3,47 +3,29 @@
 import { useState, useCallback } from "react";
 import { Play, X, ArrowRight } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Button } from "@/components/ui/Button";
 import { CarouselWithDots } from "@/components/ui/CarouselWithDots";
-
-// ============================================================
-// Video data — replace YouTube IDs with your real videos
-// ============================================================
-
-const VIDEOS = [
-  {
-    id: "VIDEO_ID_1",
-    title: "Подбор BMW 5 G30 — полная проверка",
-    description: "Пример выездной диагностики BMW 530d из Европы. Выявили скрученный пробег и шпатлёвку.",
-    thumbnail: "/images/case-bmw-real.jpg",
-  },
-  {
-    id: "VIDEO_ID_2",
-    title: "Как мы проверяем ЛКП толщиномером",
-    description: "Подробный обзор процесса замера толщины лакокрасочного покрытия.",
-    thumbnail: "/images/tools-diagnostic.jpg",
-  },
-  {
-    id: "VIDEO_ID_3",
-    title: "Подбор VW Tiguan — аргументированный торг",
-    description: "Кейс: нашли задиры цилиндров и сторговали $1 200 для клиента.",
-    thumbnail: "/images/case-tiguan-real.jpg",
-  },
-  {
-    id: "VIDEO_ID_4",
-    title: "Оборудование для диагностики авто",
-    description: "Обзор нашего профессионального оборудования: Launch X431, Etari, эндоскоп.",
-    thumbnail: "/images/tools-equipment.jpg",
-  },
-] as const;
+import { VIDEO_SHOWCASE_ITEMS } from "@/lib/constants";
 
 // ============================================================
 // VideoShowcase — YouTube video grid with modal player
 // ============================================================
 
-export function VideoShowcase() {
+type BottomLink = { href: string; label: string } | null;
+
+type VideoShowcaseProps = {
+  /** If null, bottom CTA is hidden. Default: { href: "/cases/", label: "Наши кейсы" } */
+  bottomLink?: BottomLink;
+  /** Use carousel layout on all screen sizes and always show dots. For use on /cases/ page. Default false. */
+  alwaysCarousel?: boolean;
+};
+
+const DEFAULT_BOTTOM_LINK: BottomLink = { href: "/cases/", label: "Наши кейсы" };
+
+export function VideoShowcase({ bottomLink = DEFAULT_BOTTOM_LINK, alwaysCarousel = false }: VideoShowcaseProps = {}) {
   const [activeVideo, setActiveVideo] = useState<string | null>(null);
 
   const openVideo = useCallback((videoId: string) => {
@@ -70,18 +52,25 @@ export function VideoShowcase() {
           <span id="video-heading">Видеоподбор автомобилей</span>
         </SectionHeading>
 
-        {/* Мобильная: карусель с точками снизу. sm+: сетка 2 колонки. */}
+        {/* Мобильная: карусель с точками снизу. sm+: сетка 2 колонки (или всегда карусель на /cases/). */}
         <CarouselWithDots
-          count={VIDEOS.length}
-          hideDotsAbove="sm"
-          scrollContainerClassName="w-full min-w-0 max-w-full flex gap-4 overflow-x-auto snap-x snap-mandatory pb-2 scrollbar-hide sm:grid sm:grid-cols-2 sm:gap-6 sm:overflow-visible sm:snap-none"
+          count={VIDEO_SHOWCASE_ITEMS.length}
+          hideDotsAbove={alwaysCarousel ? false : "sm"}
+          showArrows={alwaysCarousel}
+          scrollContainerClassName={
+            alwaysCarousel
+              ? "w-full min-w-0 max-w-full flex items-stretch gap-4 overflow-x-auto overflow-y-hidden snap-x snap-mandatory pb-2 scrollbar-hide cursor-grab active:cursor-grabbing"
+              : "w-full min-w-0 max-w-full flex gap-4 overflow-x-auto snap-x snap-mandatory pb-2 scrollbar-hide sm:grid sm:grid-cols-2 sm:gap-6 sm:overflow-visible sm:snap-none"
+          }
         >
-          {VIDEOS.map((video) => (
+          {VIDEO_SHOWCASE_ITEMS.map((video) => (
             <button
               key={video.id}
               type="button"
               onClick={() => openVideo(video.id)}
-              className="group relative flex h-full min-w-[100%] max-w-full flex-shrink-0 snap-center cursor-pointer flex-col overflow-hidden rounded-2xl border border-white/10 bg-surface-200/30 text-left transition-all duration-300 hover:border-primary-600/30 hover:shadow-lg hover:shadow-black/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 focus-visible:ring-offset-surface-950 sm:min-w-0 sm:max-w-none sm:snap-align-none"
+              className={`group relative flex h-full min-w-[100%] max-w-full flex-shrink-0 snap-center cursor-pointer flex-col overflow-hidden rounded-2xl border border-white/10 bg-surface-200/30 text-left transition-all duration-300 hover:border-primary-600/30 hover:shadow-lg hover:shadow-black/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 focus-visible:ring-offset-surface-950 sm:min-w-0 sm:max-w-none sm:snap-align-none ${
+                alwaysCarousel ? "min-w-[85%] max-w-[85%] sm:min-w-[70%] sm:max-w-[70%] md:min-w-[45%] md:max-w-[45%] self-stretch" : ""
+              }`}
               aria-label={`Смотреть видео: ${video.title}`}
             >
               {/* Крупное превью сверху (16:9) */}
@@ -116,16 +105,18 @@ export function VideoShowcase() {
           ))}
         </CarouselWithDots>
 
-        {/* Instruction + ссылка на кейсы */}
+        {/* Instruction + опциональная ссылка */}
         <p className="mt-6 text-center text-xs text-neutral-400">
           Нажмите на видео, чтобы посмотреть полный процесс проверки
         </p>
-        <div className="mt-6 flex justify-center">
-          <Button href="/cases/" variant="secondary" size="md">
-            Наши кейсы
-            <ArrowRight className="h-4 w-4" aria-hidden="true" />
-          </Button>
-        </div>
+        {bottomLink && (
+          <div className="mt-6 flex justify-center">
+            <Button href={bottomLink.href} variant="secondary" size="md">
+              {bottomLink.label}
+              <ArrowRight className="h-4 w-4" aria-hidden="true" />
+            </Button>
+          </div>
+        )}
       </Container>
 
       {/* ===== Video Modal ===== */}

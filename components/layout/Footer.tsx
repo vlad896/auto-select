@@ -210,7 +210,7 @@ export function Footer() {
               </li>
               <li>
                 <a
-                  href="#pricing"
+                  href="/pricing/"
                   className="text-white/60 transition-colors hover:text-white"
                 >
                   Цены на услуги
@@ -218,10 +218,18 @@ export function Footer() {
               </li>
               <li>
                 <a
-                  href="#cases"
+                  href="/cases/"
                   className="text-white/60 transition-colors hover:text-white"
                 >
                   Примеры проверок
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/faq/"
+                  className="text-white/60 transition-colors hover:text-white"
+                >
+                  Вопросы и ответы
                 </a>
               </li>
             </ul>
@@ -276,6 +284,12 @@ export function Footer() {
         <Container className="flex flex-col items-center justify-between gap-2 py-5 text-xs text-white/60 sm:flex-row">
           <p>&copy; {new Date().getFullYear()} {SITE.name}. Все права защищены.</p>
           <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1">
+            <a
+              href="/privacy/"
+              className="transition-colors hover:text-white/70"
+            >
+              Использование cookies
+            </a>
             <a
               href="/llms.txt"
               type="text/plain"

@@ -51,9 +51,10 @@ const PRICE_PRESETS = [5000, 10000, 15000, 20000, 30000] as const;
 // Calculator — dark theme
 // ============================================================
 
-export function Calculator() {
+export function Calculator({ basePath = "" }: { basePath?: string }) {
   const [priceInput, setPriceInput] = useState("12000");
   const { bynToUsd, serviceCost } = CALCULATOR_DEFAULTS;
+  const quizHref = basePath ? `${basePath}#quiz` : "#quiz";
 
   const priceUsd = useMemo(() => {
     const val = parseInt(priceInput.replace(/\D/g, ""), 10);
@@ -242,7 +243,7 @@ export function Calculator() {
                 </div>
 
                 <Button
-                  href="#quiz"
+                  href={quizHref}
                   variant="primary"
                   size="md"
                   className="mt-2 w-full"

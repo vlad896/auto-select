@@ -11,6 +11,7 @@ import { PromoBanner } from "@/components/layout/PromoBanner";
 import { ServiceWorkerRegistration } from "@/components/layout/ServiceWorkerRegistration";
 import { YandexMetrika } from "@/components/layout/YandexMetrika";
 import { LeadPopup } from "@/components/layout/LeadPopup";
+import { CookieConsentBanner } from "@/components/layout/CookieConsentBanner";
 import "./globals.css";
 
 // ============================================================
@@ -171,6 +172,7 @@ export default function RootLayout({
         <ServiceWorkerRegistration />
         <YandexMetrika />
         <LeadPopup />
+        <CookieConsentBanner />
       </body>
     </html>
   );

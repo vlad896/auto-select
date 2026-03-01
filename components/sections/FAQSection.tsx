@@ -70,10 +70,18 @@ export function FAQSection() {
           <p className="mb-4 text-sm text-neutral-500">
             Не нашли ответ на свой вопрос?
           </p>
-          <Button href="#quiz" variant="primary" size="md">
-            Задать вопрос эксперту
-            <ArrowRight className="h-4 w-4" aria-hidden="true" />
-          </Button>
+          <div className="flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
+            <Button href="#quiz" variant="primary" size="md">
+              Задать вопрос эксперту
+              <ArrowRight className="h-4 w-4" aria-hidden="true" />
+            </Button>
+            <a
+              href="/faq/"
+              className="text-sm font-medium text-primary-400 underline underline-offset-2 hover:text-primary-300"
+            >
+              Все вопросы и ответы
+            </a>
+          </div>
         </div>
       </Container>
     </section>

@@ -1,4 +1,4 @@
-import { SITE, FAQ_ITEMS } from "./constants";
+import { SITE, FAQ_ITEMS, FAQ_PAGE_ITEMS, SERVICES, CASE_STUDIES } from "./constants";
 
 // ============================================================
 // JSON-LD Structured Data generators (Schema.org)
@@ -219,6 +219,187 @@ export function getBreadcrumbJsonLd() {
         item: `${SITE.url}/`,
       },
     ],
+  };
+}
+
+/* ── 8. FAQ Page (/faq) — WebPage + FAQPage + BreadcrumbList ── */
+export function getFAQPageJsonLd() {
+  const faqUrl = `${SITE.url}/faq/`;
+  const webPageId = `${faqUrl}#webpage`;
+  const faqId = `${faqUrl}#faq`;
+  const breadcrumbId = `${faqUrl}#breadcrumb`;
+
+  const webPage = {
+    "@type": "WebPage",
+    "@id": webPageId,
+    url: faqUrl,
+    name: "Частые вопросы об автоподборе и диагностике в Минске | АвтоПодбор",
+    description:
+      "Ответы на частые вопросы: стоимость проверки, сроки подбора под ключ, гарантии, выезд по РБ. Автоподбор в Минске — профессиональная диагностика перед покупкой.",
+    isPartOf: { "@id": `${SITE.url}/#website` },
+    inLanguage: "ru",
+    breadcrumb: { "@id": breadcrumbId },
+  };
+
+  const faqPage = {
+    "@type": "FAQPage",
+    "@id": faqId,
+    url: faqUrl,
+    inLanguage: "ru",
+    mainEntityOfPage: { "@id": webPageId },
+    mainEntity: FAQ_PAGE_ITEMS.map((item, i) => ({
+      "@type": "Question",
+      "@id": `${faqUrl}#faq-q-${i + 1}`,
+      name: item.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: item.answer,
+      },
+    })),
+  };
+
+  const breadcrumb = {
+    "@type": "BreadcrumbList",
+    "@id": breadcrumbId,
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Главная", item: `${SITE.url}/` },
+      { "@type": "ListItem", position: 2, name: "Вопросы и ответы", item: faqUrl },
+    ],
+  };
+
+  return {
+    "@context": "https://schema.org",
+    "@graph": [webPage, faqPage, breadcrumb],
+  };
+}
+
+/* ── 9. Pricing Page (/pricing) — WebPage + BreadcrumbList + OfferCatalog ── */
+export function getPricingPageJsonLd() {
+  const pricingUrl = `${SITE.url}/pricing/`;
+  const webPageId = `${pricingUrl}#webpage`;
+  const breadcrumbId = `${pricingUrl}#breadcrumb`;
+
+  const webPage = {
+    "@type": "WebPage",
+    "@id": webPageId,
+    url: pricingUrl,
+    name: "Цены на автоподбор и диагностику в Минске | АвтоПодбор",
+    description:
+      "Стоимость разовой диагностики от 130 BYN, эксперт на день 500 BYN, автоподбор под ключ от 1200 BYN. Фиксированные цены, выезд за МКАД 0,50 BYN/км.",
+    isPartOf: { "@id": `${SITE.url}/#website` },
+    inLanguage: "ru",
+    breadcrumb: { "@id": breadcrumbId },
+  };
+
+  const breadcrumb = {
+    "@type": "BreadcrumbList",
+    "@id": breadcrumbId,
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Главная", item: `${SITE.url}/` },
+      { "@type": "ListItem", position: 2, name: "Цены", item: pricingUrl },
+    ],
+  };
+
+  const offerCatalog = {
+    "@type": "OfferCatalog",
+    "@id": `${pricingUrl}#offers`,
+    name: "Цены на услуги автоподбора в Минске",
+    url: pricingUrl,
+    itemListElement: SERVICES.map((svc) => ({
+      "@type": "Offer",
+      itemOffered: {
+        "@type": "Service",
+        name: svc.title,
+        description: svc.description,
+      },
+      price: String(svc.price),
+      priceCurrency: "BYN",
+    })),
+  };
+
+  return {
+    "@context": "https://schema.org",
+    "@graph": [webPage, breadcrumb, offerCatalog],
+  };
+}
+
+/* ── 10. Cases Page (/cases) — WebPage + BreadcrumbList + ItemList (AI citation–friendly) ── */
+export function getCasesPageJsonLd() {
+  const casesUrl = `${SITE.url}/cases/`;
+  const webPageId = `${casesUrl}#webpage`;
+  const breadcrumbId = `${casesUrl}#breadcrumb`;
+  const itemListId = `${casesUrl}#cases-list`;
+
+  const webPage = {
+    "@type": "WebPage",
+    "@id": webPageId,
+    url: casesUrl,
+    name: "Кейсы проверок автомобилей в Минске | АвтоПодбор",
+    description:
+      "Реальные примеры проверенных автомобилей в Минске: отказ от покупки при скрученном пробеге и шпатлёвке, покупка с дисконтом после аргументированного торга. Данные за последний квартал.",
+    isPartOf: { "@id": `${SITE.url}/#website` },
+    inLanguage: "ru",
+    breadcrumb: { "@id": breadcrumbId },
+    mainEntity: { "@id": itemListId },
+    author: { "@id": `${SITE.url}/#organization` },
+    publisher: { "@id": `${SITE.url}/#organization` },
+    datePublished: "2025-01-01",
+    dateModified: new Date().toISOString().split("T")[0],
+    primaryImageOfPage: {
+      "@type": "ImageObject",
+      url: `${SITE.url}/images/case-bmw-real.jpg`,
+    },
+  };
+
+  const breadcrumb = {
+    "@type": "BreadcrumbList",
+    "@id": breadcrumbId,
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Главная", item: `${SITE.url}/` },
+      { "@type": "ListItem", position: 2, name: "Кейсы", item: casesUrl },
+    ],
+  };
+
+  // Полные описания кейсов для краулеров и AI-цитирования
+  const itemList = {
+    "@type": "ItemList",
+    "@id": itemListId,
+    name: "Кейсы проверок автомобилей в Минске",
+    description:
+      "Реальные кейсы выездной диагностики автомобилей: отказ от покупки при скрученном пробеге и шпатлёвке, покупка с дисконтом после аргументированного торга. Минск, последний квартал.",
+    url: casesUrl,
+    numberOfItems: CASE_STUDIES.length,
+    itemListElement: CASE_STUDIES.map((study, i) => {
+      const fullText = [
+        study.car,
+        study.origin,
+        `Заявлено: ${study.claimed}`,
+        `Реальность: ${study.reality}`,
+        ...study.findings.map((f) => `Обнаружено: ${f}`),
+        study.resultText,
+      ].join(". ");
+      return {
+        "@type": "ListItem",
+        position: i + 1,
+        name: study.car,
+        description: fullText,
+        url: `${casesUrl}#${study.id}`,
+        item: {
+          "@type": "CreativeWork",
+          name: study.car,
+          description: fullText,
+          author: { "@id": `${SITE.url}/#organization` },
+          publisher: { "@id": `${SITE.url}/#organization` },
+          inLanguage: "ru",
+          datePublished: "2025-01-01",
+        },
+      };
+    }),
+  };
+
+  return {
+    "@context": "https://schema.org",
+    "@graph": [webPage, breadcrumb, itemList],
   };
 }
 

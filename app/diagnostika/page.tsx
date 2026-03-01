@@ -1016,6 +1016,10 @@ export default function DiagnostikaPage() {
                         label: "Проверка кузова и ЛКП",
                       },
                       {
+                        href: "/pricing/",
+                        label: "Цены",
+                      },
+                      {
                         href: "/diagnostika/kompyuternaya-diagnostika/",
                         label: "Компьютерная диагностика",
                       },
@@ -1026,6 +1030,10 @@ export default function DiagnostikaPage() {
                       {
                         href: "/diagnostika/endoskopiya-dvigatelya/",
                         label: "Эндоскопия двигателя",
+                      },
+                      {
+                        href: "/faq/",
+                        label: "Частые вопросы",
                       },
                     ].map((link) => (
                       <Link

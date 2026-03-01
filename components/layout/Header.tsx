@@ -51,9 +51,9 @@ const NAV_LINKS: readonly NavLink[] = [
       { href: "/marki/#kia-hyundai", label: "Kia и Hyundai", desc: "GDS Mobile, эндоскопия" },
     ],
   },
-  { href: "#pricing", label: "Цены" },
-  { href: "#cases", label: "Кейсы" },
-  { href: "#faq", label: "FAQ" },
+  { href: "/pricing/", label: "Цены" },
+  { href: "/cases/", label: "Кейсы" },
+  { href: "/faq/", label: "FAQ" },
 ];
 
 // ============================================================

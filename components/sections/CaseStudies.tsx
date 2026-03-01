@@ -25,7 +25,20 @@ const CASE_IMAGES: Record<string, string> = {
 // CaseStudies — dark theme with real car photos
 // ============================================================
 
-export function CaseStudies() {
+type CaseStudiesProps = {
+  /** Show bottom CTA (Хочу такую же проверку / Посмотреть больше кейсов). Default true. */
+  showBottomCta?: boolean;
+  /** Use carousel layout on all screen sizes and always show dots. For use on /cases/ page. Default false. */
+  alwaysCarousel?: boolean;
+};
+
+export function CaseStudies({ showBottomCta = true, alwaysCarousel = false }: CaseStudiesProps = {}) {
+  const scrollContainerClass = alwaysCarousel
+    ? "w-full min-w-0 max-w-full flex items-stretch gap-4 overflow-x-auto overflow-y-hidden snap-x snap-mandatory pb-2 scrollbar-hide cursor-grab active:cursor-grabbing"
+    : "w-full min-w-0 max-w-full flex gap-4 overflow-x-auto snap-x snap-mandatory pb-2 scrollbar-hide md:grid md:grid-cols-2 md:gap-6 md:overflow-visible md:snap-none";
+  const cardClass = alwaysCarousel
+    ? "card-hover relative flex h-full min-h-0 min-w-[85%] max-w-[85%] sm:min-w-[70%] sm:max-w-[70%] md:min-w-[45%] md:max-w-[45%] flex-shrink-0 snap-center flex-col overflow-hidden rounded-2xl border-2 bg-surface-200/30 transition-all duration-300 hover:shadow-lg hover:shadow-black/20 self-stretch"
+    : `card-hover relative flex h-full min-w-[100%] max-w-full flex-shrink-0 snap-center flex-col overflow-hidden rounded-2xl border-2 bg-surface-200/30 transition-all duration-300 hover:shadow-lg hover:shadow-black/20 md:min-w-0 md:max-w-none md:snap-align-none`;
   return (
     <section
       id="cases"
@@ -42,11 +55,12 @@ export function CaseStudies() {
           </span>
         </SectionHeading>
 
-        {/* Мобильная: карусель с точками снизу. md+: сетка 2 колонки. */}
+        {/* Мобильная: карусель с точками снизу. md+: сетка 2 колонки (или всегда карусель на /cases/). */}
         <CarouselWithDots
           count={CASE_STUDIES.length}
-          hideDotsAbove="md"
-          scrollContainerClassName="w-full min-w-0 max-w-full flex gap-4 overflow-x-auto snap-x snap-mandatory pb-2 scrollbar-hide md:grid md:grid-cols-2 md:gap-6 md:overflow-visible md:snap-none"
+          hideDotsAbove={alwaysCarousel ? false : "md"}
+          showArrows={alwaysCarousel}
+          scrollContainerClassName={scrollContainerClass}
         >
           {CASE_STUDIES.map((study) => {
             const isRejected = study.result === "rejected";
@@ -55,7 +69,8 @@ export function CaseStudies() {
             return (
               <article
                 key={study.id}
-                className={`card-hover relative flex h-full min-w-[100%] max-w-full flex-shrink-0 snap-center flex-col overflow-hidden rounded-2xl border-2 bg-surface-200/30 transition-all duration-300 hover:shadow-lg hover:shadow-black/20 md:min-w-0 md:max-w-none md:snap-align-none ${
+                id={study.id}
+                className={`${cardClass} ${
                   isRejected
                     ? "border-danger-500/30 hover:border-danger-500/50"
                     : "border-success-500/30 hover:border-primary-600/30"
@@ -206,6 +221,7 @@ export function CaseStudies() {
         </CarouselWithDots>
 
         {/* CTA + ссылка на страницу кейсов */}
+        {showBottomCta && (
         <div className="mt-8 flex flex-col items-center gap-3 sm:mt-10 sm:flex-row sm:justify-center sm:gap-4">
           <Button href="#quiz" variant="primary" size="md">
             Хочу такую же проверку
@@ -220,6 +236,7 @@ export function CaseStudies() {
             <ArrowRight className="h-4 w-4" aria-hidden="true" />
           </Button>
         </div>
+        )}
       </Container>
     </section>
   );
