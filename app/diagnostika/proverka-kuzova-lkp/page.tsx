@@ -44,6 +44,7 @@ export default function ProverkaKuzovaPage() {
             alt="Замер толщины ЛКП автомобиля толщиномером Etari ET-700"
             fill
             priority
+            sizes="100vw"
             className="object-cover object-center"
             quality={75}
           />

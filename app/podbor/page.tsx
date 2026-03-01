@@ -61,6 +61,7 @@ export default function PodborPage() {
             alt="Автоподбор в Минске — эксперт с диагностическим отчётом у проверенного автомобиля"
             fill
             priority
+            sizes="100vw"
             className="object-cover object-center"
             quality={75}
           />

@@ -57,6 +57,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
     },
 
+    // Политика конфиденциальности
+    {
+      url: `${SITE.url}/privacy/`,
+      lastModified: now,
+      changeFrequency: "yearly",
+      priority: 0.3,
+    },
+
     // L3 — Подбор
     {
       url: `${SITE.url}/podbor/expert-na-den/`,

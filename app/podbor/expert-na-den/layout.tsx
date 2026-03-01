@@ -1,30 +1,15 @@
 import type { Metadata } from "next";
 import { SITE } from "@/lib/constants";
+import { getPageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
-  title:
-    "Услуга Эксперт на день в Минске: подбор авто за 500 BYN | АвтоПодбор",
+export const metadata: Metadata = getPageMetadata({
+  path: "/podbor/expert-na-den/",
+  title: "Услуга Эксперт на день в Минске: подбор авто за 500 BYN",
   description:
     "Проверка неограниченного количества авто за один день. Эксперт на машине с оборудованием (Launch, Etari, эндоскоп). Экономия на разовых выездах до 50%. Забронируйте дату!",
-  alternates: { canonical: `${SITE.url}/podbor/expert-na-den/` },
-  openGraph: {
-    title: "Эксперт на день — мобильный осмотр авто в Минске",
-    description:
-      "8 часов, до 10 осмотров, Launch X431 + Etari + эндоскоп. Встречаем на вокзале, строим маршрут, торгуемся. 500 BYN.",
-    url: `${SITE.url}/podbor/expert-na-den/`,
-    siteName: SITE.name,
-    locale: "ru_BY",
-    type: "article",
-    images: [
-      {
-        url: `${SITE.url}/images/expert-day-hero.jpg`,
-        width: 1200,
-        height: 630,
-        alt: "Эксперт на день — мобильный осмотр автомобилей в Минске",
-      },
-    ],
-  },
-};
+  ogImage: "/images/expert-day-hero.jpg",
+  openGraphType: "article",
+});
 
 function getPageJsonLd() {
   const pageUrl = `${SITE.url}/podbor/expert-na-den/`;

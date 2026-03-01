@@ -42,12 +42,11 @@ export function ProcessSteps() {
 
       <Container className="relative z-10">
         <SectionHeading
+          id="process-heading"
           label="Этапы работы"
           subtitle="70% работы — это глубокая аналитика и «отсев» на этапе звонка. Мы придерживаемся строгой последовательности, чтобы минимизировать риск."
         >
-          <span id="process-heading">
-            От заключения договора до переоформления в МРО
-          </span>
+          От заключения договора до переоформления в МРО
         </SectionHeading>
 
         {/* Desktop: horizontal timeline, Mobile: vertical */}

@@ -6,6 +6,7 @@ import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import { OpenLeadPopupButton } from "@/components/ui/OpenLeadPopupButton";
 import { SITE, PRICING_TABLE, SERVICES, FAQ_PAGE_ITEMS } from "@/lib/constants";
+import { getPageMetadata } from "@/lib/metadata";
 
 const Calculator = dynamic(
   () => import("@/components/sections/Calculator").then((m) => ({ default: m.Calculator })),
@@ -16,11 +17,12 @@ const Accordion = dynamic(
   { ssr: true }
 );
 
-export const metadata = {
-  title: "Цены на автоподбор и диагностику в Минске | АвтоПодбор",
+export const metadata = getPageMetadata({
+  path: "/pricing/",
+  title: "Цены на автоподбор и диагностику в Минске",
   description:
-    "Стоимость разовой диагностики от 130 BYN, эксперт на день 500 BYN, автоподбор под ключ от 1200 BYN. Фиксированные цены. Выезд за МКАД — 0,50 BYN/км.",
-};
+    "Разовая диагностика от 130 BYN, эксперт на день 500 BYN, под ключ от 1200 BYN. Фиксированные цены. Закажите проверку — перезвоним за 15 минут.",
+});
 
 export default function PricingPage() {
   const pricingFaqItems = FAQ_PAGE_ITEMS.filter((item) => item.category === "services").slice(0, 5);
@@ -39,6 +41,7 @@ export default function PricingPage() {
             alt=""
             fill
             priority
+            sizes="100vw"
             className="object-cover object-center"
             quality={75}
           />

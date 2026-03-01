@@ -25,10 +25,11 @@ export function ToolsProof() {
     <section className="section-padding bg-surface-950" aria-labelledby="tools-heading">
       <Container>
         <SectionHeading
+          id="tools-heading"
           label="Наше оборудование"
           subtitle="Мы используем только профессиональное оборудование для объективной диагностики. Никаких бытовых приборов и догадок — только данные."
         >
-          <span id="tools-heading">Чем мы проверяем автомобили</span>
+          Чем мы проверяем автомобили
         </SectionHeading>
 
         {/* Tools showcase image */}

@@ -44,7 +44,7 @@ export default function YuridicheskayaChistotaPage() {
       {/* ═══ HERO ═══ */}
       <section className="relative overflow-hidden bg-surface-950">
         <div className="absolute inset-0" aria-hidden="true">
-          <Image src="/images/legal-vin-check.jpg" alt="Криминалистическая сверка VIN-номера автомобиля ультрафиолетом" fill priority className="object-cover object-center" quality={75} />
+          <Image src="/images/legal-vin-check.jpg" alt="Криминалистическая сверка VIN-номера автомобиля ультрафиолетом" fill priority sizes="100vw" className="object-cover object-center" quality={75} />
           <div className="absolute inset-0 bg-gradient-to-b from-surface-950/90 via-surface-950/80 to-surface-950" />
         </div>
 

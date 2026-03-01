@@ -60,10 +60,11 @@ export function Guarantees() {
     >
       <Container>
         <SectionHeading
+          id="guarantees-heading"
           label="Гарантии"
           subtitle="Мы работаем по договору и несём ответственность за каждую проверку. Вот конкретные обязательства."
         >
-          <span id="guarantees-heading">Почему нам доверяют</span>
+          Почему нам доверяют
         </SectionHeading>
 
         <StaggerChildren className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 sm:gap-6">

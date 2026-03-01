@@ -147,6 +147,7 @@ export default function MarkiPage() {
             alt="Профильная диагностика автомобиля дилерским сканером в профессиональном гараже"
             fill
             priority
+            sizes="100vw"
             className="object-cover object-center"
             quality={75}
           />

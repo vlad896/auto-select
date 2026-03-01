@@ -46,10 +46,11 @@ export function VideoShowcase({ bottomLink = DEFAULT_BOTTOM_LINK, alwaysCarousel
     >
       <Container>
         <SectionHeading
+          id="video-heading"
           label="Видео"
           subtitle="Смотрите, как мы проверяем автомобили для наших клиентов. Реальные выезды, реальные находки."
         >
-          <span id="video-heading">Видеоподбор автомобилей</span>
+          Видеоподбор автомобилей
         </SectionHeading>
 
         {/* Мобильная: карусель с точками снизу. sm+: сетка 2 колонки (или всегда карусель на /cases/). */}

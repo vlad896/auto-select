@@ -1,31 +1,16 @@
 import type { Metadata } from "next";
 import { SITE } from "@/lib/constants";
+import { getPageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = getPageMetadata({
+  path: "/marki/",
   title:
-    "Подбор авто по маркам в Минске: диагностика профильным сканером (BMW, VAG, Mercedes, Geely) | АвтоПодбор",
+    "Подбор авто по маркам в Минске: диагностика профильным сканером (BMW, VAG, Mercedes, Geely)",
   description:
     "Не ищите «просто подборщика». Выбирайте эксперта по вашей марке. Профильная диагностика дилерским оборудованием (ODIS, ISTA, Xentry). Глубокая проверка двигателей и КПП. Минск и выезд по РБ.",
-  alternates: { canonical: `${SITE.url}/marki/` },
-  openGraph: {
-    title:
-      "Подбор авто по маркам в Минске — профильная диагностика дилерским ПО",
-    description:
-      "BMW (ISTA+), VAG (ODIS), Mercedes (Xentry), Geely, Toyota (Techstream), Kia/Hyundai. Узкопрофильная проверка, а не «универсальный» взгляд.",
-    url: `${SITE.url}/marki/`,
-    siteName: SITE.name,
-    locale: "ru_BY",
-    type: "article",
-    images: [
-      {
-        url: `${SITE.url}/images/marki-hero-diagnostic.jpg`,
-        width: 1200,
-        height: 630,
-        alt: "Профильная диагностика автомобиля дилерским сканером",
-      },
-    ],
-  },
-};
+  ogImage: "/images/marki-hero-diagnostic.jpg",
+  openGraphType: "article",
+});
 
 function getPageJsonLd() {
   const pageUrl = `${SITE.url}/marki/`;

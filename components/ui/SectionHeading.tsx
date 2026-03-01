@@ -8,6 +8,8 @@ interface SectionHeadingProps {
   subtitle?: string;
   /** Heading level (defaults to h2) */
   as?: "h1" | "h2" | "h3" | "h4";
+  /** Optional id for anchor (e.g. for aria-labelledby or deep links) */
+  id?: string;
   /** Text alignment */
   align?: "left" | "center";
   /** Optional small label above heading */
@@ -19,6 +21,7 @@ export function SectionHeading({
   children,
   subtitle,
   as: Tag = "h2",
+  id,
   align = "center",
   label,
   className = "",
@@ -35,7 +38,7 @@ export function SectionHeading({
         </AnimateOnScroll>
       )}
       <AnimateOnScroll variant="fadeUp" delay={label ? 0.1 : 0} duration={0.5}>
-        <Tag className="text-balance">{children}</Tag>
+        <Tag id={id} className="text-balance">{children}</Tag>
       </AnimateOnScroll>
       {subtitle && (
         <AnimateOnScroll variant="fadeUp" delay={label ? 0.2 : 0.1} duration={0.5}>

@@ -1,4 +1,4 @@
-import { SITE, FAQ_ITEMS, FAQ_PAGE_ITEMS, SERVICES, CASE_STUDIES } from "./constants";
+import { SITE, getFAQItemsForHome, FAQ_PAGE_ITEMS, SERVICES, CASE_STUDIES } from "./constants";
 
 // ============================================================
 // JSON-LD Structured Data generators (Schema.org)
@@ -186,15 +186,16 @@ function getServiceJsonLd() {
   };
 }
 
-/* ── 6. FAQPage ── */
+/* ── 6. FAQPage (главная: подмножество showOnHome) ── */
 function getFAQJsonLd() {
+  const homeItems = getFAQItemsForHome();
   return {
     "@type": "FAQPage",
     "@id": `${SITE.url}/#faq`,
     url: SITE.url,
     inLanguage: "ru",
     mainEntityOfPage: { "@id": `${SITE.url}/#webpage` },
-    mainEntity: FAQ_ITEMS.map((item, i) => ({
+    mainEntity: homeItems.map((item, i) => ({
       "@type": "Question",
       "@id": `${SITE.url}/#faq-q-${i + 1}`,
       name: item.question,
@@ -400,6 +401,41 @@ export function getCasesPageJsonLd() {
   return {
     "@context": "https://schema.org",
     "@graph": [webPage, breadcrumb, itemList],
+  };
+}
+
+/* ── 11. Privacy Page (/privacy) — WebPage + BreadcrumbList ── */
+export function getPrivacyPageJsonLd() {
+  const privacyUrl = `${SITE.url}/privacy/`;
+  const webPageId = `${privacyUrl}#webpage`;
+  const breadcrumbId = `${privacyUrl}#breadcrumb`;
+
+  const webPage = {
+    "@type": "WebPage",
+    "@id": webPageId,
+    url: privacyUrl,
+    name: "Политика конфиденциальности | АвтоПодбор",
+    description:
+      "Обработка персональных данных, cookies и аналитика на сайте. Узнайте, как мы храним данные и используем Яндекс.Метрику только с вашего согласия.",
+    isPartOf: { "@id": `${SITE.url}/#website` },
+    inLanguage: "ru",
+    breadcrumb: { "@id": breadcrumbId },
+    author: { "@id": `${SITE.url}/#organization` },
+    publisher: { "@id": `${SITE.url}/#organization` },
+  };
+
+  const breadcrumb = {
+    "@type": "BreadcrumbList",
+    "@id": breadcrumbId,
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Главная", item: `${SITE.url}/` },
+      { "@type": "ListItem", position: 2, name: "Политика конфиденциальности", item: privacyUrl },
+    ],
+  };
+
+  return {
+    "@context": "https://schema.org",
+    "@graph": [webPage, breadcrumb],
   };
 }
 

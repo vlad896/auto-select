@@ -1,38 +1,19 @@
 import type { Metadata } from "next";
 import { SITE } from "@/lib/constants";
+import { getPageMetadata } from "@/lib/metadata";
 
 // ============================================================
 // L3 Page: Проверка пробега
-// Cocoon: L1 (/) → L2 (/diagnostika/) → THIS L3
-// Siblings: proverka-kuzova-lkp, kompyuternaya-diagnostika, endoskopiya-dvigatelya
 // ============================================================
 
-export const metadata: Metadata = {
-  title:
-    "Как проверить реальный пробег автомобиля: методы детекции скруток | АвтоПодбор",
+export const metadata: Metadata = getPageMetadata({
+  path: "/diagnostika/proverka-probega/",
+  title: "Как проверить реальный пробег автомобиля: методы детекции скруток",
   description:
     "Профессиональная проверка пробега сканером Launch X431: дубли в ABS, АКПП, SRS, моточасы, базы Белтехосмотра. Выявляем скрученный одометр в Минске.",
-  alternates: {
-    canonical: `${SITE.url}/diagnostika/proverka-probega/`,
-  },
-  openGraph: {
-    title: "Проверка реального пробега автомобиля — методика экспертов",
-    description:
-      "Цифровые дубли в 10+ блоках управления, моточасы, физический износ, базы техосмотров. Как мы находим скрученный пробег.",
-    url: `${SITE.url}/diagnostika/proverka-probega/`,
-    siteName: SITE.name,
-    locale: "ru_BY",
-    type: "article",
-    images: [
-      {
-        url: `${SITE.url}/images/diag-scanner-launch.jpg`,
-        width: 1200,
-        height: 630,
-        alt: "Проверка пробега сканером Launch X431 — чтение блоков управления",
-      },
-    ],
-  },
-};
+  ogImage: "/images/diag-scanner-launch.jpg",
+  openGraphType: "article",
+});
 
 function getPageJsonLd() {
   const pageUrl = `${SITE.url}/diagnostika/proverka-probega/`;

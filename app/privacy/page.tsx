@@ -1,11 +1,13 @@
 import { Container } from "@/components/ui/Container";
 import { SITE } from "@/lib/constants";
+import { getPageMetadata } from "@/lib/metadata";
 
-export const metadata = {
+export const metadata = getPageMetadata({
+  path: "/privacy/",
   title: "Политика конфиденциальности",
   description:
-    "Обработка персональных данных, использование cookies и аналитики на сайте АвтоПодбор.",
-};
+    "Обработка персональных данных, cookies и аналитика на сайте. Узнайте, как мы храним данные и используем Яндекс.Метрику только с вашего согласия.",
+});
 
 export default function PrivacyPage() {
   return (

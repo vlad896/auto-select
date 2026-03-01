@@ -47,12 +47,11 @@ export function CaseStudies({ showBottomCta = true, alwaysCarousel = false }: Ca
     >
       <Container>
         <SectionHeading
+          id="cases-heading"
           label="Реальные кейсы"
           subtitle="Примеры из нашей практики в Минске за последний квартал. Эти данные подтверждают важность профессионального подхода."
         >
-          <span id="cases-heading">
-            Кейсы: примеры проверенных автомобилей
-          </span>
+          Кейсы: примеры проверенных автомобилей
         </SectionHeading>
 
         {/* Мобильная: карусель с точками снизу. md+: сетка 2 колонки (или всегда карусель на /cases/). */}
@@ -84,7 +83,7 @@ export function CaseStudies({ showBottomCta = true, alwaysCarousel = false }: Ca
                       alt={`${study.car} — реальное фото автомобиля`}
                       fill
                       className="object-cover"
-                      sizes="(max-width: 768px) 85vw, 50vw"
+                      sizes="(max-width: 768px) 85vw, (max-width: 1024px) 70vw, 45vw"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
                     {/* Бейджи поверх нижней части фото */}

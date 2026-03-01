@@ -1,30 +1,14 @@
 import type { Metadata } from "next";
 import { SITE } from "@/lib/constants";
+import { getPageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
-  title:
-    "Автоподбор под ключ в Минске — поиск авто с гарантией чистоты | АвтоПодбор",
+export const metadata: Metadata = getPageMetadata({
+  path: "/podbor/",
+  title: "Автоподбор под ключ в Минске — поиск авто с гарантией чистоты",
   description:
     "Профессиональный подбор автомобиля в Минске: мониторинг рынка, проверка по VIN, выездная диагностика, юридическая экспертиза, торг и сопровождение сделки. Гарантия 2 месяца. От 1200 BYN.",
-  alternates: { canonical: `${SITE.url}/podbor/` },
-  openGraph: {
-    title: "Автоподбор под ключ — найдем лучший авто в ваш бюджет",
-    description:
-      "Полный цикл: от мониторинга объявлений до постановки на учет. 140+ пунктов проверки. Гарантия 2 мес. Договор.",
-    url: `${SITE.url}/podbor/`,
-    siteName: SITE.name,
-    locale: "ru_BY",
-    type: "website",
-    images: [
-      {
-        url: `${SITE.url}/images/podbor-expert-report.jpg`,
-        width: 1200,
-        height: 630,
-        alt: "Автоподбор в Минске — эксперт с диагностическим отчетом у автомобиля",
-      },
-    ],
-  },
-};
+  ogImage: "/images/podbor-expert-report.jpg",
+});
 
 function getPageJsonLd() {
   const pageUrl = `${SITE.url}/podbor/`;

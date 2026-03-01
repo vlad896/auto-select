@@ -72,10 +72,11 @@ export function Testimonials() {
     >
       <Container>
         <SectionHeading
+          id="reviews-heading"
           label="Отзывы клиентов"
           subtitle="Реальные истории людей, которые доверили нам проверку и подбор автомобиля."
         >
-          <span id="reviews-heading">Что говорят наши клиенты</span>
+          Что говорят наши клиенты
         </SectionHeading>
 
         {/* Stats bar */}

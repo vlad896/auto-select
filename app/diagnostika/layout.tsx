@@ -1,37 +1,18 @@
 import type { Metadata } from "next";
 import { SITE } from "@/lib/constants";
+import { getPageMetadata } from "@/lib/metadata";
 
 // ============================================================
 // L2 Page: Выездная диагностика автомобиля
-// Semantic cocoon: Mother = / (homepage), Children = L3 pages
 // ============================================================
 
-export const metadata: Metadata = {
-  title:
-    "Выездная диагностика автомобиля перед покупкой в Минске — от 130 BYN | АвтоПодбор",
+export const metadata: Metadata = getPageMetadata({
+  path: "/diagnostika/",
+  title: "Выездная диагностика автомобиля перед покупкой в Минске — от 130 BYN",
   description:
     "Комплексная проверка авто перед покупкой: кузов толщиномером Etari, компьютерная диагностика Launch X431, верификация пробега, эндоскопия двигателя. Выезд за 60 минут. Отчёт на 100+ фото.",
-  alternates: {
-    canonical: `${SITE.url}/diagnostika/`,
-  },
-  openGraph: {
-    title: "Выездная диагностика автомобиля в Минске — Экспертный осмотр",
-    description:
-      "140+ пунктов проверки. Сканер Launch X431 V+, толщиномер Etari ET-700. Доказательный осмотр с фотофиксацией. Выезд за 60 минут.",
-    url: `${SITE.url}/diagnostika/`,
-    siteName: SITE.name,
-    locale: "ru_BY",
-    type: "website",
-    images: [
-      {
-        url: `${SITE.url}/images/diag-hero-bg.jpg`,
-        width: 1200,
-        height: 630,
-        alt: "Выездная диагностика автомобиля — осмотр на подъёмнике в Минске",
-      },
-    ],
-  },
-};
+  ogImage: "/images/diag-hero-bg.jpg",
+});
 
 // ============================================================
 // JSON-LD structured data for the diagnostics page

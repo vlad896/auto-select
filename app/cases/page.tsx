@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/Button";
 import { OpenLeadPopupButton } from "@/components/ui/OpenLeadPopupButton";
 import { SITE, FAQ_PAGE_ITEMS } from "@/lib/constants";
 import { CaseStudies } from "@/components/sections/CaseStudies";
+import { getPageMetadata } from "@/lib/metadata";
 
 const VideoShowcase = dynamic(
   () => import("@/components/sections/VideoShowcase").then((m) => ({ default: m.VideoShowcase })),
@@ -17,22 +18,20 @@ const Accordion = dynamic(
   { ssr: true }
 );
 
-export const metadata = {
-  title: "Кейсы проверок автомобилей в Минске | АвтоПодбор",
+const casesMeta = getPageMetadata({
+  path: "/cases/",
+  title: "Кейсы проверок автомобилей в Минске",
   description:
     "Реальные примеры проверенных автомобилей в Минске: отказ от утопленника при скрученном пробеге и шпатлёвке, покупка с дисконтом после аргументированного торга. Данные за последний квартал.",
-  alternates: { canonical: `${SITE.url}/cases/` },
-  authors: [{ name: SITE.name, url: SITE.url }],
+});
+
+export const metadata = {
+  ...casesMeta,
   openGraph: {
-    title: "Кейсы проверок автомобилей в Минске | АвтоПодбор",
-    description:
-      "Реальные примеры проверенных автомобилей в Минске: отказ от покупки при скрученном пробеге и шпатлёвке, покупка с дисконтом после аргументированного торга.",
-    url: `${SITE.url}/cases/`,
-    siteName: SITE.name,
-    type: "article",
+    ...casesMeta.openGraph,
+    type: "article" as const,
     publishedTime: "2025-01-01T00:00:00+03:00",
     modifiedTime: new Date().toISOString(),
-    locale: "ru_BY",
   },
   robots: {
     index: true,
@@ -67,6 +66,7 @@ export default function CasesPage() {
             alt=""
             fill
             priority
+            sizes="100vw"
             className="object-cover object-center"
             quality={75}
           />

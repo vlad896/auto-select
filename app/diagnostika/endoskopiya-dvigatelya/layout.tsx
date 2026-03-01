@@ -1,22 +1,14 @@
 import type { Metadata } from "next";
 import { SITE } from "@/lib/constants";
+import { getPageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
-  title:
-    "Видеоэндоскопия двигателя в Минске: задиры, нагар, трещины ГБЦ | АвтоПодбор",
+export const metadata: Metadata = getPageMetadata({
+  path: "/diagnostika/endoskopiya-dvigatelya/",
+  title: "Видеоэндоскопия двигателя в Минске: задиры, нагар, трещины ГБЦ",
   description:
     "Эндоскопия цилиндров Full HD зондом: задиры ЦПГ, нагар на клапанах, трещины ГБЦ, разрушение катализатора. Проверка моторов G4KD, N20, TSI, M48. От 90 BYN.",
-  alternates: { canonical: `${SITE.url}/diagnostika/endoskopiya-dvigatelya/` },
-  openGraph: {
-    title: "Эндоскопия двигателя — заглянем в сердце мотора",
-    description:
-      "Full HD зонд с артикуляцией 180°. Задиры, масложор, прогар клапанов — видим всё без разборки. От 90 BYN в Минске.",
-    url: `${SITE.url}/diagnostika/endoskopiya-dvigatelya/`,
-    siteName: SITE.name,
-    locale: "ru_BY",
-    type: "article",
-  },
-};
+  openGraphType: "article",
+});
 
 function getPageJsonLd() {
   const pageUrl = `${SITE.url}/diagnostika/endoskopiya-dvigatelya/`;

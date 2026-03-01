@@ -46,6 +46,7 @@ export default function KompDiagPage() {
             alt="Компьютерная диагностика автомобиля сканером Launch X431 V+ PRO"
             fill
             priority
+            sizes="100vw"
             className="object-cover object-center"
             quality={75}
           />

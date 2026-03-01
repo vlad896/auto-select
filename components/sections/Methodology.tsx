@@ -144,12 +144,11 @@ export function Methodology() {
 
       <Container className="relative z-10">
         <SectionHeading
+          id="methodology-heading"
           label="Как мы проверяем"
           subtitle="Автоподбор — это не «потыкать прибором в капот». Это кропотливая работа с данными и оборудованием. Каждая проверка разделена на глубокие этапы."
         >
-          <span id="methodology-heading">
-            Техническая экспертиза автомобиля
-          </span>
+          Техническая экспертиза автомобиля
         </SectionHeading>
 
         {/* Diagnostic process hero image */}

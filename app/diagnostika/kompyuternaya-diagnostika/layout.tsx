@@ -1,19 +1,15 @@
 import type { Metadata } from "next";
 import { SITE } from "@/lib/constants";
+import { getPageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
-  title: "Компьютерная диагностика автомобиля в Минске — Launch X431 V+ | АвтоПодбор",
-  description: "Глубокая компьютерная диагностика: опрос 80+ блоков, Live Data, Freeze Frame, проверка ГРМ и АКПП/DSG. Профессиональный сканер Launch X431 V+ PRO. От 50 BYN.",
-  alternates: { canonical: `${SITE.url}/diagnostika/kompyuternaya-diagnostika/` },
-  openGraph: {
-    title: "Компьютерная диагностика автомобиля — глубокий анализ систем",
-    description: "Launch X431 V+ PRO + дилерское ПО. Опрос всех ECU, Live Data, Freeze Frame. VAG, BMW, Mercedes — специфическая диагностика.",
-    url: `${SITE.url}/diagnostika/kompyuternaya-diagnostika/`,
-    siteName: SITE.name,
-    locale: "ru_BY",
-    type: "article",
-  },
-};
+export const metadata: Metadata = getPageMetadata({
+  path: "/diagnostika/kompyuternaya-diagnostika/",
+  title: "Компьютерная диагностика автомобиля в Минске — Launch X431 V+",
+  description:
+    "Глубокая компьютерная диагностика: опрос 80+ блоков, Live Data, Freeze Frame, проверка ГРМ и АКПП/DSG. Профессиональный сканер Launch X431 V+ PRO. От 50 BYN.",
+  ogImage: "/images/comp-diag-hero.jpg",
+  openGraphType: "article",
+});
 
 function getPageJsonLd() {
   const pageUrl = `${SITE.url}/diagnostika/kompyuternaya-diagnostika/`;

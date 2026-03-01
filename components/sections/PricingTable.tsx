@@ -19,12 +19,11 @@ export function PricingTable() {
     >
       <Container>
         <SectionHeading
+          id="pricing-heading"
           label="Тарифы 2026"
           subtitle="Стоимость фиксирована и не зависит от результата торга. Эксперт должен быть объективен, а не заинтересован в занижении цены сделки."
         >
-          <span id="pricing-heading">
-            Цены на услуги автоподбора в Минске
-          </span>
+          Цены на услуги автоподбора в Минске
         </SectionHeading>
 
         {/* ===== Desktop table ===== */}

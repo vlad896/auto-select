@@ -37,10 +37,11 @@ export function OfficeMap() {
 
       <Container className="relative z-10">
         <SectionHeading
+          id="map-heading"
           label="Контакты"
           subtitle="Приезжайте к нам в офис или вызовите эксперта с выездом к продавцу — работаем по всему Минску и минскому району."
         >
-          <span id="map-heading">Как нас найти</span>
+          Как нас найти
         </SectionHeading>
 
         <div className="grid gap-6 lg:grid-cols-5 lg:gap-8">

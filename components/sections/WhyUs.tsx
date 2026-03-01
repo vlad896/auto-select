@@ -73,10 +73,11 @@ export function WhyUs() {
     >
       <Container className="max-w-4xl">
         <SectionHeading
+          id="whyus-heading"
           label="Зачем нужен эксперт"
           subtitle="По нашей статистике, 3 из 5 автомобилей на av.by имеют скрытые дефекты: скрученный пробег, скрытый окрас, юридические проблемы."
         >
-          <span id="whyus-heading">Проверяете авто сами? Сравните</span>
+          Проверяете авто сами? Сравните
         </SectionHeading>
 
         {/* Problem awareness */}

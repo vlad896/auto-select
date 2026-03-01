@@ -47,6 +47,7 @@ export default function DiagnostikaPage() {
             alt="Выездная диагностика автомобиля — осмотр на подъёмнике"
             fill
             priority
+            sizes="100vw"
             className="object-cover object-center"
             quality={75}
           />

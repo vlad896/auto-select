@@ -42,11 +42,9 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
-  title: {
-    default:
-      "Автоподбор в Минске — профессиональная диагностика и выездная проверка авто",
-    template: "%s | Автоподбор в Минске",
-  },
+  // Один title без template, чтобы не дублировать бренд на дочерних страницах.
+  title:
+    "Автоподбор в Минске — профессиональная диагностика и выездная проверка авто | АвтоПодбор",
   description:
     "Комплексная проверка авто перед покупкой в Минске. Launch X431, толщиномер Etari, проверка VIN, юридическая чистота. Договор, отчёт, аргументированный торг. От 130 BYN.",
   keywords: [
@@ -144,6 +142,9 @@ export default function RootLayout({
         {/* Preconnect: reduce latency for Yandex Metrika (Lighthouse) */}
         <link rel="preconnect" href="https://mc.yandex.ru" crossOrigin="" />
         <link rel="dns-prefetch" href="https://mc.yandex.ru" />
+        {/* Alternate plain-text for AI citation: FAQ and About */}
+        <link rel="alternate" type="text/plain" href={`${SITE.url}/faq.txt`} title="FAQ" />
+        <link rel="alternate" type="text/plain" href={`${SITE.url}/about.txt`} title="About" />
         {/* JSON-LD: Combined @graph — WebSite, WebPage, Organization,
             LocalBusiness, Service, FAQPage, BreadcrumbList */}
         <script

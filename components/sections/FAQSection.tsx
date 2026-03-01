@@ -3,7 +3,7 @@ import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Accordion } from "@/components/ui/Accordion";
 import { Button } from "@/components/ui/Button";
-import { FAQ_ITEMS } from "@/lib/constants";
+import { getFAQItemsForHome } from "@/lib/constants";
 import { ArrowRight } from "lucide-react";
 
 // ============================================================
@@ -11,7 +11,8 @@ import { ArrowRight } from "lucide-react";
 // ============================================================
 
 export function FAQSection() {
-  const accordionItems = FAQ_ITEMS.map((item) => ({
+  const homeFaqItems = getFAQItemsForHome();
+  const accordionItems = homeFaqItems.map((item) => ({
     title: item.question,
     content: item.answer,
   }));
@@ -36,10 +37,11 @@ export function FAQSection() {
 
       <Container className="relative z-10 max-w-3xl">
         <SectionHeading
+          id="faq-heading"
           label="Вопросы и ответы"
           subtitle="Ответы на частые вопросы о покупке авто в Беларуси и наших услугах."
         >
-          <span id="faq-heading">FAQ: ответы на вопросы</span>
+          FAQ: ответы на вопросы
         </SectionHeading>
 
         <div className="rounded-2xl border border-white/10 bg-surface-100 px-5 shadow-sm sm:px-6">
@@ -56,7 +58,7 @@ export function FAQSection() {
         */}
         <noscript>
           <div className="sr-only">
-            {FAQ_ITEMS.map((item) => (
+            {homeFaqItems.map((item) => (
               <details key={item.question} open>
                 <summary>{item.question}</summary>
                 <p>{item.answer}</p>

@@ -56,6 +56,7 @@ export default function ExpertNaDenPage() {
             alt="Эксперт на день — мобильный осмотр автомобилей в Минске с клиентом"
             fill
             priority
+            sizes="100vw"
             className="object-cover object-center"
             quality={75}
           />

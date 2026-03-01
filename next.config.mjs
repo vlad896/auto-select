@@ -4,8 +4,8 @@ const nextConfig = {
 
   trailingSlash: true,
 
-  // Source maps в production: устраняет предупреждение Lighthouse и ошибку парсинга .map (404 → "Not Found" as JSON)
-  productionBrowserSourceMaps: true,
+  // Source maps в production: отключено для уменьшения размера артефактов и времени деплоя
+  productionBrowserSourceMaps: false,
 
   // Legacy JavaScript (Lighthouse): Next.js подключает polyfill-module.js независимо от browserslist;
   // отключить полифиллы через конфиг пока нельзя — https://github.com/vercel/next.js/discussions/64330

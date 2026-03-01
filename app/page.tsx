@@ -1,76 +1,79 @@
 import dynamic from "next/dynamic";
 import { HeroSection } from "@/components/sections/HeroSection";
 import { Marquee } from "@/components/ui/Marquee";
+import { SectionSkeleton } from "@/components/ui/SectionSkeleton";
 import { SITE } from "@/lib/constants";
+
+const loading = () => <SectionSkeleton />;
 
 // Секции с framer-motion подгружаем динамически — чанк 370 не блокирует FCP/LCP (Lighthouse)
 const Quiz = dynamic(
   () => import("@/components/sections/Quiz").then((m) => ({ default: m.Quiz })),
-  { ssr: true }
+  { ssr: true, loading }
 );
 const ToolsProof = dynamic(
   () => import("@/components/sections/ToolsProof").then((m) => ({ default: m.ToolsProof })),
-  { ssr: true }
+  { ssr: true, loading }
 );
 const ServicesGrid = dynamic(
   () => import("@/components/sections/ServicesGrid").then((m) => ({ default: m.ServicesGrid })),
-  { ssr: true }
+  { ssr: true, loading }
 );
 const CtaBannerPrimary = dynamic(
   () => import("@/components/sections/CtaBanner").then((m) => ({ default: m.CtaBannerPrimary })),
-  { ssr: true }
+  { ssr: true, loading }
 );
 const CtaBannerSecondary = dynamic(
   () => import("@/components/sections/CtaBanner").then((m) => ({ default: m.CtaBannerSecondary })),
-  { ssr: true }
+  { ssr: true, loading }
 );
 const Methodology = dynamic(
   () => import("@/components/sections/Methodology").then((m) => ({ default: m.Methodology })),
-  { ssr: true }
+  { ssr: true, loading }
 );
 const PricingTable = dynamic(
   () => import("@/components/sections/PricingTable").then((m) => ({ default: m.PricingTable })),
-  { ssr: true }
+  { ssr: true, loading }
 );
 const Calculator = dynamic(
   () => import("@/components/sections/Calculator").then((m) => ({ default: m.Calculator })),
-  { ssr: true }
+  { ssr: true, loading }
 );
 const WhyUs = dynamic(
   () => import("@/components/sections/WhyUs").then((m) => ({ default: m.WhyUs })),
-  { ssr: true }
+  { ssr: true, loading }
 );
 const ProcessSteps = dynamic(
   () => import("@/components/sections/ProcessSteps").then((m) => ({ default: m.ProcessSteps })),
-  { ssr: true }
+  { ssr: true, loading }
 );
 const Guarantees = dynamic(
   () => import("@/components/sections/Guarantees").then((m) => ({ default: m.Guarantees })),
-  { ssr: true }
+  { ssr: true, loading }
 );
 const LegalCheck = dynamic(
   () => import("@/components/sections/LegalCheck").then((m) => ({ default: m.LegalCheck })),
-  { ssr: true }
+  { ssr: true, loading }
 );
 const Testimonials = dynamic(
   () => import("@/components/sections/Testimonials").then((m) => ({ default: m.Testimonials })),
-  { ssr: true }
+  { ssr: true, loading }
 );
 const VideoShowcase = dynamic(
   () => import("@/components/sections/VideoShowcase").then((m) => ({ default: m.VideoShowcase })),
-  { ssr: true }
+  { ssr: true, loading }
 );
 const CaseStudies = dynamic(
   () => import("@/components/sections/CaseStudies").then((m) => ({ default: m.CaseStudies })),
-  { ssr: true }
+  { ssr: true, loading }
 );
 const FAQSection = dynamic(
   () => import("@/components/sections/FAQSection").then((m) => ({ default: m.FAQSection })),
-  { ssr: true }
+  { ssr: true, loading }
 );
 const OfficeMap = dynamic(
   () => import("@/components/sections/OfficeMap").then((m) => ({ default: m.OfficeMap })),
-  { ssr: true }
+  { ssr: true, loading }
 );
 
 // ============================================================

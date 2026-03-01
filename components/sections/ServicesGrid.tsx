@@ -39,10 +39,11 @@ export function ServicesGrid() {
 
       <Container className="relative z-10">
         <SectionHeading
+          id="services-heading"
           label="Услуги"
           subtitle="Фиксированная стоимость без скрытых доплат. Мы сознательно отказались от «процента от торга» — эксперт должен быть объективен."
         >
-          <span id="services-heading">Выберите подходящий формат</span>
+          Выберите подходящий формат
         </SectionHeading>
 
         <StaggerChildren className="grid gap-5 sm:gap-6 lg:grid-cols-3">

@@ -14,12 +14,14 @@ import {
   type FAQPageCategoryId,
 } from "@/lib/constants";
 import { OpenLeadPopupButton } from "@/components/ui/OpenLeadPopupButton";
+import { getPageMetadata } from "@/lib/metadata";
 
-export const metadata = {
-  title: "Частые вопросы об автоподборе и диагностике в Минске | АвтоПодбор",
+export const metadata = getPageMetadata({
+  path: "/faq/",
+  title: "Частые вопросы об автоподборе и диагностике в Минске",
   description:
-    "Автоподбор в Минске: стоимость проверки от 130 BYN, срок подбора под ключ 5–14 дней, гарантии по договору, выезд по всей Беларуси. Ответы на частые вопросы.",
-};
+    "Стоимость проверки от 130 BYN, подбор под ключ 5–14 дней, гарантии по договору. Выезд по Беларуси. Узнайте цены и закажите диагностику — перезвоним за 15 минут.",
+});
 
 // Group FAQ items by category in display order
 const CATEGORY_ORDER: FAQPageCategoryId[] = [
@@ -49,6 +51,7 @@ export default function FAQPage() {
             alt=""
             fill
             priority
+            sizes="100vw"
             className="object-cover object-center"
             quality={75}
           />

@@ -48,6 +48,7 @@ export default function EndoskopiyaPage() {
             alt="Видеоэндоскопия двигателя — эндоскоп вводится в свечной колодец"
             fill
             priority
+            sizes="100vw"
             className="object-cover object-center"
             quality={75}
           />

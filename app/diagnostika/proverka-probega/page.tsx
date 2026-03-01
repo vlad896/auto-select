@@ -52,6 +52,7 @@ export default function ProverkaProbegaPage() {
             alt="Проверка пробега автомобиля — одометр на приборной панели"
             fill
             priority
+            sizes="100vw"
             className="object-cover object-center"
             quality={75}
           />
