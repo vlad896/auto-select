@@ -2,19 +2,41 @@ import { WifiOff, RefreshCw, Phone } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import { SITE } from "@/lib/constants";
+import { createWebPageEntities } from "@/lib/jsonld";
 
 export const metadata = {
   title: "Нет подключения — АвтоПодбор",
 };
 
 export default function OfflinePage() {
+  const pageUrl = `${SITE.url}/offline/`;
+  const { webPage, image, breadcrumb } = createWebPageEntities({
+    pageUrl,
+    name: "Нет подключения — АвтоПодбор",
+    description: "Офлайн-страница: нет подключения к интернету. Проверьте соединение и попробуйте обновить страницу.",
+    imageUrl: `${SITE.url}/images/og-image.jpg`,
+    breadcrumbItems: [
+      { name: "Главная", item: `${SITE.url}/` },
+      { name: "Офлайн", item: pageUrl },
+    ],
+  });
   return (
-    <main
-      id="main-content"
-      className="flex min-h-screen items-center justify-center"
-      style={{ paddingTop: "calc(4rem + var(--promo-h, 0px))" }}
-    >
-      <Container className="py-20 text-center">
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@graph": [webPage, image, breadcrumb],
+          }),
+        }}
+      />
+      <main
+        id="main-content"
+        className="flex min-h-screen items-center justify-center"
+        style={{ paddingTop: "calc(4rem + var(--promo-h, 0px))" }}
+      >
+        <Container className="py-20 text-center">
         <div className="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-2xl bg-surface-100 border border-white/10">
           <WifiOff className="h-10 w-10 text-neutral-500" aria-hidden="true" />
         </div>
@@ -43,7 +65,8 @@ export default function OfflinePage() {
         <p className="mt-10 text-xs text-neutral-600">
           {SITE.name} &middot; {SITE.address}
         </p>
-      </Container>
-    </main>
+        </Container>
+      </main>
+    </>
   );
 }

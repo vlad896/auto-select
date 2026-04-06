@@ -4,7 +4,7 @@ import { Container } from "@/components/ui/Container";
 import { Parallax } from "@/components/ui/Parallax";
 import { Button } from "@/components/ui/Button";
 import { AnimateOnScroll } from "@/components/ui/AnimateOnScroll";
-import { SITE } from "@/lib/constants";
+import { REL_SOCIAL_ME, SITE } from "@/lib/constants";
 
 // ============================================================
 // CtaBanner — reusable full-width conversion block
@@ -113,7 +113,7 @@ export function CtaBannerSecondary() {
               Рассчитать стоимость подбора
               <ArrowRight className="h-5 w-5" aria-hidden="true" />
             </Button>
-            <Button href={SITE.whatsapp} variant="secondary" size="lg" target="_blank" rel="noopener noreferrer">
+            <Button href={SITE.whatsapp} variant="secondary" size="lg" target="_blank" rel={REL_SOCIAL_ME}>
               <Phone className="h-5 w-5" aria-hidden="true" />
               Написать в WhatsApp
             </Button>

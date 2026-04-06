@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { SITE } from "@/lib/constants";
+import { createWebPageEntities } from "@/lib/jsonld";
 import { getPageMetadata } from "@/lib/metadata";
 
 export const metadata: Metadata = getPageMetadata({
@@ -13,23 +14,25 @@ export const metadata: Metadata = getPageMetadata({
 
 function getPageJsonLd() {
   const pageUrl = `${SITE.url}/diagnostika/proverka-kuzova-lkp/`;
+  const faqId = `${pageUrl}#faq`;
+  const { webPage, image, breadcrumb, webPageId } = createWebPageEntities({
+    pageUrl,
+    name: "Проверка кузова и ЛКП автомобиля в Минске — толщиномер Etari ET-700 | АвтоПодбор",
+    description:
+      "Комплексный аудит кузова: замер ЛКП в 5-10 точках на элемент, силовая структура, заводские швы, маркировка стёкол, системы SRS. Детекция скрытых ДТП. От 40 BYN.",
+    imageUrl: `${SITE.url}/images/diag-paint-thickness.jpg`,
+    breadcrumbItems: [
+      { name: "Главная", item: `${SITE.url}/` },
+      { name: "Диагностика", item: `${SITE.url}/diagnostika/` },
+      { name: "Проверка кузова и ЛКП", item: `${SITE.url}/diagnostika/proverka-kuzova-lkp/` },
+    ],
+    mainEntityId: faqId,
+  });
   return {
     "@context": "https://schema.org",
     "@graph": [
-      {
-        "@type": "WebPage",
-        "@id": `${pageUrl}#webpage`,
-        url: pageUrl,
-        name: "Проверка кузова и ЛКП автомобиля в Минске — толщиномер Etari ET-700 | АвтоПодбор",
-        description:
-          "Комплексный аудит кузова: замер ЛКП в 5-10 точках на элемент, силовая структура, заводские швы, маркировка стёкол, системы SRS. Детекция скрытых ДТП. От 40 BYN.",
-        isPartOf: { "@id": `${SITE.url}/#website` },
-        inLanguage: "ru",
-        primaryImageOfPage: {
-          "@type": "ImageObject",
-          url: `${SITE.url}/images/diag-paint-thickness.jpg`,
-        },
-      },
+      webPage,
+      image,
       {
         "@type": "TechArticle",
         headline:
@@ -51,10 +54,10 @@ function getPageJsonLd() {
       },
       {
         "@type": "FAQPage",
-        "@id": `${pageUrl}#faq`,
+        "@id": faqId,
         url: pageUrl,
         inLanguage: "ru",
-        mainEntityOfPage: { "@id": `${pageUrl}#webpage` },
+        mainEntityOfPage: { "@id": webPageId },
         mainEntity: [
           {
             "@type": "Question",
@@ -74,29 +77,7 @@ function getPageJsonLd() {
           },
         ],
       },
-      {
-        "@type": "BreadcrumbList",
-        itemListElement: [
-          {
-            "@type": "ListItem",
-            position: 1,
-            name: "Главная",
-            item: `${SITE.url}/`,
-          },
-          {
-            "@type": "ListItem",
-            position: 2,
-            name: "Диагностика",
-            item: `${SITE.url}/diagnostika/`,
-          },
-          {
-            "@type": "ListItem",
-            position: 3,
-            name: "Проверка кузова и ЛКП",
-            item: `${SITE.url}/diagnostika/proverka-kuzova-lkp/`,
-          },
-        ],
-      },
+      breadcrumb,
     ],
   };
 }

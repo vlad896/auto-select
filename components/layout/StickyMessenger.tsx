@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { MessageCircle, X, Send, Phone } from "lucide-react";
-import { SITE } from "@/lib/constants";
+import { REL_SOCIAL_ME, SITE } from "@/lib/constants";
 
 export function StickyMessenger() {
   const [isOpen, setIsOpen] = useState(false);
@@ -41,7 +41,7 @@ export function StickyMessenger() {
           <a
             href={SITE.telegram}
             target="_blank"
-            rel="noopener noreferrer"
+            rel={REL_SOCIAL_ME}
             className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium text-neutral-300 transition-colors hover:bg-[#229ED9]/15 hover:text-white"
           >
             <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#229ED9] text-white">
@@ -52,7 +52,7 @@ export function StickyMessenger() {
           <a
             href={SITE.whatsapp}
             target="_blank"
-            rel="noopener noreferrer"
+            rel={REL_SOCIAL_ME}
             className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium text-neutral-300 transition-colors hover:bg-[#25D366]/15 hover:text-white"
           >
             <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#25D366] text-white">

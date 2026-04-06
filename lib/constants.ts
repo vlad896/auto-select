@@ -19,6 +19,17 @@ export const SITE = {
   email: "info@автоподборминск.бел",
 } as const;
 
+/** Канонический хост для `Host:` в robots.txt (ASCII punycode; требование Яндекса). */
+export const SITE_HOSTNAME = new URL(SITE.url).hostname;
+
+/** Брендовый акцент (primary) — `theme-color`, PWA `theme_color`, плитки. */
+export const BRAND_THEME_COLOR = "#dc2626";
+
+/** Внешние ссылки с `target="_blank"` (без rel=me). */
+export const REL_EXTERNAL = "noopener noreferrer";
+/** Официальные профили бренда в Telegram / WhatsApp — `rel="me"` для верификации. */
+export const REL_SOCIAL_ME = "noopener noreferrer me";
+
 // ============================================================
 // Services & Pricing
 // ============================================================

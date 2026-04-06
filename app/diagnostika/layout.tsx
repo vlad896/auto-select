@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { SITE } from "@/lib/constants";
+import { createWebPageEntities } from "@/lib/jsonld";
 import { getPageMetadata } from "@/lib/metadata";
 
 // ============================================================
@@ -20,23 +21,24 @@ export const metadata: Metadata = getPageMetadata({
 
 function getDiagnosticsJsonLd() {
   const pageUrl = `${SITE.url}/diagnostika/`;
+  const faqId = `${pageUrl}#faq`;
+  const { webPage, image, breadcrumb, webPageId } = createWebPageEntities({
+    pageUrl,
+    name: "Выездная диагностика автомобиля перед покупкой в Минске — от 130 BYN | АвтоПодбор",
+    description:
+      "Комплексная проверка авто перед покупкой: кузов толщиномером Etari, компьютерная диагностика Launch X431, верификация пробега, эндоскопия двигателя. Выезд за 60 минут. Отчёт на 100+ фото.",
+    imageUrl: `${SITE.url}/images/diag-hero-bg.jpg`,
+    breadcrumbItems: [
+      { name: "Главная", item: `${SITE.url}/` },
+      { name: "Выездная диагностика", item: `${SITE.url}/diagnostika/` },
+    ],
+    mainEntityId: faqId,
+  });
   return {
     "@context": "https://schema.org",
     "@graph": [
-      {
-        "@type": "WebPage",
-        "@id": `${pageUrl}#webpage`,
-        url: pageUrl,
-        name: "Выездная диагностика автомобиля перед покупкой в Минске — от 130 BYN | АвтоПодбор",
-        description:
-          "Комплексная проверка авто перед покупкой: кузов толщиномером Etari, компьютерная диагностика Launch X431, верификация пробега, эндоскопия двигателя. Выезд за 60 минут. Отчёт на 100+ фото.",
-        isPartOf: { "@id": `${SITE.url}/#website` },
-        inLanguage: "ru",
-        primaryImageOfPage: {
-          "@type": "ImageObject",
-          url: `${SITE.url}/images/diag-hero-bg.jpg`,
-        },
-      },
+      webPage,
+      image,
       {
         "@type": "Service",
         name: "Выездная диагностика автомобиля перед покупкой",
@@ -84,10 +86,10 @@ function getDiagnosticsJsonLd() {
       },
       {
         "@type": "FAQPage",
-        "@id": `${pageUrl}#faq`,
+        "@id": faqId,
         url: pageUrl,
         inLanguage: "ru",
-        mainEntityOfPage: { "@id": `${pageUrl}#webpage` },
+        mainEntityOfPage: { "@id": webPageId },
         mainEntity: [
           {
             "@type": "Question",
@@ -115,23 +117,7 @@ function getDiagnosticsJsonLd() {
           },
         ],
       },
-      {
-        "@type": "BreadcrumbList",
-        itemListElement: [
-          {
-            "@type": "ListItem",
-            position: 1,
-            name: "Главная",
-            item: `${SITE.url}/`,
-          },
-          {
-            "@type": "ListItem",
-            position: 2,
-            name: "Выездная диагностика",
-            item: `${SITE.url}/diagnostika/`,
-          },
-        ],
-      },
+      breadcrumb,
     ],
   };
 }

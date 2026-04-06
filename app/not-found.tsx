@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Container, Button } from "@/components/ui";
 import { SITE } from "@/lib/constants";
+import { createWebPageEntities } from "@/lib/jsonld";
 import { Home, Phone, ArrowLeft, MapPin, Car } from "lucide-react";
 
 // ============================================================
@@ -21,8 +22,29 @@ const POPULAR_PAGES = [
 ];
 
 export default function NotFound() {
+  const pageUrl = `${SITE.url}/404/`;
+  const { webPage, image, breadcrumb } = createWebPageEntities({
+    pageUrl,
+    name: "Страница не найдена | АвтоПодбор",
+    description: "Ошибка 404: запрошенная страница не найдена. Перейдите в популярные разделы или на главную.",
+    imageUrl: `${SITE.url}/images/og-image.jpg`,
+    breadcrumbItems: [
+      { name: "Главная", item: `${SITE.url}/` },
+      { name: "404", item: pageUrl },
+    ],
+  });
   return (
-    <main id="main-content" className="relative min-h-[80vh] flex items-center overflow-hidden">
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@graph": [webPage, image, breadcrumb],
+          }),
+        }}
+      />
+      <main id="main-content" className="relative min-h-[80vh] flex items-center overflow-hidden">
       {/* Background decorative elements */}
       <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
         {/* Large faded 404 text */}
@@ -109,6 +131,7 @@ export default function NotFound() {
           </div>
         </div>
       </Container>
-    </main>
+      </main>
+    </>
   );
 }

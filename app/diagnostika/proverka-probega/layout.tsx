@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { SITE } from "@/lib/constants";
+import { createWebPageEntities } from "@/lib/jsonld";
 import { getPageMetadata } from "@/lib/metadata";
 
 // ============================================================
@@ -17,23 +18,25 @@ export const metadata: Metadata = getPageMetadata({
 
 function getPageJsonLd() {
   const pageUrl = `${SITE.url}/diagnostika/proverka-probega/`;
+  const faqId = `${pageUrl}#faq`;
+  const { webPage, image, breadcrumb, webPageId } = createWebPageEntities({
+    pageUrl,
+    name: "Как проверить реальный пробег автомобиля: методы детекции скруток | АвтоПодбор",
+    description:
+      "Профессиональная проверка пробега сканером Launch X431: дубли в ABS, АКПП, SRS, моточасы, базы Белтехосмотра. Выявляем скрученный одометр в Минске.",
+    imageUrl: `${SITE.url}/images/diag-scanner-launch.jpg`,
+    breadcrumbItems: [
+      { name: "Главная", item: `${SITE.url}/` },
+      { name: "Выездная диагностика", item: `${SITE.url}/diagnostika/` },
+      { name: "Проверка пробега", item: `${SITE.url}/diagnostika/proverka-probega/` },
+    ],
+    mainEntityId: faqId,
+  });
   return {
     "@context": "https://schema.org",
     "@graph": [
-      {
-        "@type": "WebPage",
-        "@id": `${pageUrl}#webpage`,
-        url: pageUrl,
-        name: "Как проверить реальный пробег автомобиля: методы детекции скруток | АвтоПодбор",
-        description:
-          "Профессиональная проверка пробега сканером Launch X431: дубли в ABS, АКПП, SRS, моточасы, базы Белтехосмотра. Выявляем скрученный одометр в Минске.",
-        isPartOf: { "@id": `${SITE.url}/#website` },
-        inLanguage: "ru",
-        primaryImageOfPage: {
-          "@type": "ImageObject",
-          url: `${SITE.url}/images/diag-scanner-launch.jpg`,
-        },
-      },
+      webPage,
+      image,
       {
         "@type": "TechArticle",
         headline:
@@ -48,10 +51,10 @@ function getPageJsonLd() {
       },
       {
         "@type": "FAQPage",
-        "@id": `${pageUrl}#faq`,
+        "@id": faqId,
         url: pageUrl,
         inLanguage: "ru",
-        mainEntityOfPage: { "@id": `${pageUrl}#webpage` },
+        mainEntityOfPage: { "@id": webPageId },
         mainEntity: [
           {
             "@type": "Question",
@@ -71,29 +74,7 @@ function getPageJsonLd() {
           },
         ],
       },
-      {
-        "@type": "BreadcrumbList",
-        itemListElement: [
-          {
-            "@type": "ListItem",
-            position: 1,
-            name: "Главная",
-            item: `${SITE.url}/`,
-          },
-          {
-            "@type": "ListItem",
-            position: 2,
-            name: "Выездная диагностика",
-            item: `${SITE.url}/diagnostika/`,
-          },
-          {
-            "@type": "ListItem",
-            position: 3,
-            name: "Проверка пробега",
-            item: `${SITE.url}/diagnostika/proverka-probega/`,
-          },
-        ],
-      },
+      breadcrumb,
     ],
   };
 }

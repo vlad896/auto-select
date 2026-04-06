@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { SITE } from "@/lib/constants";
+import { createWebPageEntities } from "@/lib/jsonld";
 import { getPageMetadata } from "@/lib/metadata";
 
 export const metadata: Metadata = getPageMetadata({
@@ -13,23 +14,25 @@ export const metadata: Metadata = getPageMetadata({
 
 function getPageJsonLd() {
   const pageUrl = `${SITE.url}/diagnostika/kompyuternaya-diagnostika/`;
+  const faqId = `${pageUrl}#faq`;
+  const { webPage, image, breadcrumb, webPageId } = createWebPageEntities({
+    pageUrl,
+    name: "Компьютерная диагностика автомобиля в Минске — Launch X431 V+ | АвтоПодбор",
+    description:
+      "Глубокая компьютерная диагностика: опрос 80+ блоков, Live Data, Freeze Frame, проверка ГРМ и АКПП/DSG. Профессиональный сканер Launch X431 V+ PRO. От 50 BYN.",
+    imageUrl: `${SITE.url}/images/comp-diag-hero.jpg`,
+    breadcrumbItems: [
+      { name: "Главная", item: `${SITE.url}/` },
+      { name: "Диагностика", item: `${SITE.url}/diagnostika/` },
+      { name: "Компьютерная диагностика", item: `${SITE.url}/diagnostika/kompyuternaya-diagnostika/` },
+    ],
+    mainEntityId: faqId,
+  });
   return {
     "@context": "https://schema.org",
     "@graph": [
-      {
-        "@type": "WebPage",
-        "@id": `${pageUrl}#webpage`,
-        url: pageUrl,
-        name: "Компьютерная диагностика автомобиля в Минске — Launch X431 V+ | АвтоПодбор",
-        description:
-          "Глубокая компьютерная диагностика: опрос 80+ блоков, Live Data, Freeze Frame, проверка ГРМ и АКПП/DSG. Профессиональный сканер Launch X431 V+ PRO. От 50 BYN.",
-        isPartOf: { "@id": `${SITE.url}/#website` },
-        inLanguage: "ru",
-        primaryImageOfPage: {
-          "@type": "ImageObject",
-          url: `${SITE.url}/images/comp-diag-hero.jpg`,
-        },
-      },
+      webPage,
+      image,
       {
         "@type": "TechArticle",
         headline: "Глубокая компьютерная диагностика электроники авто",
@@ -46,10 +49,10 @@ function getPageJsonLd() {
       },
       {
         "@type": "FAQPage",
-        "@id": `${pageUrl}#faq`,
+        "@id": faqId,
         url: pageUrl,
         inLanguage: "ru",
-        mainEntityOfPage: { "@id": `${pageUrl}#webpage` },
+        mainEntityOfPage: { "@id": webPageId },
         mainEntity: [
           {
             "@type": "Question",
@@ -69,14 +72,7 @@ function getPageJsonLd() {
           },
         ],
       },
-      {
-        "@type": "BreadcrumbList",
-        itemListElement: [
-          { "@type": "ListItem", position: 1, name: "Главная", item: `${SITE.url}/` },
-          { "@type": "ListItem", position: 2, name: "Диагностика", item: `${SITE.url}/diagnostika/` },
-          { "@type": "ListItem", position: 3, name: "Компьютерная диагностика", item: `${SITE.url}/diagnostika/kompyuternaya-diagnostika/` },
-        ],
-      },
+      breadcrumb,
     ],
   };
 }

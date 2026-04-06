@@ -1,5 +1,10 @@
 import type { MetadataRoute } from "next";
+import { BRAND_THEME_COLOR } from "@/lib/constants";
 
+/**
+ * PWA manifest. Нативных приложений в сторе нет — поля `prefer_related_applications` /
+ * `related_applications` не задаём (см. guidelines: добавлять при появлении Android/iOS app).
+ */
 export default function manifest(): MetadataRoute.Manifest {
   return {
     name: "АвтоПодбор в Минске — диагностика и проверка авто",
@@ -11,7 +16,7 @@ export default function manifest(): MetadataRoute.Manifest {
     display: "standalone",
     orientation: "portrait-primary",
     background_color: "#0a0a0a",
-    theme_color: "#dc2626",
+    theme_color: BRAND_THEME_COLOR,
     categories: ["auto", "business", "utilities"],
     lang: "ru",
     dir: "ltr",

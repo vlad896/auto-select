@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { SITE } from "@/lib/constants";
+import { createWebPageEntities } from "@/lib/jsonld";
 import { getPageMetadata } from "@/lib/metadata";
 
 export const metadata: Metadata = getPageMetadata({
@@ -14,23 +15,24 @@ export const metadata: Metadata = getPageMetadata({
 
 function getPageJsonLd() {
   const pageUrl = `${SITE.url}/marki/`;
+  const faqId = `${pageUrl}#faq`;
+  const { webPage, image, breadcrumb, webPageId } = createWebPageEntities({
+    pageUrl,
+    name: "Подбор авто по маркам в Минске: диагностика профильным сканером (BMW, VAG, Mercedes, Geely) | АвтоПодбор",
+    description:
+      "Не ищите «просто подборщика». Выбирайте эксперта по вашей марке. Профильная диагностика дилерским оборудованием (ODIS, ISTA, Xentry). Глубокая проверка двигателей и КПП. Минск и выезд по РБ.",
+    imageUrl: `${SITE.url}/images/marki-hero-diagnostic.jpg`,
+    breadcrumbItems: [
+      { name: "Главная", item: `${SITE.url}/` },
+      { name: "Подбор по маркам", item: `${SITE.url}/marki/` },
+    ],
+    mainEntityId: faqId,
+  });
   return {
     "@context": "https://schema.org",
     "@graph": [
-      {
-        "@type": "WebPage",
-        "@id": `${pageUrl}#webpage`,
-        url: pageUrl,
-        name: "Подбор авто по маркам в Минске: диагностика профильным сканером (BMW, VAG, Mercedes, Geely) | АвтоПодбор",
-        description:
-          "Не ищите «просто подборщика». Выбирайте эксперта по вашей марке. Профильная диагностика дилерским оборудованием (ODIS, ISTA, Xentry). Глубокая проверка двигателей и КПП. Минск и выезд по РБ.",
-        isPartOf: { "@id": `${SITE.url}/#website` },
-        inLanguage: "ru",
-        primaryImageOfPage: {
-          "@type": "ImageObject",
-          url: `${SITE.url}/images/marki-hero-diagnostic.jpg`,
-        },
-      },
+      webPage,
+      image,
       {
         "@type": "Service",
         name: "Подбор автомобилей по маркам",
@@ -69,10 +71,10 @@ function getPageJsonLd() {
       },
       {
         "@type": "FAQPage",
-        "@id": `${pageUrl}#faq`,
+        "@id": faqId,
         url: pageUrl,
         inLanguage: "ru",
-        mainEntityOfPage: { "@id": `${pageUrl}#webpage` },
+        mainEntityOfPage: { "@id": webPageId },
         mainEntity: [
           {
             "@type": "Question",
@@ -108,13 +110,7 @@ function getPageJsonLd() {
           },
         ],
       },
-      {
-        "@type": "BreadcrumbList",
-        itemListElement: [
-          { "@type": "ListItem", position: 1, name: "Главная", item: `${SITE.url}/` },
-          { "@type": "ListItem", position: 2, name: "Подбор по маркам", item: `${SITE.url}/marki/` },
-        ],
-      },
+      breadcrumb,
     ],
   };
 }

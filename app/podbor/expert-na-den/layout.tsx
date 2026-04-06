@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { SITE } from "@/lib/constants";
+import { createWebPageEntities } from "@/lib/jsonld";
 import { getPageMetadata } from "@/lib/metadata";
 
 export const metadata: Metadata = getPageMetadata({
@@ -13,23 +14,25 @@ export const metadata: Metadata = getPageMetadata({
 
 function getPageJsonLd() {
   const pageUrl = `${SITE.url}/podbor/expert-na-den/`;
+  const faqId = `${pageUrl}#faq`;
+  const { webPage, image, breadcrumb, webPageId } = createWebPageEntities({
+    pageUrl,
+    name: "Услуга Эксперт на день в Минске: подбор авто за 500 BYN | АвтоПодбор",
+    description:
+      "Проверка неограниченного количества авто за один день. Эксперт на машине с оборудованием (Launch, Etari, эндоскоп). Экономия на разовых выездах до 50%. Забронируйте дату!",
+    imageUrl: `${SITE.url}/images/expert-day-hero.jpg`,
+    breadcrumbItems: [
+      { name: "Главная", item: `${SITE.url}/` },
+      { name: "Автоподбор под ключ", item: `${SITE.url}/podbor/` },
+      { name: "Эксперт на день", item: `${SITE.url}/podbor/expert-na-den/` },
+    ],
+    mainEntityId: faqId,
+  });
   return {
     "@context": "https://schema.org",
     "@graph": [
-      {
-        "@type": "WebPage",
-        "@id": `${pageUrl}#webpage`,
-        url: pageUrl,
-        name: "Услуга Эксперт на день в Минске: подбор авто за 500 BYN | АвтоПодбор",
-        description:
-          "Проверка неограниченного количества авто за один день. Эксперт на машине с оборудованием (Launch, Etari, эндоскоп). Экономия на разовых выездах до 50%. Забронируйте дату!",
-        isPartOf: { "@id": `${SITE.url}/#website` },
-        inLanguage: "ru",
-        primaryImageOfPage: {
-          "@type": "ImageObject",
-          url: `${SITE.url}/images/expert-day-hero.jpg`,
-        },
-      },
+      webPage,
+      image,
       {
         "@type": "Service",
         name: "Эксперт на день — интенсивный подбор авто",
@@ -54,10 +57,10 @@ function getPageJsonLd() {
       },
       {
         "@type": "FAQPage",
-        "@id": `${pageUrl}#faq`,
+        "@id": faqId,
         url: pageUrl,
         inLanguage: "ru",
-        mainEntityOfPage: { "@id": `${pageUrl}#webpage` },
+        mainEntityOfPage: { "@id": webPageId },
         mainEntity: [
           {
             "@type": "Question",
@@ -93,29 +96,7 @@ function getPageJsonLd() {
           },
         ],
       },
-      {
-        "@type": "BreadcrumbList",
-        itemListElement: [
-          {
-            "@type": "ListItem",
-            position: 1,
-            name: "Главная",
-            item: `${SITE.url}/`,
-          },
-          {
-            "@type": "ListItem",
-            position: 2,
-            name: "Автоподбор под ключ",
-            item: `${SITE.url}/podbor/`,
-          },
-          {
-            "@type": "ListItem",
-            position: 3,
-            name: "Эксперт на день",
-            item: `${SITE.url}/podbor/expert-na-den/`,
-          },
-        ],
-      },
+      breadcrumb,
     ],
   };
 }

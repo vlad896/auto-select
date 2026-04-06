@@ -9,9 +9,10 @@ import {
   MessageCircle,
   CheckCircle,
 } from "lucide-react";
+import Link from "next/link";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
-import { SITE } from "@/lib/constants";
+import { REL_EXTERNAL, REL_SOCIAL_ME, SITE } from "@/lib/constants";
 import { submitContactForm, type FormState } from "@/app/actions";
 
 // ============================================================
@@ -112,6 +113,8 @@ function ContactForm() {
 // ============================================================
 
 export function Footer() {
+  const year = new Date().getFullYear();
+
   return (
     <footer className="bg-surface-100 text-white border-t border-white/5" role="contentinfo">
       <Container className="section-padding">
@@ -119,7 +122,7 @@ export function Footer() {
           {/* Column 1: About + Contact Info */}
           <div className="lg:col-span-1">
             {/* Logo */}
-            <a href="#" className="mb-6 inline-flex items-center gap-2.5">
+            <Link href="/" className="mb-6 inline-flex items-center gap-2.5">
               <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary-600">
                 <svg
                   width="20"
@@ -141,7 +144,7 @@ export function Footer() {
               <span className="text-lg font-bold font-[family-name:var(--font-heading)]">
                 АвтоПодбор
               </span>
-            </a>
+            </Link>
             <p className="mb-6 max-w-xs text-sm leading-relaxed text-white/60">
               Профессиональная диагностика и подбор автомобилей в Минске.
               Работаем по договору с гарантией достоверности.
@@ -180,6 +183,7 @@ export function Footer() {
 
           {/* Column 2: Quick Links + Messengers */}
           <div className="lg:col-span-1">
+            <nav aria-label="Услуги и разделы сайта">
             <h3 className="mb-4 text-base font-semibold text-white">
               Услуги
             </h3>
@@ -233,6 +237,7 @@ export function Footer() {
                 </a>
               </li>
             </ul>
+            </nav>
 
             <h3 className="mb-4 text-base font-semibold text-white">
               Мессенджеры
@@ -241,7 +246,7 @@ export function Footer() {
               <a
                 href={SITE.telegram}
                 target="_blank"
-                rel="noopener noreferrer"
+                rel={REL_SOCIAL_ME}
                 className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/10 text-white/70 transition-all hover:bg-[#229ED9] hover:text-white"
                 aria-label="Написать в Telegram"
               >
@@ -250,7 +255,7 @@ export function Footer() {
               <a
                 href={SITE.whatsapp}
                 target="_blank"
-                rel="noopener noreferrer"
+                rel={REL_SOCIAL_ME}
                 className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/10 text-white/70 transition-all hover:bg-[#25D366] hover:text-white"
                 aria-label="Написать в WhatsApp"
               >
@@ -258,6 +263,7 @@ export function Footer() {
               </a>
               <a
                 href={SITE.viber}
+                rel={REL_EXTERNAL}
                 className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/10 text-white/70 transition-all hover:bg-[#7360F2] hover:text-white"
                 aria-label="Написать в Viber"
               >
@@ -279,10 +285,14 @@ export function Footer() {
         </div>
       </Container>
 
-      {/* Bottom bar */}
-      <div className="border-t border-white/10">
+      {/* Bottom bar — boilerplate: исключение из сниппетов по best practices */}
+      <div className="border-t border-white/10" data-nosnippet>
         <Container className="flex flex-col items-center justify-between gap-2 py-5 text-xs text-white/60 sm:flex-row">
-          <p>&copy; {new Date().getFullYear()} {SITE.name}. Все права защищены.</p>
+          <p>
+            &copy;{" "}
+            <time dateTime={String(year)}>{year}</time>{" "}
+            {SITE.name}. Все права защищены.
+          </p>
           <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1">
             <a
               href="/privacy/"
@@ -292,7 +302,6 @@ export function Footer() {
             </a>
             <a
               href="/llms.txt"
-              type="text/plain"
               title="Автоподбор в Минске — документация для LLM и ИИ"
               className="transition-colors hover:text-white/70"
             >

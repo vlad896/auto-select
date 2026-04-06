@@ -1,108 +1,26 @@
 import type { MetadataRoute } from "next";
 import { SITE } from "@/lib/constants";
 
+/** Paths with trailing slash; `""` = homepage. Canonical-aligned with segment layouts. */
+const SITEMAP_PATHS = [
+  "",
+  "podbor/",
+  "diagnostika/",
+  "marki/",
+  "cases/",
+  "faq/",
+  "pricing/",
+  "privacy/",
+  "podbor/expert-na-den/",
+  "podbor/yuridicheskaya-chistota/",
+  "diagnostika/proverka-kuzova-lkp/",
+  "diagnostika/kompyuternaya-diagnostika/",
+  "diagnostika/proverka-probega/",
+  "diagnostika/endoskopiya-dvigatelya/",
+] as const;
+
 export default function sitemap(): MetadataRoute.Sitemap {
-  const now = new Date().toISOString();
-
-  return [
-    // L1 — homepage
-    {
-      url: `${SITE.url}/`,
-      lastModified: now,
-      changeFrequency: "weekly",
-      priority: 1.0,
-    },
-
-    // L2 — Автоподбор
-    {
-      url: `${SITE.url}/podbor/`,
-      lastModified: now,
-      changeFrequency: "monthly",
-      priority: 0.9,
-    },
-
-    // L2 — Диагностика
-    {
-      url: `${SITE.url}/diagnostika/`,
-      lastModified: now,
-      changeFrequency: "monthly",
-      priority: 0.9,
-    },
-
-    // L2 — По маркам
-    {
-      url: `${SITE.url}/marki/`,
-      lastModified: now,
-      changeFrequency: "monthly",
-      priority: 0.9,
-    },
-
-    // L2 — Кейсы, FAQ, Цены (важно для AI-цитирования и краулинга)
-    {
-      url: `${SITE.url}/cases/`,
-      lastModified: now,
-      changeFrequency: "weekly",
-      priority: 0.9,
-    },
-    {
-      url: `${SITE.url}/faq/`,
-      lastModified: now,
-      changeFrequency: "monthly",
-      priority: 0.9,
-    },
-    {
-      url: `${SITE.url}/pricing/`,
-      lastModified: now,
-      changeFrequency: "monthly",
-      priority: 0.9,
-    },
-
-    // Политика конфиденциальности
-    {
-      url: `${SITE.url}/privacy/`,
-      lastModified: now,
-      changeFrequency: "yearly",
-      priority: 0.3,
-    },
-
-    // L3 — Подбор
-    {
-      url: `${SITE.url}/podbor/expert-na-den/`,
-      lastModified: now,
-      changeFrequency: "monthly",
-      priority: 0.8,
-    },
-    {
-      url: `${SITE.url}/podbor/yuridicheskaya-chistota/`,
-      lastModified: now,
-      changeFrequency: "monthly",
-      priority: 0.8,
-    },
-
-    // L3 — Диагностика
-    {
-      url: `${SITE.url}/diagnostika/proverka-kuzova-lkp/`,
-      lastModified: now,
-      changeFrequency: "monthly",
-      priority: 0.8,
-    },
-    {
-      url: `${SITE.url}/diagnostika/kompyuternaya-diagnostika/`,
-      lastModified: now,
-      changeFrequency: "monthly",
-      priority: 0.8,
-    },
-    {
-      url: `${SITE.url}/diagnostika/proverka-probega/`,
-      lastModified: now,
-      changeFrequency: "monthly",
-      priority: 0.8,
-    },
-    {
-      url: `${SITE.url}/diagnostika/endoskopiya-dvigatelya/`,
-      lastModified: now,
-      changeFrequency: "monthly",
-      priority: 0.8,
-    },
-  ];
+  return SITEMAP_PATHS.map((path) => ({
+    url: path === "" ? `${SITE.url}/` : `${SITE.url}/${path}`,
+  }));
 }

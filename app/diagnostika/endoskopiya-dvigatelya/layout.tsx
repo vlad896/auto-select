@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { SITE } from "@/lib/constants";
+import { createWebPageEntities } from "@/lib/jsonld";
 import { getPageMetadata } from "@/lib/metadata";
 
 export const metadata: Metadata = getPageMetadata({
@@ -12,19 +13,25 @@ export const metadata: Metadata = getPageMetadata({
 
 function getPageJsonLd() {
   const pageUrl = `${SITE.url}/diagnostika/endoskopiya-dvigatelya/`;
+  const faqId = `${pageUrl}#faq`;
+  const { webPage, image, breadcrumb, webPageId } = createWebPageEntities({
+    pageUrl,
+    name: "Видеоэндоскопия двигателя в Минске: задиры, нагар, трещины ГБЦ | АвтоПодбор",
+    description:
+      "Эндоскопия цилиндров Full HD зондом: задиры ЦПГ, нагар на клапанах, трещины ГБЦ, разрушение катализатора. Проверка моторов G4KD, N20, TSI, M48. От 90 BYN.",
+    imageUrl: `${SITE.url}/images/og-image.jpg`,
+    breadcrumbItems: [
+      { name: "Главная", item: `${SITE.url}/` },
+      { name: "Диагностика", item: `${SITE.url}/diagnostika/` },
+      { name: "Эндоскопия двигателя", item: `${SITE.url}/diagnostika/endoskopiya-dvigatelya/` },
+    ],
+    mainEntityId: faqId,
+  });
   return {
     "@context": "https://schema.org",
     "@graph": [
-      {
-        "@type": "WebPage",
-        "@id": `${pageUrl}#webpage`,
-        url: pageUrl,
-        name: "Видеоэндоскопия двигателя в Минске: задиры, нагар, трещины ГБЦ | АвтоПодбор",
-        description:
-          "Эндоскопия цилиндров Full HD зондом: задиры ЦПГ, нагар на клапанах, трещины ГБЦ, разрушение катализатора. Проверка моторов G4KD, N20, TSI, M48. От 90 BYN.",
-        isPartOf: { "@id": `${SITE.url}/#website` },
-        inLanguage: "ru",
-      },
+      webPage,
+      image,
       {
         "@type": "Service",
         name: "Видеоэндоскопия двигателя",
@@ -38,10 +45,10 @@ function getPageJsonLd() {
       },
       {
         "@type": "FAQPage",
-        "@id": `${pageUrl}#faq`,
+        "@id": faqId,
         url: pageUrl,
         inLanguage: "ru",
-        mainEntityOfPage: { "@id": `${pageUrl}#webpage` },
+        mainEntityOfPage: { "@id": webPageId },
         mainEntity: [
           {
             "@type": "Question",
@@ -61,14 +68,7 @@ function getPageJsonLd() {
           },
         ],
       },
-      {
-        "@type": "BreadcrumbList",
-        itemListElement: [
-          { "@type": "ListItem", position: 1, name: "Главная", item: `${SITE.url}/` },
-          { "@type": "ListItem", position: 2, name: "Диагностика", item: `${SITE.url}/diagnostika/` },
-          { "@type": "ListItem", position: 3, name: "Эндоскопия двигателя", item: `${SITE.url}/diagnostika/endoskopiya-dvigatelya/` },
-        ],
-      },
+      breadcrumb,
     ],
   };
 }

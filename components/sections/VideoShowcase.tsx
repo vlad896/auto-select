@@ -3,7 +3,6 @@
 import { useState, useCallback } from "react";
 import { Play, X, ArrowRight } from "lucide-react";
 import Image from "next/image";
-import Link from "next/link";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Button } from "@/components/ui/Button";

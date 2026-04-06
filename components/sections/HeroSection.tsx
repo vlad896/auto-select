@@ -94,16 +94,15 @@ export function HeroSection() {
             Профессиональная диагностика в Минске
           </p>
 
-          {/* H1 */}
+          {/* H1 — совпадает с основной частью <title> (ключевые запросы и бренд) */}
           <h1
             id="hero-heading"
             className="text-balance text-3xl font-bold leading-tight tracking-tight text-white sm:text-4xl md:text-5xl lg:text-6xl"
           >
-            Автоподбор в Минске:{" "}
+            <span className="text-white">Автоподбор в Минске — </span>
             <span className="bg-gradient-to-r from-primary-500 to-primary-400 bg-clip-text text-transparent">
-              профессиональная диагностика
-            </span>{" "}
-            и выездная проверка авто
+              профессиональная диагностика и выездная проверка авто
+            </span>
           </h1>
 
           {/* USP subtitle */}
@@ -149,7 +148,9 @@ export function HeroSection() {
                       aria-hidden="true"
                     />
                     <p className="text-2xl font-bold tracking-tight text-white sm:text-3xl">
-                      <Odometer value={stat.num} suffix={stat.suffix} duration={1.5} />
+                      <data value={String(stat.num)}>
+                        <Odometer value={stat.num} suffix={stat.suffix} duration={1.5} />
+                      </data>
                     </p>
                     <p className="text-center text-xs text-neutral-500 sm:text-sm">
                       {stat.label}

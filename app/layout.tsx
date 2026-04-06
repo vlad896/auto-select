@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Inter, Manrope } from "next/font/google";
-import { SITE } from "@/lib/constants";
+import { BRAND_THEME_COLOR, SITE } from "@/lib/constants";
 import { getMainPageJsonLd } from "@/lib/jsonld";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
@@ -34,19 +34,25 @@ const manrope = Manrope({
 // Metadata API — SEO, Open Graph, Twitter
 // ============================================================
 
+/** Единый `<title>`, `og:title`, `twitter:title` и описания для главной. */
+const HOME_PAGE_TITLE =
+  "Автоподбор в Минске — профессиональная диагностика и выездная проверка авто | АвтоПодбор";
+const HOME_PAGE_DESCRIPTION =
+  "Комплексная проверка авто перед покупкой в Минске. Launch X431, толщиномер Etari, проверка VIN, юридическая чистота. Договор, отчёт, аргументированный торг. От 130 BYN.";
+const HOME_OG_IMAGE = "/images/og-image.jpg";
+
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#dc2626",
+  themeColor: BRAND_THEME_COLOR,
 };
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
+  referrer: "strict-origin-when-cross-origin",
   // Один title без template, чтобы не дублировать бренд на дочерних страницах.
-  title:
-    "Автоподбор в Минске — профессиональная диагностика и выездная проверка авто | АвтоПодбор",
-  description:
-    "Комплексная проверка авто перед покупкой в Минске. Launch X431, толщиномер Etari, проверка VIN, юридическая чистота. Договор, отчёт, аргументированный торг. От 130 BYN.",
+  title: HOME_PAGE_TITLE,
+  description: HOME_PAGE_DESCRIPTION,
   keywords: [
     "автоподбор Минск",
     "проверка авто перед покупкой",
@@ -75,7 +81,7 @@ export const metadata: Metadata = {
     "mobile-web-app-capable": "yes",
     "apple-mobile-web-app-capable": "yes",
     "application-name": "АвтоПодбор",
-    "msapplication-TileColor": "#dc2626",
+    "msapplication-TileColor": BRAND_THEME_COLOR,
     "msapplication-config": "none",
   },
   icons: {
@@ -83,6 +89,8 @@ export const metadata: Metadata = {
       { url: "/icon.svg", type: "image/svg+xml" },
       { url: "/icon-512.png", sizes: "512x512", type: "image/png" },
     ],
+    /** Дублируем SVG как shortcut icon — аналог favicon.ico для векторного набора проекта. */
+    shortcut: [{ url: "/icon.svg", type: "image/svg+xml" }],
     apple: [
       { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
     ],
@@ -92,25 +100,21 @@ export const metadata: Metadata = {
     locale: "ru_BY",
     url: SITE.url,
     siteName: SITE.name,
-    title:
-      "Автоподбор в Минске — профессиональная диагностика и проверка авто перед покупкой",
-    description:
-      "Проверка по 140+ пунктам: сканер Launch X431, толщиномер, VIN-аудит, юридическая чистота. Экспертный отчёт через 2 часа. Работаем по договору.",
+    title: HOME_PAGE_TITLE,
+    description: HOME_PAGE_DESCRIPTION,
     images: [
       {
-        url: "/images/og-image.jpg",
-        width: 1200,
-        height: 630,
-        alt: "Автоподбор в Минске — диагностика автомобилей сканером Launch",
+        url: HOME_OG_IMAGE,
+        type: "image/jpeg",
+        alt: HOME_PAGE_TITLE,
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Автоподбор в Минске — проверка авто перед покупкой",
-    description:
-      "Комплексная диагностика: Launch X431, толщиномер, VIN-проверка. Отчёт за 2 часа. От 130 BYN.",
-    images: ["/images/og-image.jpg"],
+    title: HOME_PAGE_TITLE,
+    description: HOME_PAGE_DESCRIPTION,
+    images: [{ url: HOME_OG_IMAGE, alt: HOME_PAGE_TITLE }],
   },
   alternates: {
     canonical: `${SITE.url}/`,
@@ -118,11 +122,13 @@ export const metadata: Metadata = {
   robots: {
     index: true,
     follow: true,
+    "max-image-preview": "large",
     googleBot: {
       index: true,
       follow: true,
       "max-image-preview": "large",
       "max-snippet": -1,
+      "max-video-preview": -1,
     },
   },
 };

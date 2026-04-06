@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { SITE } from "@/lib/constants";
+import { createWebPageEntities } from "@/lib/jsonld";
 import { getPageMetadata } from "@/lib/metadata";
 
 export const metadata: Metadata = getPageMetadata({
@@ -12,23 +13,25 @@ export const metadata: Metadata = getPageMetadata({
 
 function getPageJsonLd() {
   const pageUrl = `${SITE.url}/podbor/`;
+  const faqId = `${pageUrl}#faq`;
+  const { webPage, image, breadcrumb, webPageId } = createWebPageEntities({
+    pageUrl,
+    name: "Автоподбор под ключ в Минске — поиск авто с гарантией чистоты | АвтоПодбор",
+    description:
+      "Профессиональный подбор автомобиля в Минске: мониторинг рынка, проверка по VIN, выездная диагностика, юридическая экспертиза, торг и сопровождение сделки. Гарантия 2 месяца. От 1200 BYN.",
+    imageUrl: `${SITE.url}/images/podbor-expert-report.jpg`,
+    breadcrumbItems: [
+      { name: "Главная", item: `${SITE.url}/` },
+      { name: "Услуги", item: `${SITE.url}/#services` },
+      { name: "Автоподбор под ключ", item: `${SITE.url}/podbor/` },
+    ],
+    mainEntityId: faqId,
+  });
   return {
     "@context": "https://schema.org",
     "@graph": [
-      {
-        "@type": "WebPage",
-        "@id": `${pageUrl}#webpage`,
-        url: pageUrl,
-        name: "Автоподбор под ключ в Минске — поиск авто с гарантией чистоты | АвтоПодбор",
-        description:
-          "Профессиональный подбор автомобиля в Минске: мониторинг рынка, проверка по VIN, выездная диагностика, юридическая экспертиза, торг и сопровождение сделки. Гарантия 2 месяца. От 1200 BYN.",
-        isPartOf: { "@id": `${SITE.url}/#website` },
-        inLanguage: "ru",
-        primaryImageOfPage: {
-          "@type": "ImageObject",
-          url: `${SITE.url}/images/podbor-expert-report.jpg`,
-        },
-      },
+      webPage,
+      image,
       {
         "@type": "Service",
         name: "Автоподбор автомобиля под ключ",
@@ -66,10 +69,10 @@ function getPageJsonLd() {
       },
       {
         "@type": "FAQPage",
-        "@id": `${pageUrl}#faq`,
+        "@id": faqId,
         url: pageUrl,
         inLanguage: "ru",
-        mainEntityOfPage: { "@id": `${pageUrl}#webpage` },
+        mainEntityOfPage: { "@id": webPageId },
         mainEntity: [
           {
             "@type": "Question",
@@ -97,29 +100,7 @@ function getPageJsonLd() {
           },
         ],
       },
-      {
-        "@type": "BreadcrumbList",
-        itemListElement: [
-          {
-            "@type": "ListItem",
-            position: 1,
-            name: "Главная",
-            item: `${SITE.url}/`,
-          },
-          {
-            "@type": "ListItem",
-            position: 2,
-            name: "Услуги",
-            item: `${SITE.url}/#services`,
-          },
-          {
-            "@type": "ListItem",
-            position: 3,
-            name: "Автоподбор под ключ",
-            item: `${SITE.url}/podbor/`,
-          },
-        ],
-      },
+      breadcrumb,
     ],
   };
 }

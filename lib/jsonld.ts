@@ -1,12 +1,105 @@
 import { SITE, getFAQItemsForHome, FAQ_PAGE_ITEMS, SERVICES, CASE_STUDIES } from "./constants";
 
+type BreadcrumbItem = { name: string; item: string };
+
+type WebPageEntityOptions = {
+  pageUrl: string;
+  name: string;
+  description: string;
+  imageUrl: string;
+  breadcrumbItems: BreadcrumbItem[];
+  mainEntityId?: string;
+};
+
+export function createWebPageEntities({
+  pageUrl,
+  name,
+  description,
+  imageUrl,
+  breadcrumbItems,
+  mainEntityId,
+}: WebPageEntityOptions) {
+  const webPageId = `${pageUrl}#webpage`;
+  const imageId = `${pageUrl}#primaryimage`;
+  const breadcrumbId = `${pageUrl}#breadcrumb`;
+
+  const webPage = {
+    "@type": "WebPage",
+    "@id": webPageId,
+    url: pageUrl,
+    name,
+    description,
+    inLanguage: "ru",
+    isPartOf: { "@id": `${SITE.url}/#website` },
+    publisher: { "@id": `${SITE.url}/#organization` },
+    breadcrumb: { "@id": breadcrumbId },
+    primaryImageOfPage: { "@id": imageId },
+    image: { "@id": imageId },
+    potentialAction: {
+      "@type": "ReadAction",
+      target: [pageUrl],
+    },
+    ...(mainEntityId ? { mainEntity: { "@id": mainEntityId } } : {}),
+  };
+
+  const image = {
+    "@type": "ImageObject",
+    "@id": imageId,
+    url: imageUrl,
+  };
+
+  const breadcrumb = {
+    "@type": "BreadcrumbList",
+    "@id": breadcrumbId,
+    itemListElement: breadcrumbItems.map((item, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: item.name,
+      item: item.item,
+    })),
+  };
+
+  return { webPage, image, breadcrumb, webPageId, breadcrumbId, imageId };
+}
+
 // ============================================================
 // JSON-LD Structured Data generators (Schema.org)
 //
 // Strategy:  Single @graph array with entity IDs for cross-referencing.
 // Entities:  WebSite, WebPage, Organization, LocalBusiness (AutoRepair),
 //            Service (OfferCatalog), FAQPage, BreadcrumbList
+// Note:      WebApplication/SoftwareApplication intentionally omitted:
+//            current product is service-based (not SaaS/subscription).
 // ============================================================
+
+/* ── Shared ImageObject entities ── */
+function getLogoImageObjectJsonLd() {
+  const logoUrl = `${SITE.url}/icon-512.png`;
+  return {
+    "@type": "ImageObject",
+    "@id": `${SITE.url}/#logo`,
+    url: logoUrl,
+    contentUrl: logoUrl,
+    width: 512,
+    height: 512,
+    caption: `${SITE.name} Logo`,
+    inLanguage: "ru",
+  };
+}
+
+function getWebsiteImageObjectJsonLd() {
+  const imageUrl = `${SITE.url}/images/og-image.jpg`;
+  return {
+    "@type": "ImageObject",
+    "@id": `${SITE.url}/#website-image`,
+    url: imageUrl,
+    contentUrl: imageUrl,
+    width: 1200,
+    height: 630,
+    caption: `${SITE.name} Website`,
+    inLanguage: "ru",
+  };
+}
 
 /* ── 1. WebSite ── */
 function getWebSiteJsonLd() {
@@ -17,8 +110,17 @@ function getWebSiteJsonLd() {
     name: SITE.name,
     description:
       "Профессиональный автоподбор и диагностика автомобилей перед покупкой в Минске. Договор, отчёт, аргументированный торг.",
+    image: { "@id": `${SITE.url}/#website-image` },
     publisher: { "@id": `${SITE.url}/#organization` },
     inLanguage: "ru",
+    isAccessibleForFree: true,
+    keywords: [
+      "автоподбор в Минске",
+      "диагностика авто перед покупкой",
+      "проверка авто по VIN",
+      "подбор автомобиля под ключ",
+      "выездная проверка автомобиля",
+    ],
     potentialAction: {
       "@type": "SearchAction",
       target: {
@@ -32,23 +134,16 @@ function getWebSiteJsonLd() {
 
 /* ── 2. WebPage (homepage) ── */
 function getWebPageJsonLd() {
-  return {
-    "@type": "WebPage",
-    "@id": `${SITE.url}/#webpage`,
-    url: SITE.url,
+  const pageUrl = `${SITE.url}/`;
+  return createWebPageEntities({
+    pageUrl,
     name: "Автоподбор в Минске — профессиональная диагностика и выездная проверка авто",
     description:
       "Комплексная проверка авто перед покупкой в Минске. Launch X431, толщиномер Etari, VIN-аудит, юридическая чистота. Договор, отчёт за 2 часа. От 130 BYN.",
-    isPartOf: { "@id": `${SITE.url}/#website` },
-    about: { "@id": `${SITE.url}/#organization` },
-    primaryImageOfPage: {
-      "@type": "ImageObject",
-      url: `${SITE.url}/images/og-image.jpg`,
-    },
-    inLanguage: "ru",
-    datePublished: "2025-01-01",
-    dateModified: new Date().toISOString().split("T")[0],
-  };
+    imageUrl: `${SITE.url}/images/og-image.jpg`,
+    breadcrumbItems: [{ name: "Главная", item: pageUrl }],
+    mainEntityId: `${SITE.url}/#service`,
+  });
 }
 
 /* ── 3. Organization ── */
@@ -58,12 +153,8 @@ function getOrganizationJsonLd() {
     "@id": `${SITE.url}/#organization`,
     name: SITE.name,
     url: SITE.url,
-    logo: {
-      "@type": "ImageObject",
-      url: `${SITE.url}/icon-512.png`,
-      width: 512,
-      height: 512,
-    },
+    logo: { "@id": `${SITE.url}/#logo` },
+    image: { "@id": `${SITE.url}/#website-image` },
     description:
       "Профессиональный автоподбор и комплексная диагностика автомобилей в Минске. Сканер Launch X431, толщиномер Etari ET-700, юридическая проверка.",
     telephone: [SITE.phone, SITE.phone2],
@@ -79,18 +170,33 @@ function getOrganizationJsonLd() {
       {
         "@type": "ContactPoint",
         telephone: SITE.phone,
-        contactType: "customer service",
+        contactType: "sales",
+        email: SITE.email,
+        name: "Отдел продаж",
+        description:
+          "Консультация по стоимости услуг, форматам проверки и записи на выездную диагностику.",
         availableLanguage: ["Russian", "Belarusian"],
         areaServed: { "@type": "Country", name: "BY" },
       },
       {
         "@type": "ContactPoint",
         telephone: SITE.phone2,
-        contactType: "customer service",
+        contactType: "customer support",
+        email: SITE.email,
+        name: "Поддержка клиентов",
+        description:
+          "Поддержка по текущим заявкам, отчётам диагностики и сопровождению сделки.",
         availableLanguage: ["Russian", "Belarusian"],
         areaServed: { "@type": "Country", name: "BY" },
       },
     ],
+    makesOffer: {
+      "@type": "Offer",
+      name: "Комплексный автоподбор и диагностика автомобилей в Минске",
+      description:
+        "Разовая выездная диагностика, автоподбор под ключ, эксперт на день и юридическая проверка автомобиля перед покупкой.",
+      category: "AutomotiveInspectionService",
+    },
     sameAs: [
       SITE.telegram,
       SITE.whatsapp,
@@ -165,6 +271,9 @@ function getServiceJsonLd() {
           itemOffered: { "@type": "Service", name: "Разовая выездная диагностика" },
           price: "130",
           priceCurrency: "BYN",
+          availability: "https://schema.org/InStock",
+          itemCondition: "https://schema.org/NewCondition",
+          seller: { "@id": `${SITE.url}/#organization` },
           description: "Выезд, кузов, Launch X431, тест-драйв, фотоотчёт",
         },
         {
@@ -172,6 +281,9 @@ function getServiceJsonLd() {
           itemOffered: { "@type": "Service", name: "Автоподбор под ключ" },
           price: "1200",
           priceCurrency: "BYN",
+          availability: "https://schema.org/InStock",
+          itemCondition: "https://schema.org/NewCondition",
+          seller: { "@id": `${SITE.url}/#organization` },
           description: "Поиск до результата, полное сопровождение, торг",
         },
         {
@@ -179,6 +291,9 @@ function getServiceJsonLd() {
           itemOffered: { "@type": "Service", name: "Эксперт на день" },
           price: "500",
           priceCurrency: "BYN",
+          availability: "https://schema.org/InStock",
+          itemCondition: "https://schema.org/NewCondition",
+          seller: { "@id": `${SITE.url}/#organization` },
           description: "Неограниченное число осмотров с 10:00 до 18:00",
         },
       ],
@@ -209,38 +324,33 @@ function getFAQJsonLd() {
 
 /* ── 7. BreadcrumbList (homepage = single item) ── */
 export function getBreadcrumbJsonLd() {
-  return {
-    "@type": "BreadcrumbList",
-    "@id": `${SITE.url}/#breadcrumb`,
-    itemListElement: [
-      {
-        "@type": "ListItem",
-        position: 1,
-        name: "Главная",
-        item: `${SITE.url}/`,
-      },
-    ],
-  };
+  return createWebPageEntities({
+    pageUrl: `${SITE.url}/`,
+    name: "Автоподбор в Минске — профессиональная диагностика и выездная проверка авто",
+    description:
+      "Комплексная проверка авто перед покупкой в Минске. Launch X431, толщиномер Etari, VIN-аудит, юридическая чистота. Договор, отчёт за 2 часа. От 130 BYN.",
+    imageUrl: `${SITE.url}/images/og-image.jpg`,
+    breadcrumbItems: [{ name: "Главная", item: `${SITE.url}/` }],
+    mainEntityId: `${SITE.url}/#service`,
+  }).breadcrumb;
 }
 
 /* ── 8. FAQ Page (/faq) — WebPage + FAQPage + BreadcrumbList ── */
 export function getFAQPageJsonLd() {
   const faqUrl = `${SITE.url}/faq/`;
-  const webPageId = `${faqUrl}#webpage`;
   const faqId = `${faqUrl}#faq`;
-  const breadcrumbId = `${faqUrl}#breadcrumb`;
-
-  const webPage = {
-    "@type": "WebPage",
-    "@id": webPageId,
-    url: faqUrl,
+  const { webPage, image, breadcrumb, webPageId } = createWebPageEntities({
+    pageUrl: faqUrl,
     name: "Частые вопросы об автоподборе и диагностике в Минске | АвтоПодбор",
     description:
       "Ответы на частые вопросы: стоимость проверки, сроки подбора под ключ, гарантии, выезд по РБ. Автоподбор в Минске — профессиональная диагностика перед покупкой.",
-    isPartOf: { "@id": `${SITE.url}/#website` },
-    inLanguage: "ru",
-    breadcrumb: { "@id": breadcrumbId },
-  };
+    imageUrl: `${SITE.url}/images/og-image.jpg`,
+    breadcrumbItems: [
+      { name: "Главная", item: `${SITE.url}/` },
+      { name: "Вопросы и ответы", item: faqUrl },
+    ],
+    mainEntityId: faqId,
+  });
 
   const faqPage = {
     "@type": "FAQPage",
@@ -259,51 +369,36 @@ export function getFAQPageJsonLd() {
     })),
   };
 
-  const breadcrumb = {
-    "@type": "BreadcrumbList",
-    "@id": breadcrumbId,
-    itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Главная", item: `${SITE.url}/` },
-      { "@type": "ListItem", position: 2, name: "Вопросы и ответы", item: faqUrl },
-    ],
-  };
-
   return {
     "@context": "https://schema.org",
-    "@graph": [webPage, faqPage, breadcrumb],
+    "@graph": [webPage, image, faqPage, breadcrumb],
   };
 }
 
 /* ── 9. Pricing Page (/pricing) — WebPage + BreadcrumbList + OfferCatalog ── */
 export function getPricingPageJsonLd() {
   const pricingUrl = `${SITE.url}/pricing/`;
-  const webPageId = `${pricingUrl}#webpage`;
-  const breadcrumbId = `${pricingUrl}#breadcrumb`;
-
-  const webPage = {
-    "@type": "WebPage",
-    "@id": webPageId,
-    url: pricingUrl,
+  const offersId = `${pricingUrl}#offers`;
+  const faqId = `${pricingUrl}#faq`;
+  const pricingFaqItems = FAQ_PAGE_ITEMS
+    .filter((item) => item.category === "services")
+    .slice(0, 5);
+  const { webPage, image, breadcrumb } = createWebPageEntities({
+    pageUrl: pricingUrl,
     name: "Цены на автоподбор и диагностику в Минске | АвтоПодбор",
     description:
       "Стоимость разовой диагностики от 130 BYN, эксперт на день 500 BYN, автоподбор под ключ от 1200 BYN. Фиксированные цены, выезд за МКАД 0,50 BYN/км.",
-    isPartOf: { "@id": `${SITE.url}/#website` },
-    inLanguage: "ru",
-    breadcrumb: { "@id": breadcrumbId },
-  };
-
-  const breadcrumb = {
-    "@type": "BreadcrumbList",
-    "@id": breadcrumbId,
-    itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Главная", item: `${SITE.url}/` },
-      { "@type": "ListItem", position: 2, name: "Цены", item: pricingUrl },
+    imageUrl: `${SITE.url}/images/og-image.jpg`,
+    breadcrumbItems: [
+      { name: "Главная", item: `${SITE.url}/` },
+      { name: "Цены", item: pricingUrl },
     ],
-  };
+    mainEntityId: faqId,
+  });
 
   const offerCatalog = {
     "@type": "OfferCatalog",
-    "@id": `${pricingUrl}#offers`,
+    "@id": offersId,
     name: "Цены на услуги автоподбора в Минске",
     url: pricingUrl,
     itemListElement: SERVICES.map((svc) => ({
@@ -315,50 +410,55 @@ export function getPricingPageJsonLd() {
       },
       price: String(svc.price),
       priceCurrency: "BYN",
+      availability: "https://schema.org/InStock",
+      itemCondition: "https://schema.org/NewCondition",
+      seller: { "@id": `${SITE.url}/#organization` },
+    })),
+  };
+
+  const faqPage = {
+    "@type": "FAQPage",
+    "@id": faqId,
+    url: pricingUrl,
+    inLanguage: "ru",
+    mainEntityOfPage: { "@id": `${pricingUrl}#webpage` },
+    mainEntity: pricingFaqItems.map((item, index) => ({
+      "@type": "Question",
+      "@id": `${pricingUrl}#faq-q-${index + 1}`,
+      name: item.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: item.answer,
+      },
     })),
   };
 
   return {
     "@context": "https://schema.org",
-    "@graph": [webPage, breadcrumb, offerCatalog],
+    "@graph": [webPage, image, breadcrumb, offerCatalog, faqPage],
   };
 }
 
 /* ── 10. Cases Page (/cases) — WebPage + BreadcrumbList + ItemList (AI citation–friendly) ── */
 export function getCasesPageJsonLd() {
   const casesUrl = `${SITE.url}/cases/`;
-  const webPageId = `${casesUrl}#webpage`;
-  const breadcrumbId = `${casesUrl}#breadcrumb`;
   const itemListId = `${casesUrl}#cases-list`;
-
-  const webPage = {
-    "@type": "WebPage",
-    "@id": webPageId,
-    url: casesUrl,
+  const { webPage: baseWebPage, image, breadcrumb } = createWebPageEntities({
+    pageUrl: casesUrl,
     name: "Кейсы проверок автомобилей в Минске | АвтоПодбор",
     description:
       "Реальные примеры проверенных автомобилей в Минске: отказ от покупки при скрученном пробеге и шпатлёвке, покупка с дисконтом после аргументированного торга. Данные за последний квартал.",
-    isPartOf: { "@id": `${SITE.url}/#website` },
-    inLanguage: "ru",
-    breadcrumb: { "@id": breadcrumbId },
-    mainEntity: { "@id": itemListId },
-    author: { "@id": `${SITE.url}/#organization` },
-    publisher: { "@id": `${SITE.url}/#organization` },
-    datePublished: "2025-01-01",
-    dateModified: new Date().toISOString().split("T")[0],
-    primaryImageOfPage: {
-      "@type": "ImageObject",
-      url: `${SITE.url}/images/case-bmw-real.jpg`,
-    },
-  };
-
-  const breadcrumb = {
-    "@type": "BreadcrumbList",
-    "@id": breadcrumbId,
-    itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Главная", item: `${SITE.url}/` },
-      { "@type": "ListItem", position: 2, name: "Кейсы", item: casesUrl },
+    imageUrl: `${SITE.url}/images/case-bmw-real.jpg`,
+    breadcrumbItems: [
+      { name: "Главная", item: `${SITE.url}/` },
+      { name: "Кейсы", item: casesUrl },
     ],
+    mainEntityId: itemListId,
+  });
+
+  const webPage = {
+    ...baseWebPage,
+    "@type": ["WebPage", "CollectionPage"],
   };
 
   // Полные описания кейсов для краулеров и AI-цитирования
@@ -366,6 +466,7 @@ export function getCasesPageJsonLd() {
     "@type": "ItemList",
     "@id": itemListId,
     name: "Кейсы проверок автомобилей в Минске",
+    itemListOrder: "https://schema.org/ItemListOrderDescending",
     description:
       "Реальные кейсы выездной диагностики автомобилей: отказ от покупки при скрученном пробеге и шпатлёвке, покупка с дисконтом после аргументированного торга. Минск, последний квартал.",
     url: casesUrl,
@@ -392,7 +493,6 @@ export function getCasesPageJsonLd() {
           author: { "@id": `${SITE.url}/#organization` },
           publisher: { "@id": `${SITE.url}/#organization` },
           inLanguage: "ru",
-          datePublished: "2025-01-01",
         },
       };
     }),
@@ -400,42 +500,28 @@ export function getCasesPageJsonLd() {
 
   return {
     "@context": "https://schema.org",
-    "@graph": [webPage, breadcrumb, itemList],
+    "@graph": [webPage, image, breadcrumb, itemList],
   };
 }
 
 /* ── 11. Privacy Page (/privacy) — WebPage + BreadcrumbList ── */
 export function getPrivacyPageJsonLd() {
   const privacyUrl = `${SITE.url}/privacy/`;
-  const webPageId = `${privacyUrl}#webpage`;
-  const breadcrumbId = `${privacyUrl}#breadcrumb`;
-
-  const webPage = {
-    "@type": "WebPage",
-    "@id": webPageId,
-    url: privacyUrl,
+  const { webPage, image, breadcrumb } = createWebPageEntities({
+    pageUrl: privacyUrl,
     name: "Политика конфиденциальности | АвтоПодбор",
     description:
       "Обработка персональных данных, cookies и аналитика на сайте. Узнайте, как мы храним данные и используем Яндекс.Метрику только с вашего согласия.",
-    isPartOf: { "@id": `${SITE.url}/#website` },
-    inLanguage: "ru",
-    breadcrumb: { "@id": breadcrumbId },
-    author: { "@id": `${SITE.url}/#organization` },
-    publisher: { "@id": `${SITE.url}/#organization` },
-  };
-
-  const breadcrumb = {
-    "@type": "BreadcrumbList",
-    "@id": breadcrumbId,
-    itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Главная", item: `${SITE.url}/` },
-      { "@type": "ListItem", position: 2, name: "Политика конфиденциальности", item: privacyUrl },
+    imageUrl: `${SITE.url}/images/og-image.jpg`,
+    breadcrumbItems: [
+      { name: "Главная", item: `${SITE.url}/` },
+      { name: "Политика конфиденциальности", item: privacyUrl },
     ],
-  };
+  });
 
   return {
     "@context": "https://schema.org",
-    "@graph": [webPage, breadcrumb],
+    "@graph": [webPage, image, breadcrumb],
   };
 }
 
@@ -444,16 +530,20 @@ export function getPrivacyPageJsonLd() {
 // ============================================================
 
 export function getMainPageJsonLd() {
+  const homepageEntities = getWebPageJsonLd();
   return {
     "@context": "https://schema.org",
     "@graph": [
+      getLogoImageObjectJsonLd(),
+      getWebsiteImageObjectJsonLd(),
       getWebSiteJsonLd(),
-      getWebPageJsonLd(),
+      homepageEntities.webPage,
+      homepageEntities.image,
       getOrganizationJsonLd(),
       getLocalBusinessJsonLd(),
       getServiceJsonLd(),
       getFAQJsonLd(),
-      getBreadcrumbJsonLd(),
+      homepageEntities.breadcrumb,
     ],
   };
 }

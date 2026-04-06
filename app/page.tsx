@@ -129,11 +129,15 @@ export default function HomePage() {
       id="main-content"
       style={{ paddingTop: "calc(4rem + var(--promo-h, 0px))" }}
     >
+      <article>
       {/* ═══ PHASE 1: ATTENTION ═══ */}
       <HeroSection />
 
       {/* Brand trust marquee */}
-      <section className="border-y border-white/5 bg-surface-100/50 py-4" aria-label="Марки автомобилей">
+      <section className="border-y border-white/5 bg-surface-100/50 py-4" aria-labelledby="marquee-heading">
+        <h2 id="marquee-heading" className="sr-only">
+          Марки и преимущества
+        </h2>
         <Marquee speed={35} pauseOnHover>
           {["BMW (ISTA+)", "Volkswagen / Audi (ODIS)", "Mercedes (Xentry)", "Geely (профиль)", "Toyota (Techstream)", "Kia / Hyundai", "Škoda / SEAT", "Volvo (VIDA)", "140+ пунктов проверки", "500+ проверенных авто", "95% успешный торг"].map((item) => (
             <span key={item} className="whitespace-nowrap text-sm font-medium text-neutral-400">
@@ -169,6 +173,7 @@ export default function HomePage() {
       <Quiz />
       <FAQSection />
       <OfficeMap />
+      </article>
     </main>
   );
 }

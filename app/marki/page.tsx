@@ -21,7 +21,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
-import { SITE } from "@/lib/constants";
+import { REL_SOCIAL_ME, SITE } from "@/lib/constants";
 
 // ============================================================
 // L2: /marki/
@@ -603,7 +603,7 @@ export default function MarkiPage() {
                       Оставить заявку на подбор
                       <ArrowRight className="h-5 w-5" aria-hidden="true" />
                     </Button>
-                    <Button href={SITE.telegram} variant="secondary" size="lg" target="_blank" rel="noopener noreferrer">
+                    <Button href={SITE.telegram} variant="secondary" size="lg" target="_blank" rel={REL_SOCIAL_ME}>
                       <Send className="h-4 w-4" aria-hidden="true" />
                       Написать в Telegram
                     </Button>

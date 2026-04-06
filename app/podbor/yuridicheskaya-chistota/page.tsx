@@ -20,7 +20,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
-import { SITE } from "@/lib/constants";
+import { REL_SOCIAL_ME, SITE } from "@/lib/constants";
 
 // ============================================================
 // L3: /podbor/yuridicheskaya-chistota/
@@ -424,7 +424,7 @@ export default function YuridicheskayaChistotaPage() {
                       Проверить авто по базам
                       <ArrowRight className="h-5 w-5" aria-hidden="true" />
                     </Button>
-                    <Button href={SITE.whatsapp} variant="secondary" size="lg" target="_blank" rel="noopener noreferrer">
+                    <Button href={SITE.whatsapp} variant="secondary" size="lg" target="_blank" rel={REL_SOCIAL_ME}>
                       <Send className="h-4 w-4" aria-hidden="true" />
                       WhatsApp
                     </Button>

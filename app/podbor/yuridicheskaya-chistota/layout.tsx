@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { SITE } from "@/lib/constants";
+import { createWebPageEntities } from "@/lib/jsonld";
 import { getPageMetadata } from "@/lib/metadata";
 
 export const metadata: Metadata = getPageMetadata({
@@ -13,23 +14,25 @@ export const metadata: Metadata = getPageMetadata({
 
 function getPageJsonLd() {
   const pageUrl = `${SITE.url}/podbor/yuridicheskaya-chistota/`;
+  const faqId = `${pageUrl}#faq`;
+  const { webPage, image, breadcrumb, webPageId } = createWebPageEntities({
+    pageUrl,
+    name: "Юридическая проверка авто в Минске: базы залогов, арестов и розыска | АвтоПодбор",
+    description:
+      "Проверка юридической чистоты автомобиля перед покупкой. Реестр залогов РБ/РФ, проверка VIN, исполнительные производства. Экспертная сверка маркировок. Защита от «двойников».",
+    imageUrl: `${SITE.url}/images/legal-vin-check.jpg`,
+    breadcrumbItems: [
+      { name: "Главная", item: `${SITE.url}/` },
+      { name: "Автоподбор", item: `${SITE.url}/podbor/` },
+      { name: "Юридическая проверка", item: `${SITE.url}/podbor/yuridicheskaya-chistota/` },
+    ],
+    mainEntityId: faqId,
+  });
   return {
     "@context": "https://schema.org",
     "@graph": [
-      {
-        "@type": "WebPage",
-        "@id": `${pageUrl}#webpage`,
-        url: pageUrl,
-        name: "Юридическая проверка авто в Минске: базы залогов, арестов и розыска | АвтоПодбор",
-        description:
-          "Проверка юридической чистоты автомобиля перед покупкой. Реестр залогов РБ/РФ, проверка VIN, исполнительные производства. Экспертная сверка маркировок. Защита от «двойников».",
-        isPartOf: { "@id": `${SITE.url}/#website` },
-        inLanguage: "ru",
-        primaryImageOfPage: {
-          "@type": "ImageObject",
-          url: `${SITE.url}/images/legal-vin-check.jpg`,
-        },
-      },
+      webPage,
+      image,
       {
         "@type": "Service",
         name: "Юридическая проверка автомобиля",
@@ -41,10 +44,10 @@ function getPageJsonLd() {
       },
       {
         "@type": "FAQPage",
-        "@id": `${pageUrl}#faq`,
+        "@id": faqId,
         url: pageUrl,
         inLanguage: "ru",
-        mainEntityOfPage: { "@id": `${pageUrl}#webpage` },
+        mainEntityOfPage: { "@id": webPageId },
         mainEntity: [
           {
             "@type": "Question",
@@ -72,14 +75,7 @@ function getPageJsonLd() {
           },
         ],
       },
-      {
-        "@type": "BreadcrumbList",
-        itemListElement: [
-          { "@type": "ListItem", position: 1, name: "Главная", item: `${SITE.url}/` },
-          { "@type": "ListItem", position: 2, name: "Автоподбор", item: `${SITE.url}/podbor/` },
-          { "@type": "ListItem", position: 3, name: "Юридическая проверка", item: `${SITE.url}/podbor/yuridicheskaya-chistota/` },
-        ],
-      },
+      breadcrumb,
     ],
   };
 }
