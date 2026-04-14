@@ -25,7 +25,7 @@ import { REL_SOCIAL_ME, SITE } from "@/lib/constants";
 
 // ============================================================
 // L2: /marki/
-// Cocoon: L1 (/) → THIS L2
+// Cocoon: L1 (/) в†' THIS L2
 // Children (future L3): /marki/bmw/, /marki/vag/, /marki/mercedes/, etc.
 // Cross-links: /diagnostika/*, /podbor/*
 // ============================================================
@@ -39,11 +39,11 @@ const TOC = [
   { id: "faq", label: "FAQ" },
 ] as const;
 
-/* ── Brand data ── */
+/* в"Ђв"Ђ Brand data в"Ђв"Ђ */
 const BRANDS = [
   {
     id: "bmw",
-    name: "BMW и Mini",
+    name: "BMW Рё Mini",
     tagline: "Хирургическая точность. Не «на глаз».",
     color: "from-blue-600/20 to-blue-900/10 border-blue-500/20",
     equipment: "Дилерский комплекс ISTA+ (Rheingold) и инженерное меню E-Sys",
@@ -100,7 +100,7 @@ const BRANDS = [
   },
   {
     id: "toyota",
-    name: "Toyota и Lexus",
+    name: "Toyota Рё Lexus",
     tagline: "Миф «Тойоты не ломаются» дорого обходится.",
     color: "from-rose-600/20 to-rose-900/10 border-rose-500/20",
     equipment: "Toyota Techstream",
@@ -114,7 +114,7 @@ const BRANDS = [
   },
   {
     id: "kia-hyundai",
-    name: "Kia и Hyundai",
+    name: "Kia Рё Hyundai",
     tagline: "Машины, требующие эндоскопии.",
     color: "from-amber-600/20 to-amber-900/10 border-amber-500/20",
     equipment: "GDS Mobile, видеоэндоскоп HD",
@@ -139,7 +139,7 @@ const PRICING = [
 export default function MarkiPage() {
   return (
     <main id="main-content" style={{ paddingTop: "calc(4rem + var(--promo-h, 0px))" }}>
-      {/* ═══ HERO ═══ */}
+      {/* в•ђв•ђв•ђ HERO в•ђв•ђв•ђ */}
       <section className="relative overflow-hidden bg-surface-950">
         <div className="absolute inset-0" aria-hidden="true">
           <Image
@@ -201,12 +201,12 @@ export default function MarkiPage() {
         </Container>
       </section>
 
-      {/* ═══ ARTICLE BODY ═══ */}
+      {/* в•ђв•ђв•ђ ARTICLE BODY в•ђв•ђв•ђ */}
       <div className="bg-surface-950">
         <Container className="py-12 sm:py-16 lg:py-20">
           <div className="lg:grid lg:grid-cols-[260px_1fr] lg:gap-10 xl:grid-cols-[280px_1fr] xl:gap-14">
 
-            {/* ── Sidebar ── */}
+            {/* в"Ђв"Ђ Sidebar в"Ђв"Ђ */}
             <aside className="mb-10 lg:mb-0">
               <div className="lg:sticky lg:top-[calc(5rem+var(--promo-h,0px))]">
                 <nav className="rounded-2xl border border-white/10 bg-surface-100 p-5" aria-label="Содержание">
@@ -234,7 +234,7 @@ export default function MarkiPage() {
               </div>
             </aside>
 
-            {/* ── Article ── */}
+            {/* в"Ђв"Ђ Article в"Ђв"Ђ */}
             <article className="min-w-0">
 
               {/* Intro box */}
@@ -378,7 +378,7 @@ export default function MarkiPage() {
                   Мы работаем со всем спектром автомобилей, представленных на рынке
                   Беларуси: Ford, Mazda, Volvo, Land&nbsp;Rover, Peugeot, Renault и
                   другие. Технический арсенал включает мультимарочные комплексы{" "}
-                  <strong className="text-neutral-200">Launch&nbsp;X431&nbsp;PRO</strong> и{" "}
+                  <strong className="text-neutral-200">Launch&nbsp;X431&nbsp;PRO</strong> Рё{" "}
                   <strong className="text-neutral-200">Autel&nbsp;MaxiSys</strong>,
                   перекрывающие 99% функционала по чтению блоков масс-маркета.
                 </p>
@@ -416,7 +416,7 @@ export default function MarkiPage() {
                 </p>
 
                 <div className="mb-6 space-y-4">
-                  {/* 1. Кузов */}
+                  {/* 1. РљСѓР·РѕРІ */}
                   <div className="rounded-2xl border border-white/10 bg-surface-100 p-5">
                     <div className="mb-3 flex items-center gap-2">
                       <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary-600/15 text-sm font-bold text-primary-400">01</div>
@@ -503,7 +503,7 @@ export default function MarkiPage() {
 
               <Div />
 
-              {/* ──── H2: Pricing ──── */}
+              {/* в"Ђв"Ђв"Ђв"Ђ H2: Pricing в"Ђв"Ђв"Ђв"Ђ */}
               <section id="pricing" className="scroll-mt-24">
                 <h2 className="mb-4 text-2xl font-bold text-white sm:text-3xl">
                   Стоимость профильного автоподбора в&nbsp;Минске
@@ -542,7 +542,7 @@ export default function MarkiPage() {
 
               <Div />
 
-              {/* ──── H2: FAQ ──── */}
+              {/* в"Ђв"Ђв"Ђв"Ђ H2: FAQ в"Ђв"Ђв"Ђв"Ђ */}
               <section id="faq" className="scroll-mt-24">
                 <h2 className="mb-5 text-2xl font-bold text-white sm:text-3xl">
                   FAQ: ответы на частые вопросы
@@ -553,7 +553,7 @@ export default function MarkiPage() {
                     {
                       icon: HelpCircle,
                       q: "Нужно ли мне присутствовать на диагностике?",
-                      a: "Нет. 80% клиентов получают отчёт удалённо: подробный фото- и видеоотчёт (100+ файлов) в Telegram или WhatsApp, скриншоты диагностики и голосовое резюме эксперта с рекомендацией — брать, торговаться или бежать.",
+                      a: "Нет. 80% клиентов получают отчёт удалённо: подробный фото- и видеоотчёт (100+ файлов) в Telegram, Instagram, WhatsApp или Max, скриншоты диагностики и голосовое резюме эксперта с рекомендацией — брать, торговаться или бежать.",
                     },
                     {
                       icon: Scale,
@@ -587,7 +587,7 @@ export default function MarkiPage() {
 
               <Div />
 
-              {/* ──── Final CTA ──── */}
+              {/* в"Ђв"Ђв"Ђв"Ђ Final CTA в"Ђв"Ђв"Ђв"Ђ */}
               <section>
                 <div className="rounded-2xl border border-white/10 bg-surface-100 p-6 text-center sm:p-8">
                   <p className="mb-2 text-sm font-semibold uppercase tracking-widest text-primary-500">Готовы проверить автомобиль?</p>
@@ -611,7 +611,7 @@ export default function MarkiPage() {
                 </div>
               </section>
 
-              {/* ═══ SEMANTIC COCOON ═══ */}
+              {/* в•ђв•ђв•ђ SEMANTIC COCOON в•ђв•ђв•ђ */}
               <Div />
               <section>
                 <h2 className="mb-4 text-xl font-bold text-white">Смотрите также</h2>

@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Inter, Manrope } from "next/font/google";
 import { BRAND_THEME_COLOR, SITE } from "@/lib/constants";
 import { getMainPageJsonLd } from "@/lib/jsonld";
+import { JsonLdScripts } from "@/components/layout/JsonLdScripts";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { StickyMessenger } from "@/components/layout/StickyMessenger";
@@ -151,14 +152,7 @@ export default function RootLayout({
         {/* Alternate plain-text for AI citation: FAQ and About */}
         <link rel="alternate" type="text/plain" href={`${SITE.url}/faq.txt`} title="FAQ" />
         <link rel="alternate" type="text/plain" href={`${SITE.url}/about.txt`} title="About" />
-        {/* JSON-LD: Combined @graph — WebSite, WebPage, Organization,
-            LocalBusiness, Service, FAQPage, BreadcrumbList */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(getMainPageJsonLd()),
-          }}
-        />
+        <JsonLdScripts schemas={getMainPageJsonLd()} idPrefix="root-jsonld" />
       </head>
       <body className="min-h-screen bg-surface-950 font-sans text-neutral-300 antialiased" suppressHydrationWarning>
         <CursorSpotlight />

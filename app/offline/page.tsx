@@ -3,6 +3,7 @@ import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import { SITE } from "@/lib/constants";
 import { createWebPageEntities } from "@/lib/jsonld";
+import { JsonLdScripts } from "@/components/layout/JsonLdScripts";
 
 export const metadata = {
   title: "Нет подключения — АвтоПодбор",
@@ -22,15 +23,7 @@ export default function OfflinePage() {
   });
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@graph": [webPage, image, breadcrumb],
-          }),
-        }}
-      />
+      <JsonLdScripts schemas={[webPage, image, breadcrumb]} idPrefix="offline-jsonld" />
       <main
         id="main-content"
         className="flex min-h-screen items-center justify-center"

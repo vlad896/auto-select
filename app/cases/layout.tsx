@@ -1,4 +1,5 @@
 import { getCasesPageJsonLd } from "@/lib/jsonld";
+import { JsonLdScripts } from "@/components/layout/JsonLdScripts";
 
 export default function CasesLayout({
   children,
@@ -9,10 +10,7 @@ export default function CasesLayout({
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
+      <JsonLdScripts schemas={jsonLd} idPrefix="cases-jsonld" />
       {children}
     </>
   );

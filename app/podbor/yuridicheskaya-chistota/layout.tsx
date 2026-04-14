@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { JsonLdScripts } from "@/components/layout/JsonLdScripts";
 import { SITE } from "@/lib/constants";
 import { createWebPageEntities } from "@/lib/jsonld";
 import { getPageMetadata } from "@/lib/metadata";
@@ -28,12 +29,10 @@ function getPageJsonLd() {
     ],
     mainEntityId: faqId,
   });
-  return {
-    "@context": "https://schema.org",
-    "@graph": [
-      webPage,
-      image,
-      {
+  return [
+    webPage,
+    image,
+    {
         "@type": "Service",
         name: "Юридическая проверка автомобиля",
         serviceType: "Legal Vehicle Verification",
@@ -41,8 +40,8 @@ function getPageJsonLd() {
         areaServed: { "@type": "City", name: "Минск" },
         description:
           "Глубокий аудит юридической чистоты: реестр залогов РБ/РФ, проверка собственника по ОПИ/ФССП, криминалистическая экспертиза маркировок VIN.",
-      },
-      {
+    },
+    {
         "@type": "FAQPage",
         "@id": faqId,
         url: pageUrl,
@@ -74,16 +73,15 @@ function getPageJsonLd() {
             },
           },
         ],
-      },
-      breadcrumb,
-    ],
-  };
+    },
+    breadcrumb,
+  ];
 }
 
 export default function YuridicheskayaChistotaLayout({ children }: { children: React.ReactNode }) {
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(getPageJsonLd()) }} />
+      <JsonLdScripts schemas={getPageJsonLd()} idPrefix="legal-jsonld" />
       {children}
     </>
   );

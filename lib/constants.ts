@@ -9,13 +9,18 @@ export const SITE = {
   url: "https://автоподборминск.бел",
   phone: "+375333818430",
   phoneDisplay: "+375 33 381-84-30",
-  telegram: "https://t.me/autopodborminsk",
-  whatsapp: "https://wa.me/375333818430",
-  viber: "viber://chat?number=%2B375333818430",
+  secondaryPhone: "+79664452388",
+  secondaryPhoneDisplay: "+7 966 445-23-88",
+  telegram: "https://t.me/mihailrulevski",
+  instagram: "https://www.instagram.com/mihail_autopodbor?igsh=bWxxZTkyNnc1NnJk",
+  whatsapp: "https://wa.me/79664452388",
+  max: "tel:+79664452388",
   address: "ул. Тимирязева, 23, Минск",
   workingHours: "Ежедневно 09:00 — 21:00",
   email: "info@автоподборминск.бел",
 } as const;
+
+export const SITE_ASCII_URL = "https://xn--80accivmmjeacirre.xn--90ais" as const;
 
 /** Канонический хост для `Host:` в robots.txt (ASCII punycode; требование Яндекса). */
 export const SITE_HOSTNAME = new URL(SITE.url).hostname;
@@ -25,7 +30,7 @@ export const BRAND_THEME_COLOR = "#dc2626";
 
 /** Внешние ссылки с `target="_blank"` (без rel=me). */
 export const REL_EXTERNAL = "noopener noreferrer";
-/** Официальные профили бренда в Telegram / WhatsApp — `rel="me"` для верификации. */
+/** Официальные профили бренда в Telegram / Instagram — `rel="me"` для верификации. */
 export const REL_SOCIAL_ME = "noopener noreferrer me";
 
 // ============================================================

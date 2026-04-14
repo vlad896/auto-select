@@ -1,4 +1,8 @@
-import { type ButtonHTMLAttributes, type AnchorHTMLAttributes, type ReactNode } from "react";
+"use client";
+
+import { type ButtonHTMLAttributes, type AnchorHTMLAttributes, type MouseEventHandler, type ReactNode } from "react";
+import { usePathname } from "next/navigation";
+import { openLeadPopup, shouldOpenLeadPopup } from "@/lib/open-lead-popup";
 
 // ============================================================
 // Variant styles — dark theme
@@ -63,6 +67,7 @@ export function Button({
   fullWidthMobile = false,
   ...props
 }: ButtonProps) {
+  const pathname = usePathname() ?? "/";
   const baseClasses = [
     "inline-flex items-center justify-center gap-2",
     "rounded-xl font-medium",
@@ -80,9 +85,22 @@ export function Button({
 
   // Render as <a> if href is provided
   if ("href" in props && props.href) {
-    const { href, ...rest } = props as ButtonAsLink;
+    const { href, onClick, ...rest } = props as ButtonAsLink;
+    const handleClick: MouseEventHandler<HTMLAnchorElement> = (event) => {
+      onClick?.(event);
+
+      if (event.defaultPrevented) {
+        return;
+      }
+
+      if (shouldOpenLeadPopup(pathname, href)) {
+        event.preventDefault();
+        openLeadPopup();
+      }
+    };
+
     return (
-      <a href={href} className={baseClasses} {...rest}>
+      <a href={href} className={baseClasses} onClick={handleClick} {...rest}>
         {children}
       </a>
     );

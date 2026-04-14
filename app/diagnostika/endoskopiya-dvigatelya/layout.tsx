@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { JsonLdScripts } from "@/components/layout/JsonLdScripts";
 import { SITE } from "@/lib/constants";
 import { createWebPageEntities } from "@/lib/jsonld";
 import { getPageMetadata } from "@/lib/metadata";
@@ -27,12 +28,10 @@ function getPageJsonLd() {
     ],
     mainEntityId: faqId,
   });
-  return {
-    "@context": "https://schema.org",
-    "@graph": [
-      webPage,
-      image,
-      {
+  return [
+    webPage,
+    image,
+    {
         "@type": "Service",
         name: "Видеоэндоскопия двигателя",
         description:
@@ -42,8 +41,8 @@ function getPageJsonLd() {
         offers: { "@type": "Offer", price: "90.00", priceCurrency: "BYN" },
         serviceOutput:
           "Фото и видео отчёт состояния хона, поршней и клапанов.",
-      },
-      {
+    },
+    {
         "@type": "FAQPage",
         "@id": faqId,
         url: pageUrl,
@@ -67,19 +66,15 @@ function getPageJsonLd() {
             },
           },
         ],
-      },
-      breadcrumb,
-    ],
-  };
+    },
+    breadcrumb,
+  ];
 }
 
 export default function EndoskopiyaLayout({ children }: { children: React.ReactNode }) {
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(getPageJsonLd()) }}
-      />
+      <JsonLdScripts schemas={getPageJsonLd()} idPrefix="endoskopiya-jsonld" />
       {children}
     </>
   );

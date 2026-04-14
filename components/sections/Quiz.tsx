@@ -227,7 +227,7 @@ export function Quiz() {
                   htmlFor="quiz-phone"
                   className="mb-2 block text-sm font-medium text-neutral-300"
                 >
-                  Введите ваш номер (WhatsApp / Telegram / Viber)
+                  Введите ваш номер (Telegram / Instagram / WhatsApp / Max)
                 </label>
                 <input
                   id="quiz-phone"

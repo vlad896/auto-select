@@ -1,4 +1,5 @@
 import mysql from "mysql2/promise";
+import { logError, logWarn, maskPhone } from "@/lib/logger";
 
 export type LeadSource = "contact" | "quiz";
 export type LeadStatus = "new" | "in_progress" | "won" | "lost";
@@ -111,9 +112,16 @@ export async function saveLead(input: {
   answers?: Record<string, string> | null;
   userAgent?: string | null;
   pageUrl?: string | null;
+  requestId?: string;
 }): Promise<SaveLeadResult> {
   const pool = getPool();
   if (!pool) {
+    logWarn("lead.db.not_configured", {
+      requestId: input.requestId,
+      source: input.source,
+      phone: maskPhone(input.phone),
+      hasAnswers: Boolean(input.answers && Object.keys(input.answers).length > 0),
+    });
     return { ok: false, reason: "not_configured" };
   }
 
@@ -158,7 +166,14 @@ export async function saveLead(input: {
     );
     return { ok: true };
   } catch (err) {
-    console.error("[leads] insert failed", err);
+    logError("lead.db.insert_failed", err, {
+      requestId: input.requestId,
+      source: input.source,
+      phone: maskPhone(input.phone),
+      hasAnswers: Boolean(input.answers && Object.keys(input.answers).length > 0),
+      hasUserAgent: Boolean(userAgent),
+      pageUrl,
+    });
     return { ok: false, reason: "db_error" };
   }
 }
@@ -200,7 +215,7 @@ export async function listLeads(limit = 100): Promise<LeadListItem[]> {
       createdAt: toIso(row.created_at),
     }));
   } catch (err) {
-    console.error("[leads] list failed", err);
+    logError("lead.db.list_failed", err, { limit });
     return [];
   }
 }
@@ -262,7 +277,7 @@ export async function getLeadById(leadId: number): Promise<LeadDetails | null> {
       })),
     };
   } catch (err) {
-    console.error("[leads] details failed", err);
+    logError("lead.db.details_failed", err, { leadId });
     return null;
   }
 }
@@ -293,7 +308,11 @@ export async function updateLeadStatus(input: {
     );
     return true;
   } catch (err) {
-    console.error("[leads] update status failed", err);
+    logError("lead.db.update_status_failed", err, {
+      leadId: input.leadId,
+      status: input.status,
+      actor: input.actor ?? "admin",
+    });
     return false;
   }
 }
@@ -326,7 +345,10 @@ export async function addLeadNote(input: {
     );
     return true;
   } catch (err) {
-    console.error("[leads] add note failed", err);
+    logError("lead.db.add_note_failed", err, {
+      leadId: input.leadId,
+      author: input.author ?? "admin",
+    });
     return false;
   }
 }
@@ -366,7 +388,11 @@ export async function checkAndStoreRateLimitHit(input: {
     );
     return true;
   } catch (err) {
-    console.error("[leads] rate-limit check failed", err);
+    logError("lead.db.rate_limit_check_failed", err, {
+      clientIp: input.clientIp,
+      windowMs: input.windowMs,
+      maxPerWindow: input.maxPerWindow,
+    });
     return null;
   }
 }

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { JsonLdScripts } from "@/components/layout/JsonLdScripts";
 import { SITE } from "@/lib/constants";
 import { createWebPageEntities } from "@/lib/jsonld";
 import { getPageMetadata } from "@/lib/metadata";
@@ -32,12 +33,10 @@ function getPageJsonLd() {
     ],
     mainEntityId: faqId,
   });
-  return {
-    "@context": "https://schema.org",
-    "@graph": [
-      webPage,
-      image,
-      {
+  return [
+    webPage,
+    image,
+    {
         "@type": "TechArticle",
         headline:
           "Методика проверки реального пробега автомобиля в Минске",
@@ -48,8 +47,8 @@ function getPageJsonLd() {
           "@type": "Organization",
           name: SITE.name,
         },
-      },
-      {
+    },
+    {
         "@type": "FAQPage",
         "@id": faqId,
         url: pageUrl,
@@ -73,10 +72,9 @@ function getPageJsonLd() {
             },
           },
         ],
-      },
-      breadcrumb,
-    ],
-  };
+    },
+    breadcrumb,
+  ];
 }
 
 export default function ProverkaProbegaLayout({
@@ -86,12 +84,7 @@ export default function ProverkaProbegaLayout({
 }) {
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(getPageJsonLd()),
-        }}
-      />
+      <JsonLdScripts schemas={getPageJsonLd()} idPrefix="probeg-jsonld" />
       {children}
     </>
   );

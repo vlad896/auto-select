@@ -92,9 +92,15 @@ export function OfficeMap() {
                 >
                   {SITE.phoneDisplay}
                 </a>
+                <a
+                  href={`tel:${SITE.secondaryPhone}`}
+                  className="block text-sm font-medium text-neutral-300 transition-colors hover:text-primary-300"
+                >
+                  Max / WhatsApp: {SITE.secondaryPhoneDisplay}
+                </a>
               </div>
               <p className="mt-1 text-sm text-neutral-500">
-                WhatsApp · Telegram · Viber
+                Telegram / Instagram / WhatsApp / Max
               </p>
             </div>
 

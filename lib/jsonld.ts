@@ -9,6 +9,13 @@ type WebPageEntityOptions = {
   imageUrl: string;
   breadcrumbItems: BreadcrumbItem[];
   mainEntityId?: string;
+  hasPartIds?: string[];
+  pageType?: string | string[];
+};
+
+type FAQQuestionItem = {
+  question: string;
+  answer: string;
 };
 
 export function createWebPageEntities({
@@ -18,13 +25,15 @@ export function createWebPageEntities({
   imageUrl,
   breadcrumbItems,
   mainEntityId,
+  hasPartIds,
+  pageType = "WebPage",
 }: WebPageEntityOptions) {
   const webPageId = `${pageUrl}#webpage`;
   const imageId = `${pageUrl}#primaryimage`;
   const breadcrumbId = `${pageUrl}#breadcrumb`;
 
   const webPage = {
-    "@type": "WebPage",
+    "@type": pageType,
     "@id": webPageId,
     url: pageUrl,
     name,
@@ -40,12 +49,18 @@ export function createWebPageEntities({
       target: [pageUrl],
     },
     ...(mainEntityId ? { mainEntity: { "@id": mainEntityId } } : {}),
+    ...(hasPartIds && hasPartIds.length > 0
+      ? {
+          hasPart: hasPartIds.map((id) => ({ "@id": id })),
+        }
+      : {}),
   };
 
   const image = {
     "@type": "ImageObject",
     "@id": imageId,
     url: imageUrl,
+    contentUrl: imageUrl,
   };
 
   const breadcrumb = {
@@ -62,10 +77,77 @@ export function createWebPageEntities({
   return { webPage, image, breadcrumb, webPageId, breadcrumbId, imageId };
 }
 
+export function createFAQPageEntity(input: {
+  pageUrl: string;
+  webPageId: string;
+  faqId?: string;
+  questions: FAQQuestionItem[];
+}) {
+  const faqId = input.faqId ?? `${input.pageUrl}#faq`;
+
+  return {
+    "@type": "FAQPage",
+    "@id": faqId,
+    url: input.pageUrl,
+    inLanguage: "ru",
+    mainEntityOfPage: { "@id": input.webPageId },
+    mainEntity: input.questions.map((item, index) => ({
+      "@type": "Question",
+      "@id": `${faqId}-q-${index + 1}`,
+      name: item.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: item.answer,
+      },
+    })),
+  };
+}
+
+export function createOfferEntity(input: {
+  offerId: string;
+  url: string;
+  price: string;
+  priceCurrency?: string;
+  description?: string;
+}) {
+  return {
+    "@type": "Offer",
+    "@id": input.offerId,
+    url: input.url,
+    price: input.price,
+    priceCurrency: input.priceCurrency ?? "BYN",
+    availability: "https://schema.org/InStock",
+    itemCondition: "https://schema.org/NewCondition",
+    seller: { "@id": `${SITE.url}/#organization` },
+    ...(input.description ? { description: input.description } : {}),
+  };
+}
+
+export function createServiceEntity(input: {
+  serviceId: string;
+  pageUrl: string;
+  name: string;
+  description: string;
+  serviceType: string;
+  offerId?: string;
+}) {
+  return {
+    "@type": "Service",
+    "@id": input.serviceId,
+    url: input.pageUrl,
+    name: input.name,
+    serviceType: input.serviceType,
+    provider: { "@id": `${SITE.url}/#organization` },
+    areaServed: { "@type": "City", name: "Минск" },
+    description: input.description,
+    ...(input.offerId ? { offers: { "@id": input.offerId } } : {}),
+  };
+}
+
 // ============================================================
 // JSON-LD Structured Data generators (Schema.org)
 //
-// Strategy:  Single @graph array with entity IDs for cross-referencing.
+// Strategy: Separate JSON-LD entities in individual script tags, linked via @id.
 // Entities:  WebSite, WebPage, Organization, LocalBusiness (AutoRepair),
 //            Service (OfferCatalog), FAQPage, BreadcrumbList
 // Note:      WebApplication/SoftwareApplication intentionally omitted:
@@ -188,6 +270,7 @@ function getOrganizationJsonLd() {
     },
     sameAs: [
       SITE.telegram,
+      SITE.instagram,
       SITE.whatsapp,
     ],
   };
@@ -237,7 +320,7 @@ export function getLocalBusinessJsonLd() {
       "@type": "City",
       name: "Минск",
     },
-    sameAs: [SITE.telegram, SITE.whatsapp],
+    sameAs: [SITE.telegram, SITE.instagram, SITE.whatsapp],
   };
 }
 
@@ -293,22 +376,16 @@ function getServiceJsonLd() {
 /* ── 6. FAQPage (главная: подмножество showOnHome) ── */
 function getFAQJsonLd() {
   const homeItems = getFAQItemsForHome();
-  return {
-    "@type": "FAQPage",
-    "@id": `${SITE.url}/#faq`,
-    url: SITE.url,
-    inLanguage: "ru",
-    mainEntityOfPage: { "@id": `${SITE.url}/#webpage` },
-    mainEntity: homeItems.map((item, i) => ({
-      "@type": "Question",
-      "@id": `${SITE.url}/#faq-q-${i + 1}`,
-      name: item.question,
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: item.answer,
-      },
+  return createFAQPageEntity({
+    pageUrl: SITE.url,
+    webPageId: `${SITE.url}/#webpage`,
+    faqId: `${SITE.url}/#faq`,
+    questions: homeItems.map((item, i) => ({
+      id: `${SITE.url}/#faq-q-${i + 1}`,
+      question: item.question,
+      answer: item.answer,
     })),
-  };
+  });
 }
 
 /* ── 7. BreadcrumbList (homepage = single item) ── */
@@ -341,27 +418,18 @@ export function getFAQPageJsonLd() {
     mainEntityId: faqId,
   });
 
-  const faqPage = {
-    "@type": "FAQPage",
-    "@id": faqId,
-    url: faqUrl,
-    inLanguage: "ru",
-    mainEntityOfPage: { "@id": webPageId },
-    mainEntity: FAQ_PAGE_ITEMS.map((item, i) => ({
-      "@type": "Question",
-      "@id": `${faqUrl}#faq-q-${i + 1}`,
-      name: item.question,
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: item.answer,
-      },
+  const faqPage = createFAQPageEntity({
+    pageUrl: faqUrl,
+    webPageId,
+    faqId,
+    questions: FAQ_PAGE_ITEMS.map((item, i) => ({
+      id: `${faqUrl}#faq-q-${i + 1}`,
+      question: item.question,
+      answer: item.answer,
     })),
-  };
+  });
 
-  return {
-    "@context": "https://schema.org",
-    "@graph": [webPage, image, faqPage, breadcrumb],
-  };
+  return [webPage, image, faqPage, breadcrumb];
 }
 
 /* ── 9. Pricing Page (/pricing) — WebPage + BreadcrumbList + OfferCatalog ── */
@@ -382,7 +450,8 @@ export function getPricingPageJsonLd() {
       { name: "Главная", item: `${SITE.url}/` },
       { name: "Цены", item: pricingUrl },
     ],
-    mainEntityId: faqId,
+    mainEntityId: offersId,
+    hasPartIds: [faqId],
   });
 
   const offerCatalog = {
@@ -405,34 +474,25 @@ export function getPricingPageJsonLd() {
     })),
   };
 
-  const faqPage = {
-    "@type": "FAQPage",
-    "@id": faqId,
-    url: pricingUrl,
-    inLanguage: "ru",
-    mainEntityOfPage: { "@id": `${pricingUrl}#webpage` },
-    mainEntity: pricingFaqItems.map((item, index) => ({
-      "@type": "Question",
-      "@id": `${pricingUrl}#faq-q-${index + 1}`,
-      name: item.question,
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: item.answer,
-      },
+  const faqPage = createFAQPageEntity({
+    pageUrl: pricingUrl,
+    webPageId: `${pricingUrl}#webpage`,
+    faqId,
+    questions: pricingFaqItems.map((item, index) => ({
+      id: `${pricingUrl}#faq-q-${index + 1}`,
+      question: item.question,
+      answer: item.answer,
     })),
-  };
+  });
 
-  return {
-    "@context": "https://schema.org",
-    "@graph": [webPage, image, breadcrumb, offerCatalog, faqPage],
-  };
+  return [webPage, image, breadcrumb, offerCatalog, faqPage];
 }
 
 /* ── 10. Cases Page (/cases) — WebPage + BreadcrumbList + ItemList (AI citation–friendly) ── */
 export function getCasesPageJsonLd() {
   const casesUrl = `${SITE.url}/cases/`;
   const itemListId = `${casesUrl}#cases-list`;
-  const { webPage: baseWebPage, image, breadcrumb } = createWebPageEntities({
+  const { webPage, image, breadcrumb } = createWebPageEntities({
     pageUrl: casesUrl,
     name: "Кейсы проверок автомобилей в Минске | АвтоПодбор",
     description:
@@ -443,12 +503,8 @@ export function getCasesPageJsonLd() {
       { name: "Кейсы", item: casesUrl },
     ],
     mainEntityId: itemListId,
+    pageType: ["WebPage", "CollectionPage"],
   });
-
-  const webPage = {
-    ...baseWebPage,
-    "@type": ["WebPage", "CollectionPage"],
-  };
 
   // Полные описания кейсов для краулеров и AI-цитирования
   const itemList = {
@@ -487,10 +543,7 @@ export function getCasesPageJsonLd() {
     }),
   };
 
-  return {
-    "@context": "https://schema.org",
-    "@graph": [webPage, image, breadcrumb, itemList],
-  };
+  return [webPage, image, breadcrumb, itemList];
 }
 
 /* ── 11. Privacy Page (/privacy) — WebPage + BreadcrumbList ── */
@@ -500,7 +553,7 @@ export function getPrivacyPageJsonLd() {
     pageUrl: privacyUrl,
     name: "Политика конфиденциальности | АвтоПодбор",
     description:
-      "Обработка персональных данных, cookies и аналитика на сайте. Узнайте, как мы храним данные и используем Яндекс.Метрику только с вашего согласия.",
+      "Обработка персональных данных, cookies и аналитика на сайте. Узнайте, как мы храним данные и используем Яндекс.Метрику на сайте.",
     imageUrl: `${SITE.url}/images/og-image.jpg`,
     breadcrumbItems: [
       { name: "Главная", item: `${SITE.url}/` },
@@ -508,31 +561,29 @@ export function getPrivacyPageJsonLd() {
     ],
   });
 
-  return {
-    "@context": "https://schema.org",
-    "@graph": [webPage, image, breadcrumb],
-  };
+  return [webPage, image, breadcrumb];
 }
 
 // ============================================================
-// Combined @graph — all entities in ONE script tag
+// Main page JSON-LD entities rendered as separate script tags
 // ============================================================
 
 export function getMainPageJsonLd() {
   const homepageEntities = getWebPageJsonLd();
-  return {
-    "@context": "https://schema.org",
-    "@graph": [
-      getLogoImageObjectJsonLd(),
-      getWebsiteImageObjectJsonLd(),
-      getWebSiteJsonLd(),
-      homepageEntities.webPage,
-      homepageEntities.image,
-      getOrganizationJsonLd(),
-      getLocalBusinessJsonLd(),
-      getServiceJsonLd(),
-      getFAQJsonLd(),
-      homepageEntities.breadcrumb,
-    ],
+  const homeWebPage = {
+    ...homepageEntities.webPage,
+    hasPart: [{ "@id": `${SITE.url}/#faq` }],
   };
+  return [
+    getLogoImageObjectJsonLd(),
+    getWebsiteImageObjectJsonLd(),
+    getWebSiteJsonLd(),
+    homeWebPage,
+    homepageEntities.image,
+    getOrganizationJsonLd(),
+    getLocalBusinessJsonLd(),
+    getServiceJsonLd(),
+    getFAQJsonLd(),
+    homepageEntities.breadcrumb,
+  ];
 }

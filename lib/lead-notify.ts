@@ -1,4 +1,5 @@
 import { LeadSource } from "@/lib/db";
+import { logError, logWarn, maskPhone } from "@/lib/logger";
 
 function escapeTelegram(text: string): string {
   return text.replace(/([_*\[\]()~`>#+\-=|{}.!\\])/g, "\\$1");
@@ -9,6 +10,7 @@ export async function notifyLead(input: {
   name: string | null;
   phone: string;
   pageUrl: string | null;
+  requestId?: string;
 }): Promise<void> {
   const token = process.env.TELEGRAM_BOT_TOKEN?.trim();
   const chatId = process.env.TELEGRAM_CHAT_ID?.trim();
@@ -24,7 +26,7 @@ export async function notifyLead(input: {
   const text = escapeTelegram(lines.join("\n"));
 
   try {
-    await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+    const response = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -36,8 +38,24 @@ export async function notifyLead(input: {
       }),
       cache: "no-store",
     });
+
+    if (!response.ok) {
+      const body = await response.text();
+      logWarn("lead.telegram.notify_failed", {
+        requestId: input.requestId,
+        source: input.source,
+        phone: maskPhone(input.phone),
+        pageUrl: input.pageUrl,
+        status: response.status,
+        responseBody: body.slice(0, 500),
+      });
+    }
   } catch (err) {
-    console.error("[leads] telegram notify failed", err);
+    logError("lead.telegram.notify_error", err, {
+      requestId: input.requestId,
+      source: input.source,
+      phone: maskPhone(input.phone),
+      pageUrl: input.pageUrl,
+    });
   }
 }
-

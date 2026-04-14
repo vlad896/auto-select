@@ -1,5 +1,5 @@
-﻿import type { MetadataRoute } from "next";
-import { SITE, SITE_HOSTNAME } from "@/lib/constants";
+import type { MetadataRoute } from "next";
+import { SITE_ASCII_URL, SITE_HOSTNAME } from "@/lib/constants";
 
 /**
  * robots.txt — индексация, AI-цитирование (разрешён обход контента), служебные пути закрыты.
@@ -63,7 +63,7 @@ export default function robots(): MetadataRoute.Robots {
       },
     ],
 
-    sitemap: `${SITE.url}/sitemap.xml`,
+    sitemap: `${SITE_ASCII_URL}/sitemap.xml`,
     host: SITE_HOSTNAME,
   };
 }

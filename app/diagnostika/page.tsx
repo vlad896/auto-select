@@ -951,7 +951,7 @@ export default function DiagnostikaPage() {
                       rel="noopener noreferrer"
                     >
                       <Send className="h-4 w-4" aria-hidden="true" />
-                      WhatsApp / Telegram
+                      WhatsApp / Telegram / Max
                     </Button>
                   </div>
                 </div>

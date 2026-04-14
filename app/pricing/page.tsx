@@ -344,7 +344,7 @@ export default function PricingPage() {
             Заказать проверку
           </h2>
           <p className="mb-6 max-w-md mx-auto text-sm text-neutral-400">
-            Оставьте заявку — перезвоним в течение 15 минут в рабочее время. Или свяжитесь по телефону {SITE.phoneDisplay} или в Telegram / WhatsApp.
+            Оставьте заявку — перезвоним в течение 15 минут в рабочее время. Или свяжитесь по телефону {SITE.phoneDisplay} или в Telegram / Instagram / WhatsApp / Max.
           </p>
           <div className="flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
             <OpenLeadPopupButton variant="primary" size="lg">

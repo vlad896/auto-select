@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { MessageCircle, X, Send, Phone } from "lucide-react";
+import { MessageCircle, X, Send, Phone, Instagram } from "lucide-react";
 import { REL_SOCIAL_ME, SITE } from "@/lib/constants";
 
 export function StickyMessenger() {
@@ -59,6 +59,26 @@ export function StickyMessenger() {
               <MessageCircle className="h-4 w-4" aria-hidden="true" />
             </span>
             WhatsApp
+          </a>
+          <a
+            href={SITE.instagram}
+            target="_blank"
+            rel={REL_SOCIAL_ME}
+            className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium text-neutral-300 transition-colors hover:bg-[#E4405F]/15 hover:text-white"
+          >
+            <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#E4405F] text-white">
+              <Instagram className="h-4 w-4" aria-hidden="true" />
+            </span>
+            Instagram
+          </a>
+          <a
+            href={SITE.max}
+            className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium text-neutral-300 transition-colors hover:bg-primary-600/15 hover:text-white"
+          >
+            <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary-600 text-white">
+              <MessageCircle className="h-4 w-4" aria-hidden="true" />
+            </span>
+            Max
           </a>
           <a
             href={`tel:${SITE.phone}`}

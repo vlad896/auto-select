@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { X, Phone, ShieldCheck, Clock, Gift } from "lucide-react";
 import { SITE } from "@/lib/constants";
+import { OPEN_LEAD_POPUP_EVENT } from "@/lib/open-lead-popup";
 
 // ============================================================
 // Config
@@ -15,7 +16,7 @@ const STORAGE_KEY = "lead_popup_dismissed";
 /** Сколько дней не показывать после закрытия */
 const DISMISS_DAYS = 3;
 /** Событие для открытия попапа по клику на кнопку «Срочный выезд на осмотр» */
-const OPEN_POPUP_EVENT = "open-lead-popup";
+const OPEN_POPUP_EVENT = OPEN_LEAD_POPUP_EVENT;
 
 // ============================================================
 // LeadPopup — маркетинговый pop-up с крючком

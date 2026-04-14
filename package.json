@@ -7,6 +7,7 @@
     "build": "next build",
     "start": "node server.js",
     "start:next": "next start",
+    "db:check": "node scripts/check-db.js",
     "pack-deploy": "node scripts/pack-standalone.js",
     "lint": "next lint"
   },

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { JsonLdScripts } from "@/components/layout/JsonLdScripts";
 import { SITE } from "@/lib/constants";
 import { createWebPageEntities } from "@/lib/jsonld";
 import { getPageMetadata } from "@/lib/metadata";
@@ -34,12 +35,10 @@ function getDiagnosticsJsonLd() {
     ],
     mainEntityId: faqId,
   });
-  return {
-    "@context": "https://schema.org",
-    "@graph": [
-      webPage,
-      image,
-      {
+  return [
+    webPage,
+    image,
+    {
         "@type": "Service",
         name: "Выездная диагностика автомобиля перед покупкой",
         serviceType: "Auto Inspection",
@@ -61,8 +60,8 @@ function getDiagnosticsJsonLd() {
         },
         description:
           "Комплексная проверка авто: кузов, электроника сканером Launch, проверка пробега и эндоскопия двигателя.",
-      },
-      {
+    },
+    {
         "@type": "HowTo",
         name: "Как проходит диагностика автомобиля",
         step: [
@@ -83,8 +82,8 @@ function getDiagnosticsJsonLd() {
             text: "Тест-драйв и проверка ходовой части.",
           },
         ],
-      },
-      {
+    },
+    {
         "@type": "FAQPage",
         "@id": faqId,
         url: pageUrl,
@@ -116,10 +115,9 @@ function getDiagnosticsJsonLd() {
             },
           },
         ],
-      },
-      breadcrumb,
-    ],
-  };
+    },
+    breadcrumb,
+  ];
 }
 
 // ============================================================
@@ -133,12 +131,7 @@ export default function DiagnostikaLayout({
 }) {
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(getDiagnosticsJsonLd()),
-        }}
-      />
+      <JsonLdScripts schemas={getDiagnosticsJsonLd()} idPrefix="diagnostika-jsonld" />
       {children}
     </>
   );

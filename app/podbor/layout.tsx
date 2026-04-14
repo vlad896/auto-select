@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { JsonLdScripts } from "@/components/layout/JsonLdScripts";
 import { SITE } from "@/lib/constants";
 import { createWebPageEntities } from "@/lib/jsonld";
 import { getPageMetadata } from "@/lib/metadata";
@@ -27,12 +28,10 @@ function getPageJsonLd() {
     ],
     mainEntityId: faqId,
   });
-  return {
-    "@context": "https://schema.org",
-    "@graph": [
-      webPage,
-      image,
-      {
+  return [
+    webPage,
+    image,
+    {
         "@type": "Service",
         name: "Автоподбор автомобиля под ключ",
         serviceType: "Car Selection Service",
@@ -66,8 +65,8 @@ function getPageJsonLd() {
         ],
         description:
           "Профессиональный подбор авто с пробегом: мониторинг рынка, проверка VIN, выездная диагностика, юридическая экспертиза, сопровождение сделки.",
-      },
-      {
+    },
+    {
         "@type": "FAQPage",
         "@id": faqId,
         url: pageUrl,
@@ -99,10 +98,9 @@ function getPageJsonLd() {
             },
           },
         ],
-      },
-      breadcrumb,
-    ],
-  };
+    },
+    breadcrumb,
+  ];
 }
 
 export default function PodborLayout({
@@ -112,12 +110,7 @@ export default function PodborLayout({
 }) {
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(getPageJsonLd()),
-        }}
-      />
+      <JsonLdScripts schemas={getPageJsonLd()} idPrefix="podbor-jsonld" />
       {children}
     </>
   );

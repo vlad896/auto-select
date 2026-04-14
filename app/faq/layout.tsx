@@ -1,4 +1,5 @@
 import { getFAQPageJsonLd } from "@/lib/jsonld";
+import { JsonLdScripts } from "@/components/layout/JsonLdScripts";
 
 export default function FAQLayout({
   children,
@@ -9,10 +10,7 @@ export default function FAQLayout({
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
+      <JsonLdScripts schemas={jsonLd} idPrefix="faq-jsonld" />
       {children}
     </>
   );

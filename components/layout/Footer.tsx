@@ -8,11 +8,12 @@ import {
   Send,
   MessageCircle,
   CheckCircle,
+  Instagram,
 } from "lucide-react";
 import Link from "next/link";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
-import { REL_EXTERNAL, REL_SOCIAL_ME, SITE } from "@/lib/constants";
+import { REL_SOCIAL_ME, SITE } from "@/lib/constants";
 import { submitContactForm, type FormState } from "@/app/actions";
 
 // ============================================================
@@ -161,6 +162,15 @@ export function Footer() {
                   {SITE.phoneDisplay}
                 </a>
               </li>
+              <li>
+                <a
+                  href={`tel:${SITE.secondaryPhone}`}
+                  className="inline-flex items-center gap-2.5 text-white/80 transition-colors hover:text-white"
+                >
+                  <MessageCircle className="h-4 w-4 text-primary-400" aria-hidden="true" />
+                  Max / WhatsApp: {SITE.secondaryPhoneDisplay}
+                </a>
+              </li>
               <li className="flex items-center gap-2.5 text-white/80">
                 <MapPin className="h-4 w-4 shrink-0 text-primary-400" aria-hidden="true" />
                 {SITE.address}
@@ -244,6 +254,15 @@ export function Footer() {
                 <Send className="h-4 w-4" aria-hidden="true" />
               </a>
               <a
+                href={SITE.instagram}
+                target="_blank"
+                rel={REL_SOCIAL_ME}
+                className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/10 text-white/70 transition-all hover:bg-[#E4405F] hover:text-white"
+                aria-label="Open Instagram"
+              >
+                <Instagram className="h-4 w-4" aria-hidden="true" />
+              </a>
+              <a
                 href={SITE.whatsapp}
                 target="_blank"
                 rel={REL_SOCIAL_ME}
@@ -253,10 +272,9 @@ export function Footer() {
                 <MessageCircle className="h-4 w-4" aria-hidden="true" />
               </a>
               <a
-                href={SITE.viber}
-                rel={REL_EXTERNAL}
-                className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/10 text-white/70 transition-all hover:bg-[#7360F2] hover:text-white"
-                aria-label="Написать в Viber"
+                href={SITE.max}
+                className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/10 text-white/70 transition-all hover:bg-primary-600 hover:text-white"
+                aria-label="Contact in Max"
               >
                 <Phone className="h-4 w-4" aria-hidden="true" />
               </a>

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { JsonLdScripts } from "@/components/layout/JsonLdScripts";
 import { SITE } from "@/lib/constants";
 import { createWebPageEntities } from "@/lib/jsonld";
 import { getPageMetadata } from "@/lib/metadata";
@@ -28,12 +29,10 @@ function getPageJsonLd() {
     ],
     mainEntityId: faqId,
   });
-  return {
-    "@context": "https://schema.org",
-    "@graph": [
-      webPage,
-      image,
-      {
+  return [
+    webPage,
+    image,
+    {
         "@type": "Service",
         name: "Эксперт на день — интенсивный подбор авто",
         serviceType: "Mobile Car Inspection",
@@ -54,8 +53,8 @@ function getPageJsonLd() {
           description:
             "Автоэксперт с полным оборудованием в вашем распоряжении на 8 часов. До 10 качественных осмотров.",
         },
-      },
-      {
+    },
+    {
         "@type": "FAQPage",
         "@id": faqId,
         url: pageUrl,
@@ -95,10 +94,9 @@ function getPageJsonLd() {
             },
           },
         ],
-      },
-      breadcrumb,
-    ],
-  };
+    },
+    breadcrumb,
+  ];
 }
 
 export default function ExpertNaDenLayout({
@@ -108,12 +106,7 @@ export default function ExpertNaDenLayout({
 }) {
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(getPageJsonLd()),
-        }}
-      />
+      <JsonLdScripts schemas={getPageJsonLd()} idPrefix="expert-day-jsonld" />
       {children}
     </>
   );

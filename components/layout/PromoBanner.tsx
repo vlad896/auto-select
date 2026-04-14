@@ -1,7 +1,9 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import { usePathname } from "next/navigation";
 import { X, Zap, Clock } from "lucide-react";
+import { openLeadPopup, shouldOpenLeadPopup } from "@/lib/open-lead-popup";
 
 // ============================================================
 // Countdown target — end of February 2026
@@ -31,6 +33,7 @@ export function PromoBanner() {
   const [mounted, setMounted] = useState(false);
   const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0, expired: false });
   const bannerRef = useRef<HTMLDivElement>(null);
+  const pathname = usePathname() ?? "/";
 
   // Only start the timer after client mount to avoid hydration mismatch
   useEffect(() => {
@@ -115,6 +118,12 @@ export function PromoBanner() {
         {/* CTA link */}
         <a
           href="#quiz"
+          onClick={(event) => {
+            if (shouldOpenLeadPopup(pathname, "#quiz")) {
+              event.preventDefault();
+              openLeadPopup();
+            }
+          }}
           className="hidden font-semibold underline underline-offset-2 transition-colors hover:text-white/80 sm:inline"
         >
           Забронировать →

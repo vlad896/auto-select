@@ -1,8 +1,10 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import { usePathname } from "next/navigation";
 import { ArrowRight, Phone } from "lucide-react";
 import { SITE } from "@/lib/constants";
+import { openLeadPopup, shouldOpenLeadPopup } from "@/lib/open-lead-popup";
 
 /**
  * Context-aware sticky CTA bar.
@@ -25,6 +27,7 @@ export function StickyCTA() {
   const [visible, setVisible] = useState(false);
   const [variantIndex, setVariantIndex] = useState(0);
   const observersRef = useRef<IntersectionObserver[]>([]);
+  const pathname = usePathname() ?? "/";
 
   useEffect(() => {
     // Show bar after scrolling 600px (past hero)
@@ -78,6 +81,12 @@ export function StickyCTA() {
         <div className="flex w-full items-center gap-2 sm:w-auto">
           <a
             href={variant.href}
+            onClick={(event) => {
+              if (shouldOpenLeadPopup(pathname, variant.href)) {
+                event.preventDefault();
+                openLeadPopup();
+              }
+            }}
             className="flex flex-1 items-center justify-center gap-2 rounded-lg bg-primary-600 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-primary-500 sm:flex-initial"
           >
             {variant.text}

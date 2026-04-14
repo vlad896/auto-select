@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Container, Button } from "@/components/ui";
 import { SITE } from "@/lib/constants";
 import { createWebPageEntities } from "@/lib/jsonld";
+import { JsonLdScripts } from "@/components/layout/JsonLdScripts";
 import { Home, Phone, ArrowLeft, MapPin, Car } from "lucide-react";
 
 // ============================================================
@@ -35,15 +36,7 @@ export default function NotFound() {
   });
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@graph": [webPage, image, breadcrumb],
-          }),
-        }}
-      />
+      <JsonLdScripts schemas={[webPage, image, breadcrumb]} idPrefix="not-found-jsonld" />
       <main id="main-content" className="relative min-h-[80vh] flex items-center overflow-hidden">
       {/* Background decorative elements */}
       <div className="absolute inset-0 pointer-events-none" aria-hidden="true">

@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { SITE } from "@/lib/constants";
+import { SITE_ASCII_URL } from "@/lib/constants";
 
 /** Paths with trailing slash; `""` = homepage. Canonical-aligned with segment layouts. */
 const SITEMAP_PATHS = [
@@ -21,6 +21,6 @@ const SITEMAP_PATHS = [
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return SITEMAP_PATHS.map((path) => ({
-    url: path === "" ? `${SITE.url}/` : `${SITE.url}/${path}`,
+    url: path === "" ? `${SITE_ASCII_URL}/` : `${SITE_ASCII_URL}/${path}`,
   }));
 }

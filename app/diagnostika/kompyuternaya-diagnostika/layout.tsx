@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { JsonLdScripts } from "@/components/layout/JsonLdScripts";
 import { SITE } from "@/lib/constants";
 import { createWebPageEntities } from "@/lib/jsonld";
 import { getPageMetadata } from "@/lib/metadata";
@@ -28,26 +29,24 @@ function getPageJsonLd() {
     ],
     mainEntityId: faqId,
   });
-  return {
-    "@context": "https://schema.org",
-    "@graph": [
-      webPage,
-      image,
-      {
+  return [
+    webPage,
+    image,
+    {
         "@type": "TechArticle",
         headline: "Глубокая компьютерная диагностика электроники авто",
         description: "Чтение потоковых данных (Live Data), анализ Freeze Frame и проверка состояния систем ГРМ и АКПП через диагностический интерфейс.",
         articleSection: "Электроника и софт",
         author: { "@type": "Organization", name: SITE.name },
-      },
-      {
+    },
+    {
         "@type": "Service",
         name: "Компьютерная диагностика автомобиля",
         provider: { "@type": "Organization", name: SITE.name },
         areaServed: { "@type": "City", name: "Минск" },
         offers: { "@type": "Offer", price: "50.00", priceCurrency: "BYN" },
-      },
-      {
+    },
+    {
         "@type": "FAQPage",
         "@id": faqId,
         url: pageUrl,
@@ -71,16 +70,15 @@ function getPageJsonLd() {
             },
           },
         ],
-      },
-      breadcrumb,
-    ],
-  };
+    },
+    breadcrumb,
+  ];
 }
 
 export default function KompDiagLayout({ children }: { children: React.ReactNode }) {
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(getPageJsonLd()) }} />
+      <JsonLdScripts schemas={getPageJsonLd()} idPrefix="comp-diag-jsonld" />
       {children}
     </>
   );
