@@ -92,12 +92,6 @@ export function OfficeMap() {
                 >
                   {SITE.phoneDisplay}
                 </a>
-                <a
-                  href={`tel:${SITE.phone2}`}
-                  className="block text-lg font-semibold text-primary-400 transition-colors hover:text-primary-300"
-                >
-                  {SITE.phone2Display}
-                </a>
               </div>
               <p className="mt-1 text-sm text-neutral-500">
                 WhatsApp · Telegram · Viber

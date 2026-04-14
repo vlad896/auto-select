@@ -161,15 +161,6 @@ export function Footer() {
                   {SITE.phoneDisplay}
                 </a>
               </li>
-              <li>
-                <a
-                  href={`tel:${SITE.phone2}`}
-                  className="inline-flex items-center gap-2.5 text-white/80 transition-colors hover:text-white"
-                >
-                  <Phone className="h-4 w-4 text-primary-400" aria-hidden="true" />
-                  {SITE.phone2Display}
-                </a>
-              </li>
               <li className="flex items-center gap-2.5 text-white/80">
                 <MapPin className="h-4 w-4 shrink-0 text-primary-400" aria-hidden="true" />
                 {SITE.address}

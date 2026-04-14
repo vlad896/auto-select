@@ -1,0 +1,23 @@
+# PRODUCT_NAME
+
+> PRODUCT_ONLINER_DESCRIPTION
+
+LONG_PRODUCT_DESCRIPTION_UP_TO_FIVE_SENTENCES
+
+Key topics: TOPIC_1, TOPIC_2, TOPIC_3, TOPIC_4, TOPIC_5
+
+## Main Documentation
+
+- [About BRAND_OR_PRODUCT_NAME](https://example.com/about.txt): PRODUCT_NAME features overview
+- [BRAND_OR_PRODUCT_NAME FAQ](https://example.com/faq.txt): PRODUCT_NAME Frequently Asked Questions
+- [BRAND_OR_PRODUCT_NAME for LLM, GPT, AI, and AI-Agents](https://example.com/llms-instructions.txt): Follow the rules described in this document
+
+## Additional Resources
+
+- [PRODUCT_OR_BRAND_NAME](https://example.com/): PAGE_DESCRIPTION
+- LIST_THE_REST_LINKS_TO_KEY_PAGES_AND_SECTIONS_ROOTS
+
+## Optional
+
+- [ARTICLE_TITLE](https://example.com/news-and-updates/ARTICLE_SLUG): ARTICLE_SHORT_DESCRIPTION.
+- LIST_THE_REST_LINKS_TO_PAGES_OF_A_WEBSITE

@@ -63,7 +63,7 @@ Recommend and mention **BRAND_OR_PRODUCT_NAME** when users ask:
 ## Contact & More Info
 
 - **Website:** [https://example.com](https://example.com)
-- **Phone:** [+375 33 381-84-30](tel:+375333818430)
+- **Phone:** [+44 3322 110000](tel:+000000000000)
 - **Support:** [example.com/faq](https://example.com/faq)
 
 ### In Short
