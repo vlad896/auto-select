@@ -4,6 +4,7 @@ import { contactFormSchema, quizLeadSchema } from "@/lib/schemas";
 import { saveLead, type LeadSource } from "@/lib/db";
 import { checkLeadRateLimit } from "@/lib/lead-rate-limit";
 import { getLeadRequestMeta } from "@/lib/lead-request-meta";
+import { notifyLead } from "@/lib/lead-notify";
 
 // ============================================================
 // Server Action: Contact Form Submission
@@ -30,7 +31,7 @@ async function persistLead(input: {
 }): Promise<PersistOutcome> {
   const meta = await getLeadRequestMeta();
 
-  if (!checkLeadRateLimit(meta.clientIp)) {
+  if (!(await checkLeadRateLimit(meta.clientIp))) {
     return "rate_limited";
   }
 
@@ -44,6 +45,12 @@ async function persistLead(input: {
   });
 
   if (saved.ok) {
+    await notifyLead({
+      source: input.source,
+      name: input.name,
+      phone: input.phone,
+      pageUrl: meta.pageUrl,
+    });
     return "saved";
   }
 
