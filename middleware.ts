@@ -3,22 +3,35 @@ import { NextRequest, NextResponse } from "next/server";
 /**
  * Edge Middleware — нормализация URL для устранения дублей.
  *
- * Обрабатывает:
+ * Обрабатывает (всё одним 301-хопом):
+ * 0. Vercel preview host → canonical
  * 1. HTTP → HTTPS (первый визит до HSTS)
- * 2. www → non-www (301)
- * 3. Uppercase path → lowercase (301)
- * 4. Двойные/множественные слеши → одинарный (301)
- *
- * trailingSlash обрабатывается Next.js нативно (next.config.ts).
+ * 2. www → non-www
+ * 3. Двойные/множественные слеши → одинарный
+ * 4. Uppercase path → lowercase
+ * 5. Дописывает trailing slash для cross-host редиректов
+ *    (чтобы избежать вторичного 308 от nginx канона)
  */
 
 const CANONICAL_HOST = "автоподборминск.бел";
 const CANONICAL_HOST_PUNYCODE = "xn--80aafgkdcbpkjhgmfcdo6o.xn--d1acj3b";
+const VERCEL_PREVIEW_HOST = "auto-select-one.vercel.app";
 
 export function middleware(request: NextRequest) {
   const url = request.nextUrl.clone();
   const { protocol, hostname, pathname, search } = url;
   let needsRedirect = false;
+
+  const lowerHost = hostname.toLowerCase();
+
+  // ── 0. Vercel preview → canonical (одним хопом 301) ──
+  // Делаем в middleware, а не в next.config.redirects, чтобы обойти
+  // двойной хоп от Next.js trailingSlash normalization.
+  if (lowerHost === VERCEL_PREVIEW_HOST) {
+    url.protocol = "https:";
+    url.hostname = CANONICAL_HOST;
+    needsRedirect = true;
+  }
 
   // ── 1. HTTPS enforcement (пропускаем localhost) ──
   const isLocalhost =
@@ -34,7 +47,6 @@ export function middleware(request: NextRequest) {
   }
 
   // ── 2. www → non-www ──
-  const lowerHost = hostname.toLowerCase();
   if (
     lowerHost === `www.${CANONICAL_HOST}` ||
     lowerHost === `www.${CANONICAL_HOST_PUNYCODE}`
@@ -60,6 +72,17 @@ export function middleware(request: NextRequest) {
   ) {
     url.pathname = url.pathname.toLowerCase();
     needsRedirect = true;
+  }
+
+  // ── 5. Trailing slash для cross-host редиректов ──
+  // Если уже редиректим (особенно на канон) — добавляем slash здесь,
+  // чтобы избежать ещё одного хопа от nginx канона (trailingSlash: true).
+  // Файлы с расширениями (.xml, .txt, .json, …) пропускаем.
+  if (needsRedirect && !url.pathname.endsWith("/")) {
+    const lastSegment = url.pathname.split("/").pop() || "";
+    if (!lastSegment.includes(".")) {
+      url.pathname = `${url.pathname}/`;
+    }
   }
 
   if (needsRedirect) {

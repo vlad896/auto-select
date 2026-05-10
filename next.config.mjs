@@ -21,31 +21,10 @@ const nextConfig = {
     deviceSizes: [480, 640, 768, 1024, 1280, 1536],
   },
 
-  redirects: async () => [
-    {
-      source: "/:path*",
-      has: [{ type: "host", value: "auto-select-one.vercel.app" }],
-      destination: "https://автоподборминск.бел/:path*",
-      statusCode: 301,
-    },
-    {
-      source: "/:path*",
-      has: [{ type: "host", value: "www.автоподборминск.бел" }],
-      destination: "https://автоподборминск.бел/:path*",
-      statusCode: 301,
-    },
-    {
-      source: "/:path*",
-      has: [
-        {
-          type: "host",
-          value: "www.xn--80aafgkdcbpkjhgmfcdo6o.xn--d1acj3b",
-        },
-      ],
-      destination: "https://автоподборминск.бел/:path*",
-      statusCode: 301,
-    },
-  ],
+  // Редиректы (vercel preview → канон, www → non-www, http → https,
+  // нормализация слешей и lowercase) обрабатываются в middleware.ts —
+  // там они выполняются ДО Next.js trailingSlash normalization,
+  // что даёт один хоп 301 вместо двух-трёх.
 
   headers: async () => [
     {
