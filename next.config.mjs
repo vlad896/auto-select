@@ -26,13 +26,13 @@ const nextConfig = {
       source: "/:path*",
       has: [{ type: "host", value: "auto-select-one.vercel.app" }],
       destination: "https://автоподборминск.бел/:path*",
-      permanent: true,
+      statusCode: 301,
     },
     {
       source: "/:path*",
       has: [{ type: "host", value: "www.автоподборминск.бел" }],
       destination: "https://автоподборминск.бел/:path*",
-      permanent: true,
+      statusCode: 301,
     },
     {
       source: "/:path*",
@@ -43,7 +43,7 @@ const nextConfig = {
         },
       ],
       destination: "https://автоподборминск.бел/:path*",
-      permanent: true,
+      statusCode: 301,
     },
   ],
 
