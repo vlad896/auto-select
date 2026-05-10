@@ -23,9 +23,9 @@ const nextConfig = {
 
   redirects: async () => [
     {
-      source: "/",
+      source: "/:path*",
       has: [{ type: "host", value: "auto-select-one.vercel.app" }],
-      destination: "https://xn--80accivmmjeacirre.xn--90ais/",
+      destination: "https://автоподборминск.бел/:path*",
       permanent: true,
     },
     {
